@@ -5,6 +5,8 @@ import rootReducer from './rootReducer';
 // The key used for storing data in AsyncStorage.
 const DATA_NAMESPACE = '@TodoApp:data';
 
+const store = createStore(rootReducer);
+
 /**
  * Attempt storing the provided state object using AsyncStorage.
  * The state parameter is currently the entire Redux state object.
@@ -17,20 +19,11 @@ const saveState = async state => {
   }
 };
 
-/**
- * Middleware which stores the state using AsyncStorage when an action
- * is dispatched. An exception is made for the REHYDRATE action.
- */
-const saveStateMiddleware = store => next => action => {
-  if (action.type !== 'REHYDRATE') {
-    saveState(store.getState());
-  }
-
-  return next(action);
-};
-
-// Create the Redux store and register the middleware for saving state.
-const store = createStore(rootReducer, applyMiddleware(saveStateMiddleware));
+// Listen for actions and save the state when one is dispatched.
+store.subscribe(() => {
+  const state = store.getState();
+  saveState(state);
+});
 
 /**
  * Asynchronous function which attempts fetching data from the store.
