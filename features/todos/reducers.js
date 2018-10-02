@@ -23,9 +23,7 @@ const todo = (state = {}, action) => {
   }
 };
 
-const defaultTodos = [];
-
-const todos = (state = defaultTodos, action) => {  
+const todos = (state = [], action) => {  
   switch (action.type) {
     case 'ADD_TODO':
       return [...state, todo(action)];

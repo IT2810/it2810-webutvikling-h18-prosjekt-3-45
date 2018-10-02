@@ -19,7 +19,7 @@ export default class TaskScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#4256f4',
+    backgroundColor: '#FFF',
     alignItems: 'center',
     justifyContent: 'center',
   },

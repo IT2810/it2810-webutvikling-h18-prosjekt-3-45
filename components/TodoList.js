@@ -30,11 +30,13 @@ class TodoList extends Component {
           const buttons = {
             left: [{
               text: 'Done',
+              backgroundColor: '#68CC3D',
             }],
 
             right: [{
               text: 'Delete',
               onPress: () => this.handleDelete(todo.id),
+              backgroundColor: '#bf3b4f',
             }],
           };
 
@@ -68,6 +70,9 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     paddingLeft: 15,
+    backgroundColor: '#FFF',
+    borderBottomColor: '#CCC',
+    borderBottomWidth: StyleSheet.hairlineWidth,
   },
 });
 
