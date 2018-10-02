@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import {View, Text, Modal, TouchableHighlight} from 'react-native'
 import TodoSchema from "../TodoSchema";
 
-
+// TODO ha cancel knapp, fikse required (feilmelding skal bare vises hvis det er tomt tittel)
+// TODO field is required bare hvis du prøver å legge til uten.
+// TODO Reset states på cancel
+// TODO CSS
 /**
  * Modal functionality is inspired from
  * https://facebook.github.io/react-native/docs/modal.html
@@ -38,11 +41,10 @@ export default class TodoAdder extends Component {
             Alert.alert('Modal has been closed.');
           }}>
           <View>
-            <View>
-              <TodoSchema
-                saveForm={this.createTodo}
-              />
-            </View>
+            <TodoSchema
+              saveForm={this.createTodo}
+              hideModule={this.setModalVisibility}
+            />
           </View>
         </Modal>
 

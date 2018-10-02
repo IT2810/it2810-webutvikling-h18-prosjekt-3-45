@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {FormLabel, Button, FormInput, FormValidationMessage} from 'react-native-elements'
-import {Text, ScrollView, View, TouchableOpacity} from "react-native";
+import {Text, ScrollView, View, TouchableOpacity, StyleSheet} from "react-native";
 import DateTimePicker from "react-native-modal-datetime-picker";
 
 export default class TodoSchema extends Component {
@@ -52,21 +52,36 @@ export default class TodoSchema extends Component {
     this.hideDateTimePicker();
   };
 
+  saveForm = (frmObject) => {
+    if (frmObject.title === "") {
+      alert("empty title")
+    } else {
+      this.props.saveForm(frmObject)
+    }
+  }
+
+  // Function for handling cancel button for form
+  cancelForm = (state) => {
+    this.props.hideModule(state);
+  }
+
   render() {
     return (
       <ScrollView>
         <Text>Create a new todo</Text>
         <FormLabel>
           Title
-        </FormLabel>
+        </FormLabel>ScrollView
         <FormInput
           placeholder={"Do delivery .."}
           onChangeText={this.handleTitlePicked}
           value={this.state.title}
         />
-        <FormValidationMessage>
-          {'This field is required'}
+        { this.state.title === "" &&
+          <FormValidationMessage>
+            {'This field is required'}
           </FormValidationMessage>
+        }
         <FormLabel>
           Description
         </FormLabel>
@@ -80,20 +95,26 @@ export default class TodoSchema extends Component {
         <TouchableOpacity onPress={this.showDateTimePicker}>
           <Text>{'CalenderICON'}</Text>
         </TouchableOpacity>
-        <DateTimePicker
-          isVisible={this.state.isDateTimePickerVisible}
-          onConfirm={this.handleDatePicked}
-          onCancel={this.hideDateTimePicker}
-          mode={'datetime'}
-          datePickerModeAndroid={'calendar'}
-        />
-        <Text>{this.state.date}</Text>
+        <View>
+          <DateTimePicker
+            isVisible={this.state.isDateTimePickerVisible}
+            onConfirm={this.handleDatePicked}
+            onCancel={this.hideDateTimePicker}
+            mode={'datetime'}
+            datePickerModeAndroid={'calendar'}
+          />
+          <Text>{this.state.date}</Text>
+        </View>
 
-        <Button title={'Save'} onPress={() => this.props.saveForm({
-          title: this.state.title,
-          description: this.state.description,
-          date: this.state.date,
-        })} />
+        <View>
+          <Button title={'Save'} onPress={() => this.saveForm({
+            title: this.state.title,
+            description: this.state.description,
+            date: this.state.date,
+          })} />
+
+          <Button title={'Cancel'} onPress={() => this.cancelForm(false)}/>
+        </View>
       </ScrollView>
     )
   }
