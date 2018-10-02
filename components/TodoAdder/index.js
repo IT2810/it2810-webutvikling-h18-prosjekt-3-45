@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { Alert, View, Text, Modal, TouchableHighlight } from 'react-native';
-import TodoSchema from "../TodoSchema";
+import { connect } from 'react-redux';
+import { View, Text, Modal, TouchableHighlight } from 'react-native';
+import TodoSchema from '../TodoSchema';
+import { addTodo } from '../../features/todos/actions';
 
 // TODO ha cancel knapp, fikse required (feilmelding skal bare vises hvis det er tomt tittel)
 // TODO field is required bare hvis du prøver å legge til uten.
@@ -10,7 +12,7 @@ import TodoSchema from "../TodoSchema";
  * Modal functionality is inspired from
  * https://facebook.github.io/react-native/docs/modal.html
  */
-export default class TodoAdder extends Component {
+class TodoAdder extends Component {
 
   state = {
     modalVisible: false,
@@ -25,8 +27,7 @@ export default class TodoAdder extends Component {
 
   // This will display the TodoSchema s.t. we can get a form modal
   createTodo = ({ title, description, date }) => {
-    
-
+    this.props.addTodo(title, description, date);
     this.setModalVisibility(false);
   };
 
@@ -57,3 +58,12 @@ export default class TodoAdder extends Component {
     )
   }
 }
+
+const mapDispatchToProps = {
+  addTodo,
+};
+
+export default connect(
+  undefined,
+  mapDispatchToProps,
+)(TodoAdder);
