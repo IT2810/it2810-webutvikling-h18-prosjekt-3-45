@@ -34,7 +34,7 @@ export default class TodoAdder extends Component {
           animationType="slide"
           transparent={false}
           visible={this.state.modalVisible}
-          >ga
+          >
           <View>
             <View>
               <TodoSchema
@@ -42,7 +42,7 @@ export default class TodoAdder extends Component {
               />
             </View>
           </View>
-        </Modal>s
+        </Modal>
 
         <TouchableHighlight
           onPress={() => {
