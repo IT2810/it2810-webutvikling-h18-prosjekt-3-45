@@ -4,9 +4,7 @@ import { View, Text, Modal, TouchableHighlight } from 'react-native';
 import TodoSchema from '../TodoSchema';
 import { addTodo } from '../../features/todos/actions';
 
-// TODO ha cancel knapp, fikse required (feilmelding skal bare vises hvis det er tomt tittel)
-// TODO field is required bare hvis du prøver å legge til uten.
-// TODO Reset states på cancel
+// TODO Legg til ikon
 // TODO CSS
 /**
  * Modal functionality is inspired from
