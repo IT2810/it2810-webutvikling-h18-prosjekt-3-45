@@ -34,7 +34,9 @@ export default class TodoAdder extends Component {
           animationType="slide"
           transparent={false}
           visible={this.state.modalVisible}
-          >
+          onRequestClose={() => {
+            Alert.alert('Modal has been closed.');
+          }}>
           <View>
             <View>
               <TodoSchema
