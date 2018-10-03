@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, Text, Modal, TouchableHighlight } from 'react-native';
+import {View, Text, Modal, TouchableHighlight, StyleSheet} from 'react-native';
 import TodoSchema from '../TodoSchema';
 import { addTodo } from '../../features/todos/actions';
-
-// TODO Legg til ikon
-// TODO CSS
-// TODO LEgg til testing
 
 /**
  * Modal functionality is inspired from
@@ -50,7 +46,7 @@ class TodoAdder extends Component {
           visible={this.state.modalVisible}
           onRequestClose={() => this.setModalVisibility(false)}
         >
-          <View>
+          <View style={styles.container}>
             <TodoSchema
               saveForm={this.createTodo}
               hideModule={this.setModalVisibility}
@@ -77,3 +73,11 @@ export default connect(
   undefined,
   mapDispatchToProps,
 )(TodoAdder);
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    marginTop: 120,
+  },
+});
