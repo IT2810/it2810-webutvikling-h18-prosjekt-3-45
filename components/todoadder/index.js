@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {View, Text, Modal, TouchableHighlight, StyleSheet} from 'react-native';
+import { View, Modal, TouchableHighlight, StyleSheet } from 'react-native';
 import TodoSchema from '../todoschema';
 import { addTodo } from '../../features/todos/actions';
+import { Icon } from "expo";
 
-// TODO Legg til ikon
 // TODO LEgg til testing
 // TODO fikse slik at det ikke vises noe annet enn time og minutt i todoschema
 
@@ -58,12 +58,20 @@ class TodoAdder extends Component {
           </View>
         </Modal>
 
-        <TouchableHighlight
-          onPress={() => {
-            this.setModalVisibility(true);
-          }}>
-          <Text>STOR PLUSS IKON</Text>
-        </TouchableHighlight>
+        <View style={styles.btnContainer}>
+          <TouchableHighlight
+            onPress={() => {
+              this.setModalVisibility(true);
+            }}>
+            <View style={styles.iconContainer}>
+              <Icon.FontAwesome
+                name={'plus'}
+                size={35}
+                color={'#fff'}
+              />
+            </View>
+          </TouchableHighlight>
+        </View>
       </View>
     )
   }
@@ -84,4 +92,22 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingVertical: 30,
   },
+
+
+  btnContainer: {
+    marginBottom: 20,
+  },
+
+  iconContainer: {
+    border: 1,
+    borderColor: '#777',
+    borderWidth: 1,
+    color: '#fff',
+    backgroundColor: '#00AAEE',
+    borderRadius: 30,
+    width: 60,
+    height: 60,
+    alignItems: 'center',
+    justifyContent: 'center',
+  }
 });

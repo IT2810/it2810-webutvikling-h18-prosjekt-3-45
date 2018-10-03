@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import { FormLabel, Button, FormInput, FormValidationMessage } from 'react-native-elements'
-import {Text, ScrollView, View, TouchableOpacity, StyleSheet} from 'react-native';
+import {Text, ScrollView, View, TouchableOpacity, StyleSheet, Alert} from 'react-native';
 import DateTimePicker from 'react-native-modal-datetime-picker'
+import {Icon} from "expo";
 
 export default class TodoSchema extends Component {
 
@@ -56,9 +57,8 @@ export default class TodoSchema extends Component {
    */
   handleDatePicked = (date) => {
     this.setState({
-      date: date.toLocaleString().substring(0, date.toLocaleString().length-2),
+      date: date.toLocaleString().substring(0, date.toLocaleString().length-3),
     });
-    alert(date.toLocaleString().substring(0, date.toLocaleString().length-2))
     this.hideDateTimePicker();
   };
 
@@ -70,7 +70,7 @@ export default class TodoSchema extends Component {
    * an object containing the title, description and date state for todo
    */
   saveForm = (frmObject) => {
-    frmObject.title === "" ? alert("Please insert a title.") : this.props.saveForm(frmObject);
+    frmObject.title === "" ? Alert.alert("Title missing", "Please insert a title.") : this.props.saveForm(frmObject);
   };
 
   /**
@@ -115,7 +115,11 @@ export default class TodoSchema extends Component {
               Date chosen: {this.state.date === "" ? 'None' : this.state.date}
             </Text>
             <TouchableOpacity onPress={this.showDateTimePicker}>
-              <Text>{'CalenderICON'}</Text>
+              <Icon.FontAwesome
+                name={'calendar'}
+                size={40}
+                color={'#ccc'}
+              />
             </TouchableOpacity>
           </View>
           <View>

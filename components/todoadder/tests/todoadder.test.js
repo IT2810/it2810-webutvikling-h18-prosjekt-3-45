@@ -1,12 +1,9 @@
-import 'react-native';
-import React from 'react';
-import Login from '../../todoadder';
+import React from 'react'
+import renderer from 'react-test-renderer'
 
-import renderer from 'react-test-renderer';
+import TodoAdder from '../../todoadder';
 
 it('renders correctly', () => {
-  const tree = renderer.create(
-    <Login />
-  ).toJSON();
-  expect(tree).toMatchSnapshot();
+  const tree = renderer.create(<TodoAdder/>).toJSON();
+  expect(tree).toMatchSnapShot();
 });
