@@ -30,21 +30,30 @@ export default class TodoSchema extends Component {
   showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true });
   hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
 
-  // Handle title
+  /**
+   * Sets the titlestate based on input from user
+   * @param title     title for todo
+   */
   handleTitlePicked = (title) => {
     this.setState({
       title: title,
     })
   };
 
-  // Handles description
+  /**
+   * Sets the descriptionstate based on input from user
+   * @param description     description for todo
+   */
   handleDescriptionPicked = (description) => {
     this.setState({
       description: description,
     })
   };
 
-  // handles the picked date
+  /**
+   * Sets the datestate based on input from user
+   * @param date     date for todo
+   */
   handleDatePicked = (date) => {
     this.setState({
       date: date.toLocaleString(),
@@ -52,18 +61,25 @@ export default class TodoSchema extends Component {
     this.hideDateTimePicker();
   };
 
+  /**
+   * Checks whether the required field is empty
+   * Saves the state for a todo created by user input.
+   * Uses the prop saveForm from TodoAdder
+   * @param frmObject  {{title: string, description: string, date: string}}
+   * an object containing the title, description and date state for todo
+   */
   saveForm = (frmObject) => {
-    if (frmObject.title === "") {
-      alert("empty title")
-    } else {
-      this.props.saveForm(frmObject)
-    }
-  }
+    frmObject.title === "" ? alert("empty title") : this.props.saveForm(frmObject);
+  };
 
-  // Function for handling cancel button for form
+  /**
+   * Closes the modal window to the form  (cancel todo registration)
+   * Uses the prop hideModule from TodoAdder
+   * @param state
+   */
   cancelForm = (state) => {
     this.props.hideModule(state);
-  }
+  };
 
   render() {
     return (
