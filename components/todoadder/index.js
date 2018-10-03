@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {View, Text, Modal, TouchableHighlight, StyleSheet} from 'react-native';
-import TodoSchema from '../TodoSchema';
+import TodoSchema from '../todoschema';
 import { addTodo } from '../../features/todos/actions';
+
+// TODO Legg til ikon
+// TODO LEgg til testing
+// TODO fikse slik at det ikke vises noe annet enn time og minutt i todoschema
 
 /**
  * Modal functionality is inspired from
@@ -27,7 +31,7 @@ class TodoAdder extends Component {
 
   /**
    * Creates a new todo with forminput.
-   * This will display the TodoSchema s.t. we can get a form modal
+   * This will display the todoschema s.t. we can get a form modal
    * @param title         string    title for todo
    * @param description   string    description for todo (optional)
    * @param date          string    date for todo (optional)
@@ -78,6 +82,6 @@ export default connect(
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 120,
+    paddingVertical: 30,
   },
 });

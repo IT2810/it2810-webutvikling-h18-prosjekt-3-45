@@ -56,15 +56,16 @@ export default class TodoSchema extends Component {
    */
   handleDatePicked = (date) => {
     this.setState({
-      date: date.toLocaleString(),
+      date: date.toLocaleString().substring(0, date.toLocaleString().length-2),
     });
+    alert(date.toLocaleString().substring(0, date.toLocaleString().length-2))
     this.hideDateTimePicker();
   };
 
   /**
    * Checks whether the required field is empty
    * Saves the state for a todo created by user input.
-   * Uses the prop saveForm from TodoAdder
+   * Uses the prop saveForm from todoadder
    * @param frmObject  {{title: string, description: string, date: string}}
    * an object containing the title, description and date state for todo
    */
@@ -74,7 +75,7 @@ export default class TodoSchema extends Component {
 
   /**
    * Closes the modal window to the form  (cancel todo registration)
-   * Uses the prop hideModule from TodoAdder
+   * Uses the prop hideModule from todoadder
    * @param state
    */
   cancelForm = (state) => {
