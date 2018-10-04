@@ -26,7 +26,7 @@ const todo = (state = {}, action) => {
 const todos = (state = [], action) => {  
   switch (action.type) {
     case 'ADD_TODO':
-      return [...state, todo(action)];
+      return [...state, todo(undefined, action)];
 
     case 'FINISH_TODO':
       return state.map(entry => todo(entry, action));
