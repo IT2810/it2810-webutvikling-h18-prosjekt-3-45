@@ -163,7 +163,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginRight: 20,
     marginBottom: 40,
-
   },
 
   btnContainer: {
@@ -174,5 +173,4 @@ const styles = StyleSheet.create({
   button: {
     width: 80,
   },
-
 });

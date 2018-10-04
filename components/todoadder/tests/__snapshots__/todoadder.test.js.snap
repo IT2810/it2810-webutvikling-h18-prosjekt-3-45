@@ -27,38 +27,11 @@ exports[`TodoAdder renders correctly 1`] = `
       }
     }
   >
-    <View
+    <Text
       accessible={true}
-      isTVSelectable={true}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      style={null}
-    >
-      <View
-        style={
-          Object {
-            "alignItems": "center",
-            "backgroundColor": "#00AAEE",
-            "borderColor": "#777",
-            "borderRadius": 30,
-            "borderWidth": 1,
-            "height": 60,
-            "justifyContent": "center",
-            "width": 60,
-          }
-        }
-      >
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        />
-      </View>
-    </View>
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    />
   </View>
 </View>
 `;
