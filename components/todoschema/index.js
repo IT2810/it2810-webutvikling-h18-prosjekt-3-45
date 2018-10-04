@@ -7,7 +7,7 @@ import {
   StyleSheet,
   Alert,
   TextInput,
-  Platform,
+  KeyboardAvoidingView,
 } from 'react-native';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import { Icon } from 'expo';
@@ -121,100 +121,108 @@ export default class TodoSchema extends Component {
 
   render() {
     return (
-      <ScrollView>
-        <View style={styles.container}>
-          <Text style={styles.title}>
-            {this.state.text === '' &&
-            this.state.description === '' &&
-            this.state.date === ''
-              ? 'Create a new todo'
-              : 'Edit todo'}
-          </Text>
-          <Text style={styles.label}>Title</Text>
-          <TextInput
-            underlineColorAndroid="transparent"
-            style={styles.input}
-            placeholder={'Do delivery ..'}
-            onChangeText={this.handleTitlePicked}
-            value={this.state.text}
-          />
-          <Text style={styles.warning}>
-            {this.state.text === '' ? 'This field is required' : ''}
-          </Text>
-          <Text style={styles.label}>Description</Text>
-          <TextInput
-            underlineColorAndroid="transparent"
-            style={styles.input}
-            placeholder={'Also remember to bring the books ...'}
-            onChangeText={this.handleDescriptionPicked}
-            value={this.state.description}
-            multiline={true}
-          />
-          <Text style={styles.label}>Date</Text>
-          <View style={styles.dateCont}>
-            <View>
-              <Icon.FontAwesome
-                name="calendar"
-                size={40}
-                color={'#ccc'}
-                onPress={this.showDateTimePicker}
-              />
+      <KeyboardAvoidingView
+        style={styles.container}
+        behavior="padding"
+        keyboardVerticalOffset={64}
+      >
+        <ScrollView>
+          <View>
+            <Text style={styles.title}>
+              {this.state.text === '' &&
+              this.state.description === '' &&
+              this.state.date === ''
+                ? 'Create a new todo'
+                : 'Edit todo'}
+            </Text>
+            <Text style={styles.label}>Title</Text>
+            <TextInput
+              underlineColorAndroid="transparent"
+              style={styles.input}
+              returnKeyType="done"
+              placeholder={'Do delivery ..'}
+              onChangeText={this.handleTitlePicked}
+              value={this.state.text}
+            />
+            <Text style={styles.warning}>
+              {this.state.text === '' ? 'This field is required' : ''}
+            </Text>
+            <Text style={styles.label}>Description</Text>
+            <TextInput
+              underlineColorAndroid="transparent"
+              style={[styles.input, styles.multiline]}
+              placeholder={'Also remember to bring the books ...'}
+              onChangeText={this.handleDescriptionPicked}
+              value={this.state.description}
+              multiline={true}
+            />
+            <Text style={styles.label}>Date</Text>
+            <View style={styles.dateCont}>
               <View>
-                <DateTimePicker
-                  isVisible={this.state.isDateTimePickerVisible}
-                  onConfirm={this.handleDatePicked}
-                  onCancel={this.hideDateTimePicker}
-                  mode={'datetime'}
-                  datePickerModeAndroid={'spinner'}
+                <Icon.FontAwesome
+                  name="calendar"
+                  size={40}
+                  color={'#ccc'}
+                  onPress={this.showDateTimePicker}
                 />
+                <View>
+                  <DateTimePicker
+                    isVisible={this.state.isDateTimePickerVisible}
+                    onConfirm={this.handleDatePicked}
+                    onCancel={this.hideDateTimePicker}
+                    mode={'datetime'}
+                    datePickerModeAndroid={'spinner'}
+                  />
+                </View>
+              </View>
+              <Text style={styles.text}>
+                {this.state.date === '' ? 'XX.XX.20XX, XX:XX' : this.state.date}
+              </Text>
+              <View>
+                <TouchableHighlight
+                  onPress={this.clearDate}
+                  style={[styles.button, styles.cancelBtn]}
+                >
+                  <Text style={styles.btnText}>Clear</Text>
+                </TouchableHighlight>
               </View>
             </View>
-            <Text style={styles.text}>
-              {this.state.date === '' ? 'XX.XX.20XX, XX:XX' : this.state.date}
-            </Text>
-            <View>
-              <TouchableHighlight
-                onPress={this.clearDate}
-                style={[styles.button, styles.cancelBtn]}
-              >
-                <Text style={styles.btnText}>Clear</Text>
-              </TouchableHighlight>
+            <View style={styles.btnContainer}>
+              <View>
+                <TouchableHighlight
+                  style={[styles.saveBtn, styles.button]}
+                  onPress={() =>
+                    this.saveForm({
+                      text: this.state.text,
+                      description: this.state.description,
+                      date: this.state.date,
+                    })
+                  }
+                >
+                  <Text style={styles.btnText}>Save</Text>
+                </TouchableHighlight>
+              </View>
+              <View>
+                <TouchableHighlight
+                  style={[styles.cancelBtn, styles.button]}
+                  onPress={() => this.cancelForm(false)}
+                >
+                  <Text style={styles.btnText}>Cancel</Text>
+                </TouchableHighlight>
+              </View>
             </View>
           </View>
-          <View style={styles.btnContainer}>
-            <View>
-              <TouchableHighlight
-                style={[styles.saveBtn, styles.button]}
-                onPress={() =>
-                  this.saveForm({
-                    text: this.state.text,
-                    description: this.state.description,
-                    date: this.state.date,
-                  })
-                }
-              >
-                <Text style={styles.btnText}>Save</Text>
-              </TouchableHighlight>
-            </View>
-            <View>
-              <TouchableHighlight
-                style={[styles.cancelBtn, styles.button]}
-                color={Platform.OS === 'ios' ? '#fff' : 'transparent'}
-                onPress={() => this.cancelForm(false)}
-              >
-                <Text style={styles.btnText}>Cancel</Text>
-              </TouchableHighlight>
-            </View>
-          </View>
-        </View>
-      </ScrollView>
+        </ScrollView>
+      </KeyboardAvoidingView>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     padding: 20,
+    height: '100%',
   },
 
   title: {
@@ -237,12 +245,22 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#bbb',
   },
-
+  multiline: {
+    borderWidth: 1,
+    borderColor: '#bbb',
+    padding: 7,
+    borderRadius: 5,
+  },
   warning: {
     color: '#f00',
   },
 
+  test: {
+    flex: 1,
+  },
+
   dateCont: {
+    flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
