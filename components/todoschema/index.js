@@ -132,6 +132,7 @@ export default class TodoSchema extends Component {
           </Text>
           <Text style={styles.label}>Title</Text>
           <TextInput
+            underlineColorAndroid="transparent"
             style={styles.input}
             placeholder={'Do delivery ..'}
             onChangeText={this.handleTitlePicked}
@@ -142,6 +143,7 @@ export default class TodoSchema extends Component {
           </Text>
           <Text style={styles.label}>Description</Text>
           <TextInput
+            underlineColorAndroid="transparent"
             style={styles.input}
             placeholder={'Also remember to bring the books ...'}
             onChangeText={this.handleDescriptionPicked}
@@ -233,7 +235,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     paddingBottom: 5,
     borderBottomWidth: 1,
-    underlineColorAndroid: 'transparent',
     borderBottomColor: '#bbb',
   },
 
