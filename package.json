@@ -11,7 +11,6 @@
   },
   "dependencies": {
     "expo": "^30.0.1",
-    "react": "16.3.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-30.0.0.tar.gz",
     "react-native-swipeout": "^2.3.6",
     "react-redux": "^5.0.7",
@@ -22,9 +21,23 @@
   "devDependencies": {
     "jest": "^23.6.0",
     "jest-expo": "^30.0.0",
-    "react-test-renderer": "^16.5.2"
+    "react-test-renderer": "^16.5.2",
+    "husky": "^1.1.0",
+    "lint-staged": "^7.3.0",
+    "prettier": "^1.14.3"
   },
   "jest": {
     "preset": "jest-expo"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,json,css,md}": [
+      "prettier --single-quote --trailing-comma all --write",
+      "git add"
+    ]
   }
 }
