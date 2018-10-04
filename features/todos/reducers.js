@@ -8,6 +8,11 @@ const todo = (state = {}, action) => {
         date: action.date,
         id: action.id,
         done: false,
+
+        // These apply only when tracking the pedometer
+        creationDate: action.creationDate,
+        isPedometer: action.isPedometer,
+        stepsGoal: action.stepsGoal,
       };
 
     case 'UPDATE_TODO':
