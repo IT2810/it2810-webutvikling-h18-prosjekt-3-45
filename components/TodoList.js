@@ -10,7 +10,9 @@ import {
 
 import Swipeout from 'react-native-swipeout';
 
-class TodoList extends Component {
+// This class is exported both as the default export and as a component
+// wrapped using connect to ease testing of this component.
+export class TodoList extends Component {
   handleOpen = (direction, id) => {
     if (direction === 'left') {
       this.props.finishTodo(id);

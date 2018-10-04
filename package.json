@@ -9,9 +9,6 @@
     "eject": "expo eject",
     "test": "node_modules/.bin/jest"
   },
-  "jest": {
-    "preset": "jest-expo"
-  },
   "dependencies": {
     "expo": "^30.0.1",
     "expo-cli": "^2.2.0",
@@ -28,6 +25,11 @@
     "uuid": "^3.3.2"
   },
   "devDependencies": {
-    "jest-expo": "^30.0.0"
+    "jest": "^23.6.0",
+    "jest-expo": "^30.0.0",
+    "react-test-renderer": "^16.5.2"
+  },
+  "jest": {
+    "preset": "jest-expo"
   }
 }
