@@ -1,9 +1,12 @@
 import React from 'react'
 import renderer from 'react-test-renderer'
+import { TodoAdder } from '../../todoadder';
 
-import TodoAdder from '../../todoadder';
+jest.mock('../../todoschema', () => () => 'TodoSchema');
 
-it('renders correctly', () => {
-  const tree = renderer.create(<TodoAdder/>).toJSON();
-  expect(tree).toMatchSnapShot();
+describe('TodoAdder', () => {
+  it('renders correctly', () => {
+    const tree = renderer.create(<TodoAdder />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
 });

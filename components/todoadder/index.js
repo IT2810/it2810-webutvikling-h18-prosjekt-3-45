@@ -12,7 +12,7 @@ import { Icon } from "expo";
  * Modal functionality is inspired from
  * https://facebook.github.io/react-native/docs/modal.html
  */
-class TodoAdder extends Component {
+export class TodoAdder extends Component {
 
   state = {
     modalVisible: false,
@@ -99,10 +99,8 @@ const styles = StyleSheet.create({
   },
 
   iconContainer: {
-    border: 1,
     borderColor: '#777',
     borderWidth: 1,
-    color: '#fff',
     backgroundColor: '#00AAEE',
     borderRadius: 30,
     width: 60,

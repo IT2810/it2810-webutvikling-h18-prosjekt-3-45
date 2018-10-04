@@ -11,9 +11,9 @@ describe('TodoList', () => {
     <TodoList
       todos={mockTodos}
     />
-  );
+  ).toJSON();
 
   it('should render correctly', () => {
-    expect(tree.toJSON()).toMatchSnapshot();
+    expect(tree).toMatchSnapshot();
   });
 });
