@@ -233,6 +233,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     paddingBottom: 5,
     borderBottomWidth: 1,
+    underlineColorAndroid: 'transparent',
     borderBottomColor: '#bbb',
   },
 
