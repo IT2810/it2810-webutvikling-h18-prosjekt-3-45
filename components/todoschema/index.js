@@ -109,30 +109,46 @@ export default class TodoSchema extends Component {
     this.props.hideModule(state);
   };
 
+  /**
+   * Clears the date of todoform when pressing clear
+   */
+  clearDate = () => {
+    this.setState({
+      date: '',
+    });
+  };
+
   render() {
     return (
       <ScrollView>
-        <View>
-          <Text style={styles.title}>Create a new todo</Text>
-          <Text>Title</Text>
+        <View style={styles.container}>
+          <Text style={styles.title}>
+            {this.state.text === '' &&
+            this.state.description === '' &&
+            this.state.date === ''
+              ? 'Create a new todo'
+              : 'Edit todo'}
+          </Text>
+          <Text style={styles.label}>Title</Text>
           <TextInput
+            style={styles.input}
             placeholder={'Do delivery ..'}
             onChangeText={this.handleTitlePicked}
             value={this.state.text}
           />
-          {this.state.text === '' && <Text>{'This field is required'}</Text>}
-          <Text>Description</Text>
+          <Text style={styles.warning}>
+            {this.state.text === '' ? 'This field is required' : ''}
+          </Text>
+          <Text style={styles.label}>Description</Text>
           <TextInput
+            style={styles.input}
             placeholder={'Also remember to bring the books ...'}
             onChangeText={this.handleDescriptionPicked}
             value={this.state.description}
             multiline={true}
           />
-          <Text>Date</Text>
+          <Text style={styles.label}>Date</Text>
           <View style={styles.dateCont}>
-            <Text style={styles.text}>
-              Date chosen: {this.state.date === '' ? 'None' : this.state.date}
-            </Text>
             <View>
               <Icon.FontAwesome
                 name="calendar"
@@ -150,25 +166,35 @@ export default class TodoSchema extends Component {
                 />
               </View>
             </View>
+            <Text style={styles.text}>
+              {this.state.date === '' ? 'XX.XX.20XX, XX:XX' : this.state.date}
+            </Text>
+            <View style={[styles.button, styles.cancelBtn]}>
+              <Button title={'Clear'} color={'#fff'} onPress={this.clearDate} />
+            </View>
           </View>
           <View style={styles.btnContainer}>
-            <Button
-              title={'Save'}
-              style={styles.button}
-              onPress={() =>
-                this.saveForm({
-                  text: this.state.text,
-                  description: this.state.description,
-                  date: this.state.date,
-                })
-              }
-            />
-
-            <Button
-              title={'Cancel'}
-              style={styles.button}
-              onPress={() => this.cancelForm(false)}
-            />
+            <View style={[styles.saveBtn, styles.button]}>
+              <Button
+                title={'Save'}
+                style={styles.button}
+                color={'#fff'}
+                onPress={() =>
+                  this.saveForm({
+                    text: this.state.text,
+                    description: this.state.description,
+                    date: this.state.date,
+                  })
+                }
+              />
+            </View>
+            <View style={[styles.cancelBtn, styles.button]}>
+              <Button
+                title={'Cancel'}
+                color={'#fff'}
+                onPress={() => this.cancelForm(false)}
+              />
+            </View>
           </View>
         </View>
       </ScrollView>
@@ -177,29 +203,56 @@ export default class TodoSchema extends Component {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    padding: 20,
+  },
   title: {
     alignSelf: 'center',
     fontSize: 24,
   },
 
-  text: {
-    marginLeft: 20,
+  label: {
+    fontSize: 20,
+    color: '#777',
+    fontWeight: 'bold',
+    marginTop: 20,
+  },
+
+  input: {
+    marginTop: 10,
+    marginBottom: 10,
+    fontSize: 16,
+    paddingBottom: 5,
+    borderBottomWidth: 1,
+    borderBottomColor: '#bbb',
+  },
+
+  warning: {
+    color: '#f00',
   },
 
   dateCont: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginRight: 20,
     marginBottom: 40,
   },
 
   btnContainer: {
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
   },
 
   button: {
-    width: 80,
+    padding: 4,
+    borderRadius: 10,
+  },
+
+  saveBtn: {
+    backgroundColor: '#2f95dc',
+  },
+
+  cancelBtn: {
+    backgroundColor: '#f00',
   },
 });

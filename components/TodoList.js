@@ -96,7 +96,7 @@ export class TodoList extends Component {
                 {
                   text: 'Edit',
                   onPress: () => this.handlePress(todo.id),
-                  backgroundColor: '#00AAEE',
+                  backgroundColor: '#2f95dc',
                 },
                 {
                   text: 'Delete',

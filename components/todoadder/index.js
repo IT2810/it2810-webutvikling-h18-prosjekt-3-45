@@ -48,11 +48,10 @@ export class TodoAdder extends Component {
           <Icon.MaterialIcons
             name={'add-circle'}
             size={70}
-            color={'#00AAEE'}
+            color={'#2f95dc'}
             onPress={() => {
               this.setModalVisibility(true);
             }}
-            underlayColor={'#ffff00'}
           />
         </View>
       </View>
