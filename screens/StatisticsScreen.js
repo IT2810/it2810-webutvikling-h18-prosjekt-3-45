@@ -2,11 +2,11 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 export default class StatisticsScreen extends React.Component {
-    static navigationOptions = {
-        title: 'Statistics',
-    };
-  
-    render() {
+  static navigationOptions = {
+    title: 'Statistics',
+  };
+
+  render() {
     return (
       <View style={styles.container}>
         <Text>Statistics stuff</Text>

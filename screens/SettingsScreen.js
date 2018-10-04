@@ -2,11 +2,11 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 export default class SettingsScreen extends React.Component {
-    static navigationOptions = {
-        title: 'Settings',
-    };
-  
-    render() {
+  static navigationOptions = {
+    title: 'Settings',
+  };
+
+  render() {
     return (
       <View style={styles.container}>
         <Text>Settings stuff</Text>

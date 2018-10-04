@@ -2,11 +2,11 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 export default class CalendarScreen extends React.Component {
-    static navigationOptions = {
-        title: 'Calendar',
-    };
-  
-    render() {
+  static navigationOptions = {
+    title: 'Calendar',
+  };
+
+  render() {
     return (
       <View style={styles.container}>
         <Text>Calendar stuff</Text>
