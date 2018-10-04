@@ -114,24 +114,24 @@ export default class TodoSchema extends Component {
             <Text style={styles.text}>
               Date chosen: {this.state.date === "" ? 'None' : this.state.date}
             </Text>
-            <TouchableOpacity onPress={this.showDateTimePicker}>
+            <View>
               <Icon.FontAwesome
                 name={'calendar'}
                 size={40}
                 color={'#ccc'}
+                onPress={this.showDateTimePicker}
               />
-            </TouchableOpacity>
+              <View>
+                <DateTimePicker
+                  isVisible={this.state.isDateTimePickerVisible}
+                  onConfirm={this.handleDatePicked}
+                  onCancel={this.hideDateTimePicker}
+                  mode={'datetime'}
+                  datePickerModeAndroid={'calendar'}
+                />
+              </View>
+            </View>
           </View>
-          <View>
-            <DateTimePicker
-              isVisible={this.state.isDateTimePickerVisible}
-              onConfirm={this.handleDatePicked}
-              onCancel={this.hideDateTimePicker}
-              mode={'datetime'}
-              datePickerModeAndroid={'calendar'}
-            />
-          </View>
-
           <View style={styles.btnContainer}>
             <Button title={'Save'} style={styles.button} onPress={() => this.saveForm({
               title: this.state.title,
@@ -160,6 +160,7 @@ const styles = StyleSheet.create({
   dateCont: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
     marginRight: 20,
     marginBottom: 40,
 
@@ -172,6 +173,6 @@ const styles = StyleSheet.create({
 
   button: {
     width: 80,
-  }
+  },
 
 });

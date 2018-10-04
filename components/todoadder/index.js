@@ -59,18 +59,15 @@ export class TodoAdder extends Component {
         </Modal>
 
         <View style={styles.btnContainer}>
-          <TouchableHighlight
-            onPress={() => {
-              this.setModalVisibility(true);
-            }}>
-            <View style={styles.iconContainer}>
-              <Icon.FontAwesome
-                name={'plus'}
-                size={35}
-                color={'#fff'}
+              <Icon.MaterialIcons
+                name={'add-circle'}
+                size={70}
+                color={'#00AAEE'}
+                onPress={() => {
+                  this.setModalVisibility(true);
+                }}
+                underlayColor={'#ffff00'}
               />
-            </View>
-          </TouchableHighlight>
         </View>
       </View>
     )
@@ -107,5 +104,6 @@ const styles = StyleSheet.create({
     height: 60,
     alignItems: 'center',
     justifyContent: 'center',
+
   }
 });
