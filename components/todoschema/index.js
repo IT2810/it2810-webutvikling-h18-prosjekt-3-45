@@ -3,10 +3,11 @@ import {
   Text,
   ScrollView,
   View,
-  Button,
+  TouchableHighlight,
   StyleSheet,
   Alert,
   TextInput,
+  Platform,
 } from 'react-native';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import { Icon } from 'expo';
@@ -167,16 +168,19 @@ export default class TodoSchema extends Component {
             <Text style={styles.text}>
               {this.state.date === '' ? 'XX.XX.20XX, XX:XX' : this.state.date}
             </Text>
-            <View style={[styles.button, styles.cancelBtn]}>
-              <Button title={'Clear'} color={'#fff'} onPress={this.clearDate} />
+            <View>
+              <TouchableHighlight
+                onPress={this.clearDate}
+                style={[styles.button, styles.cancelBtn]}
+              >
+                <Text style={styles.btnText}>Clear</Text>
+              </TouchableHighlight>
             </View>
           </View>
           <View style={styles.btnContainer}>
-            <View style={[styles.saveBtn, styles.button]}>
-              <Button
-                title={'Save'}
-                style={styles.button}
-                color={'#fff'}
+            <View>
+              <TouchableHighlight
+                style={[styles.saveBtn, styles.button]}
                 onPress={() =>
                   this.saveForm({
                     text: this.state.text,
@@ -184,14 +188,18 @@ export default class TodoSchema extends Component {
                     date: this.state.date,
                   })
                 }
-              />
+              >
+                <Text style={styles.btnText}>Save</Text>
+              </TouchableHighlight>
             </View>
-            <View style={[styles.cancelBtn, styles.button]}>
-              <Button
-                title={'Cancel'}
-                color={'#fff'}
+            <View>
+              <TouchableHighlight
+                style={[styles.cancelBtn, styles.button]}
+                color={Platform.OS === 'ios' ? '#fff' : 'transparent'}
                 onPress={() => this.cancelForm(false)}
-              />
+              >
+                <Text style={styles.btnText}>Cancel</Text>
+              </TouchableHighlight>
             </View>
           </View>
         </View>
@@ -204,6 +212,7 @@ const styles = StyleSheet.create({
   container: {
     padding: 20,
   },
+
   title: {
     alignSelf: 'center',
     fontSize: 24,
@@ -241,8 +250,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
 
+  btnText: {
+    color: '#fff',
+  },
+
   button: {
-    padding: 4,
+    padding: 15,
     borderRadius: 10,
   },
 
