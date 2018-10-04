@@ -31,8 +31,8 @@ export class TodoAdder extends Component {
    * @param description   string    description for todo (optional)
    * @param date          string    date for todo (optional)
    */
-  createTodo = ({ title, description, date }) => {
-    this.props.addTodo(title, description, date);
+  createTodo = ({ text, description, date }) => {
+    this.props.addTodo(text, description, date);
     this.setModalVisibility(false);
   };
 

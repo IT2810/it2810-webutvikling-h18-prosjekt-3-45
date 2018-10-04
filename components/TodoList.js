@@ -10,8 +10,14 @@ import { SchemaModal } from './todoadder/schemamodal';
 // This class is exported both as the default export and as a component
 // wrapped using connect to ease testing of this component.
 export class TodoList extends Component {
+  /**
+   * modalVisible is whether the modal for adding a new todo should be visible
+   * pressedTodo is the todoobject (containing the states) that is pressed
+   * @type {{modalVisible: boolean, pressedTodo: {}}}
+   */
   state = {
     modalVisible: false,
+    pressedTodo: {},
   };
 
   /**
@@ -22,8 +28,6 @@ export class TodoList extends Component {
   handleOpen = (direction, id) => {
     if (direction === 'left') {
       this.props.finishTodo(id);
-    } else {
-      alert(section);
     }
   };
 
@@ -88,8 +92,12 @@ export class TodoList extends Component {
                   backgroundColor: '#68CC3D',
                 },
               ],
-
               right: [
+                {
+                  text: 'Edit',
+                  onPress: () => this.handlePress(todo.id),
+                  backgroundColor: '#00AAEE',
+                },
                 {
                   text: 'Delete',
                   onPress: () => this.handleDelete(todo.id),
@@ -104,7 +112,6 @@ export class TodoList extends Component {
                 right={buttons.right}
                 onOpen={(section, row, direction) => {
                   this.handleOpen(direction, todo.id);
-                  this.handlePress(todo.id);
                 }}
                 key={todo.id}
               >

@@ -12,22 +12,6 @@ import DateTimePicker from 'react-native-modal-datetime-picker';
 import { Icon } from 'expo';
 
 export default class TodoSchema extends Component {
-  constructor(props) {
-    super(props);
-
-    // The current todo object being edited with its current values
-    let curTodo = this.props.currentTodo;
-
-    // Update the state of schema with current todo values if existing
-    if (curTodo) {
-      this.state = {
-        text: curTodo.text,
-        description: curTodo.description,
-        date: curTodo.date,
-      };
-    }
-  }
-
   /**
    * States:
    * isDateTimePickerVisible is whether the datepicker modal is visible or not
@@ -43,6 +27,22 @@ export default class TodoSchema extends Component {
     description: '',
     date: '',
   };
+
+  constructor(props) {
+    super(props);
+
+    // The current todo object being edited with its current values
+    let curTodo = this.props.currentTodo;
+
+    // Update the state of schema with current todo values if existing
+    if (curTodo !== undefined) {
+      this.state = {
+        text: curTodo.text,
+        description: curTodo.description,
+        date: curTodo.date,
+      };
+    }
+  }
 
   /**
    * The DateTimePicker is taken from mmazzarolo at Github, but this has been modified to match
