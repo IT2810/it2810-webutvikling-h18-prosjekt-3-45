@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, Modal, TouchableHighlight, StyleSheet } from 'react-native';
+import { View, Modal, StyleSheet } from 'react-native';
 import TodoSchema from '../todoschema';
 import { addTodo } from '../../features/todos/actions';
 import { Icon } from "expo";
-
-// TODO LEgg til testing
-// TODO fikse slik at det ikke vises noe annet enn time og minutt i todoschema
 
 /**
  * Modal functionality is inspired from
