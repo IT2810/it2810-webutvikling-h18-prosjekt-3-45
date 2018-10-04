@@ -14,19 +14,28 @@ export class TodoList extends Component {
     modalVisible: false,
   };
 
+  /**
+   * Handles sliding of todos
+   * @param direction   the direction of the sliding
+   * @param id          id of the todo
+   */
   handleOpen = (direction, id) => {
     if (direction === 'left') {
       this.props.finishTodo(id);
+    } else {
+      alert(section);
     }
+  };
 
-    // When a todo is pressed in the list, find the states and send these to updateTodo
-    if (direction === undefined) {
-      let todo = this.props.todos.find(todo => todo.id === id);
-      this.setModalVisibility(true);
-
-      // Call this function after pressing save
-      //this.updateTodo(todo.id, todo);
-    }
+  /**
+   * When a todo is pressed in the list, find the states and send these to updateTodo
+   * @param id
+   */
+  handlePress = id => {
+    // Finds the id of pressed todo among todos
+    this.state.pressedTodo = this.props.todos.find(todo => todo.id === id);
+    // Shows the form
+    this.setModalVisibility(true);
   };
 
   /**
@@ -50,12 +59,11 @@ export class TodoList extends Component {
   /**
    * Updates a new todo with forminput from editing todo
    * This will display the todoschema s.t. we can get a form modal
-   * @param id          id for todo in redux
-   * @param data        object containing text, description and date
+   * @param data        object containing text, description and date for the changed todo
    */
-  updateTodo = (id, data) => {
-    this.props.updateTodo(id, data);
+  updateTodo = data => {
     this.setModalVisibility(false);
+    this.props.updateTodo(this.state.pressedTodo.id, data);
   };
 
   render() {
@@ -68,16 +76,12 @@ export class TodoList extends Component {
             saveForm={this.updateTodo}
             setModalVisibility={this.setModalVisibility}
             modalVisible={this.state.modalVisible}
+            currentTodo={this.state.pressedTodo}
           />
         </View>
         <View>
           {openTodos.map(todo => {
             const buttons = {
-              center: [
-                {
-                  onPress: () => this.handlePress,
-                },
-              ],
               left: [
                 {
                   text: 'Done',
@@ -98,9 +102,10 @@ export class TodoList extends Component {
               <Swipeout
                 left={buttons.left}
                 right={buttons.right}
-                onOpen={(section, row, direction) =>
-                  this.handleOpen(direction, todo.id)
-                }
+                onOpen={(section, row, direction) => {
+                  this.handleOpen(direction, todo.id);
+                  this.handlePress(todo.id);
+                }}
                 key={todo.id}
               >
                 <View style={styles.todo}>

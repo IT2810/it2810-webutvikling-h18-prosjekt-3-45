@@ -12,18 +12,34 @@ import DateTimePicker from 'react-native-modal-datetime-picker';
 import { Icon } from 'expo';
 
 export default class TodoSchema extends Component {
+  constructor(props) {
+    super(props);
+
+    // The current todo object being edited with its current values
+    let curTodo = this.props.currentTodo;
+
+    // Update the state of schema with current todo values if existing
+    if (curTodo) {
+      this.state = {
+        text: curTodo.text,
+        description: curTodo.description,
+        date: curTodo.date,
+      };
+    }
+  }
+
   /**
    * States:
    * isDateTimePickerVisible is whether the datepicker modal is visible or not
-   * title is the textinput from user
+   * text is the title of todo from textinput from user
    * description is the textinput from user (optional)
    * date is the dateinput from user (optional)
    *
-   * @type {{isDateTimePickerVisible: boolean, title: string, description: string, date: string}}
+   * @type {{isDateTimePickerVisible: boolean, text: string, description: string, date: string}}
    */
   state = {
     isDateTimePickerVisible: false,
-    title: '',
+    text: '',
     description: '',
     date: '',
   };
@@ -43,7 +59,7 @@ export default class TodoSchema extends Component {
    */
   handleTitlePicked = title => {
     this.setState({
-      title: title,
+      text: title,
     });
   };
 
@@ -74,19 +90,20 @@ export default class TodoSchema extends Component {
    * Checks whether the required field is empty
    * Saves the state for a todo created by user input.
    * Uses the prop saveForm from todoadder
-   * @param frmObject  {{title: string, description: string, date: string}}
+   * @param frmObject  {{text: string, description: string, date: string}}
    * an object containing the title, description and date state for todo
    */
   saveForm = frmObject => {
-    frmObject.title === ''
-      ? Alert.alert('Title missing', 'Please insert a title.')
-      : this.props.saveForm(frmObject);
+    if (frmObject.text === '') {
+      Alert.alert('Title missing', 'Please insert a title.');
+    } else {
+      this.props.saveForm(frmObject);
+    }
   };
 
   /**
    * Closes the modal window to the form  (cancel todo registration)
    * Uses the prop hideModule from todoadder
-   * @param state
    */
   cancelForm = state => {
     this.props.hideModule(state);
@@ -101,9 +118,9 @@ export default class TodoSchema extends Component {
           <TextInput
             placeholder={'Do delivery ..'}
             onChangeText={this.handleTitlePicked}
-            value={this.state.title}
+            value={this.state.text}
           />
-          {this.state.title === '' && <Text>{'This field is required'}</Text>}
+          {this.state.text === '' && <Text>{'This field is required'}</Text>}
           <Text>Description</Text>
           <TextInput
             placeholder={'Also remember to bring the books ...'}
@@ -118,7 +135,7 @@ export default class TodoSchema extends Component {
             </Text>
             <View>
               <Icon.FontAwesome
-                name={'calendar'}
+                name="calendar"
                 size={40}
                 color={'#ccc'}
                 onPress={this.showDateTimePicker}
@@ -129,7 +146,7 @@ export default class TodoSchema extends Component {
                   onConfirm={this.handleDatePicked}
                   onCancel={this.hideDateTimePicker}
                   mode={'datetime'}
-                  datePickerModeAndroid={'calendar'}
+                  datePickerModeAndroid={'g'}
                 />
               </View>
             </View>
@@ -140,7 +157,7 @@ export default class TodoSchema extends Component {
               style={styles.button}
               onPress={() =>
                 this.saveForm({
-                  title: this.state.title,
+                  text: this.state.text,
                   description: this.state.description,
                   date: this.state.date,
                 })

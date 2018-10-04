@@ -8,10 +8,6 @@ import TodoSchema from '../todoschema';
  * but has been modified to match our interests
  */
 export class SchemaModal extends Component {
-  saveForm = frmObject => {
-    this.props.saveForm(frmObject);
-  };
-
   render() {
     return (
       <Modal
@@ -24,6 +20,7 @@ export class SchemaModal extends Component {
           <TodoSchema
             saveForm={this.props.saveForm}
             hideModule={this.props.setModalVisibility}
+            currentTodo={this.props.currentTodo}
           />
         </View>
       </Modal>
