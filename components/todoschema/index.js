@@ -1,17 +1,12 @@
 import React, { Component } from 'react';
 import {
-  FormLabel,
-  Button,
-  FormInput,
-  FormValidationMessage,
-} from 'react-native-elements';
-import {
   Text,
   ScrollView,
   View,
-  TouchableOpacity,
+  Button,
   StyleSheet,
   Alert,
+  TextInput,
 } from 'react-native';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import { Icon } from 'expo';
@@ -102,25 +97,21 @@ export default class TodoSchema extends Component {
       <ScrollView>
         <View>
           <Text style={styles.title}>Create a new todo</Text>
-          <FormLabel>Title</FormLabel>
-          <FormInput
+          <Text>Title</Text>
+          <TextInput
             placeholder={'Do delivery ..'}
             onChangeText={this.handleTitlePicked}
             value={this.state.title}
           />
-          {this.state.title === '' && (
-            <FormValidationMessage>
-              {'This field is required'}
-            </FormValidationMessage>
-          )}
-          <FormLabel>Description</FormLabel>
-          <FormInput
+          {this.state.title === '' && <Text>{'This field is required'}</Text>}
+          <Text>Description</Text>
+          <TextInput
             placeholder={'Also remember to bring the books ...'}
             onChangeText={this.handleDescriptionPicked}
             value={this.state.description}
             multiline={true}
           />
-          <FormLabel>Date</FormLabel>
+          <Text>Date</Text>
           <View style={styles.dateCont}>
             <Text style={styles.text}>
               Date chosen: {this.state.date === '' ? 'None' : this.state.date}
