@@ -3,14 +3,13 @@ import { connect } from 'react-redux';
 import { View, Modal, StyleSheet } from 'react-native';
 import TodoSchema from '../todoschema';
 import { addTodo } from '../../features/todos/actions';
-import { Icon } from "expo";
+import { Icon } from 'expo';
 
 /**
  * Modal functionality is inspired from
  * https://facebook.github.io/react-native/docs/modal.html
  */
 export class TodoAdder extends Component {
-
   state = {
     modalVisible: false,
   };
@@ -19,12 +18,11 @@ export class TodoAdder extends Component {
    * Sets the visibility of the form modal to the visible-state
    * @param visible   boolean (whether or not the modal should be visible)
    */
-  setModalVisibility = (visible) => {
+  setModalVisibility = visible => {
     this.setState({
       modalVisible: visible,
     });
   };
-
 
   /**
    * Creates a new todo with forminput.
@@ -67,7 +65,7 @@ export class TodoAdder extends Component {
           />
         </View>
       </View>
-    )
+    );
   }
 }
 
@@ -80,12 +78,15 @@ export default connect(
   mapDispatchToProps,
 )(TodoAdder);
 
-
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
+  },
 
+  schemaContainer: {
+    flex: 1,
+    paddingVertical: 30,
   },
 
   btnContainer: {

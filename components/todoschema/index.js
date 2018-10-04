@@ -1,11 +1,22 @@
-import React, {Component} from 'react'
-import { FormLabel, Button, FormInput, FormValidationMessage } from 'react-native-elements'
-import {Text, ScrollView, View, TouchableOpacity, StyleSheet, Alert} from 'react-native';
-import DateTimePicker from 'react-native-modal-datetime-picker'
-import {Icon} from "expo";
+import React, { Component } from 'react';
+import {
+  FormLabel,
+  Button,
+  FormInput,
+  FormValidationMessage,
+} from 'react-native-elements';
+import {
+  Text,
+  ScrollView,
+  View,
+  TouchableOpacity,
+  StyleSheet,
+  Alert,
+} from 'react-native';
+import DateTimePicker from 'react-native-modal-datetime-picker';
+import { Icon } from 'expo';
 
 export default class TodoSchema extends Component {
-
   /**
    * States:
    * isDateTimePickerVisible is whether the datepicker modal is visible or not
@@ -17,9 +28,9 @@ export default class TodoSchema extends Component {
    */
   state = {
     isDateTimePickerVisible: false,
-    title: "",
-    description: "",
-    date: "",
+    title: '',
+    description: '',
+    date: '',
   };
 
   /**
@@ -35,29 +46,31 @@ export default class TodoSchema extends Component {
    * Sets the titlestate based on input from user
    * @param title   string     title for todo
    */
-  handleTitlePicked = (title) => {
+  handleTitlePicked = title => {
     this.setState({
       title: title,
-    })
+    });
   };
 
   /**
    * Sets the descriptionstate based on input from user
    * @param description   string     description for todo
    */
-  handleDescriptionPicked = (description) => {
+  handleDescriptionPicked = description => {
     this.setState({
       description: description,
-    })
+    });
   };
 
   /**
    * Sets the datestate based on input from user
    * @param date    string     date for todo
    */
-  handleDatePicked = (date) => {
+  handleDatePicked = date => {
     this.setState({
-      date: date.toLocaleString().substring(0, date.toLocaleString().length-3),
+      date: date
+        .toLocaleString()
+        .substring(0, date.toLocaleString().length - 3),
     });
     this.hideDateTimePicker();
   };
@@ -69,8 +82,10 @@ export default class TodoSchema extends Component {
    * @param frmObject  {{title: string, description: string, date: string}}
    * an object containing the title, description and date state for todo
    */
-  saveForm = (frmObject) => {
-    frmObject.title === "" ? Alert.alert("Title missing", "Please insert a title.") : this.props.saveForm(frmObject);
+  saveForm = frmObject => {
+    frmObject.title === ''
+      ? Alert.alert('Title missing', 'Please insert a title.')
+      : this.props.saveForm(frmObject);
   };
 
   /**
@@ -78,7 +93,7 @@ export default class TodoSchema extends Component {
    * Uses the prop hideModule from todoadder
    * @param state
    */
-  cancelForm = (state) => {
+  cancelForm = state => {
     this.props.hideModule(state);
   };
 
@@ -87,24 +102,20 @@ export default class TodoSchema extends Component {
       <ScrollView>
         <View>
           <Text style={styles.title}>Create a new todo</Text>
-          <FormLabel>
-            Title
-          </FormLabel>
+          <FormLabel>Title</FormLabel>
           <FormInput
-            placeholder={"Do delivery .."}
+            placeholder={'Do delivery ..'}
             onChangeText={this.handleTitlePicked}
             value={this.state.title}
           />
-          { this.state.title === "" &&
+          {this.state.title === '' && (
             <FormValidationMessage>
               {'This field is required'}
             </FormValidationMessage>
-          }
-          <FormLabel>
-            Description
-          </FormLabel>
+          )}
+          <FormLabel>Description</FormLabel>
           <FormInput
-            placeholder={"Also remember to bring the books ..."}
+            placeholder={'Also remember to bring the books ...'}
             onChangeText={this.handleDescriptionPicked}
             value={this.state.description}
             multiline={true}
@@ -112,7 +123,7 @@ export default class TodoSchema extends Component {
           <FormLabel>Date</FormLabel>
           <View style={styles.dateCont}>
             <Text style={styles.text}>
-              Date chosen: {this.state.date === "" ? 'None' : this.state.date}
+              Date chosen: {this.state.date === '' ? 'None' : this.state.date}
             </Text>
             <View>
               <Icon.FontAwesome
@@ -133,17 +144,27 @@ export default class TodoSchema extends Component {
             </View>
           </View>
           <View style={styles.btnContainer}>
-            <Button title={'Save'} style={styles.button} onPress={() => this.saveForm({
-              title: this.state.title,
-              description: this.state.description,
-              date: this.state.date,
-            })} />
+            <Button
+              title={'Save'}
+              style={styles.button}
+              onPress={() =>
+                this.saveForm({
+                  title: this.state.title,
+                  description: this.state.description,
+                  date: this.state.date,
+                })
+              }
+            />
 
-            <Button title={'Cancel'} style={styles.button} onPress={() => this.cancelForm(false)}/>
+            <Button
+              title={'Cancel'}
+              style={styles.button}
+              onPress={() => this.cancelForm(false)}
+            />
           </View>
         </View>
       </ScrollView>
-    )
+    );
   }
 }
 
