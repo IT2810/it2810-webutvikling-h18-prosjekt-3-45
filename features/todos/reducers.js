@@ -4,6 +4,8 @@ const todo = (state = {}, action) => {
       return {
         ...state,
         text: action.text,
+        description: action.description,
+        date: action.date,
         id: action.id,
         done: false,
       };
