@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Alert,
   TextInput,
+  ScrollView,
   KeyboardAvoidingView,
 } from 'react-native';
 import DateTimePicker from 'react-native-modal-datetime-picker';
@@ -23,6 +24,7 @@ export default class TodoSchema extends Component {
    */
   state = {
     isDateTimePickerVisible: false,
+    keyboardVisible: false,
     text: '',
     description: '',
     date: '',
@@ -103,8 +105,8 @@ export default class TodoSchema extends Component {
    * Closes the modal window to the form  (cancel todo registration)
    * Uses the prop hideModule from todoadder
    */
-  cancelForm = state => {
-    this.props.hideModule(state);
+  cancelForm = () => {
+    this.props.hideModule(false);
   };
 
   /**
@@ -121,10 +123,10 @@ export default class TodoSchema extends Component {
       <KeyboardAvoidingView
         style={styles.container}
         behavior="padding"
-        keyboardVerticalOffset={64}
+        keyboardVerticalOffset={32}
       >
-        <View style={styles.subcontainer}>
-          <View style={styles.subsubcontainer}>
+        <ScrollView>
+          <View style={styles.subcontainer}>
             <Text style={styles.title}>
               {this.state.text === '' &&
               this.state.description === '' &&
@@ -209,7 +211,7 @@ export default class TodoSchema extends Component {
               </TouchableHighlight>
             </View>
           </View>
-        </View>
+        </ScrollView>
       </KeyboardAvoidingView>
     );
   }
@@ -224,7 +226,6 @@ const styles = StyleSheet.create({
   subcontainer: {
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'space-between',
   },
 
   title: {

@@ -46,7 +46,7 @@ export class TodoAdder extends Component {
         />
         <View style={styles.btnContainer}>
           <Icon.MaterialIcons
-            name={'add-circle'}
+            name="add-circle"
             size={70}
             color={'#2f95dc'}
             onPress={() => {
