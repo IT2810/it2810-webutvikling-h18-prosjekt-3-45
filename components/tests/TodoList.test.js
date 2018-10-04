@@ -7,13 +7,9 @@ import { addTodo } from '../../features/todos/actions';
 const mockTodos = todos(undefined, addTodo('Test todo'));
 
 describe('TodoList', () => {
-  const tree = renderer.create(
-    <TodoList
-      todos={mockTodos}
-    />
-  );
+  const tree = renderer.create(<TodoList todos={mockTodos} />).toJSON();
 
   it('should render correctly', () => {
-    expect(tree.toJSON()).toMatchSnapshot();
+    expect(tree).toMatchSnapshot();
   });
 });
