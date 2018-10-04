@@ -11,7 +11,7 @@ export const addTodo = (text, description, date) => ({
 export const addPedometerTodo = (text, description, date, stepsGoal) => ({
   type: 'ADD_TODO',
   id: uuidv4(),
-  creationDate: new Date(),
+  creationDate: new Date().toGMTString(),
   isPedometer: true,
   text,
   description,

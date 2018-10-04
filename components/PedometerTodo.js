@@ -1,14 +1,9 @@
 import React from 'react';
 import { Pedometer } from 'expo';
-import { StyleSheet, Text, View } from 'react-native';
-import * as Progress from 'react-native-progress';
+import addDays from 'date-fns/add_days';
+import Todo from './Todo';
 
-const createdDate = new Date();
-createdDate.setDate(createdDate.getDate() - 1);
-
-const goalSteps = 500;
-
-export class PedometerTodo extends React.Component {
+export default class PedometerTodo extends React.Component {
   state = {
     pastStepCount: 0,
     currentStepCount: 0,
@@ -31,7 +26,10 @@ export class PedometerTodo extends React.Component {
           });
         });
 
-        Pedometer.getStepCountAsync(createdDate, new Date()).then(
+        Pedometer.getStepCountAsync(
+          new Date(this.props.todo.creationDate),
+          addDays(new Date(), 1),
+        ).then(
           result => {
             this.setState({ pastStepCount: result.steps });
           },
@@ -51,29 +49,15 @@ export class PedometerTodo extends React.Component {
     this._subscription = null;
   };
 
+  getTotalSteps = () => this.state.pastStepCount + this.state.currentStepCount;
+
   render() {
     return (
-      <View style={styles.container}>
-        <Text>
-          Walked {this.state.pastStepCount + this.state.currentStepCount} of{' '}
-          {goalSteps} steps
-        </Text>
-        <Progress.Bar
-          progress={
-            (this.state.pastStepCount + this.state.currentStepCount) / goalSteps
-          }
-          width={200}
-        />
-      </View>
+      <Todo
+        {...this.props}
+        getTotalSteps={this.getTotalSteps}
+        stepsGoal={this.props.todo.stepsGoal}
+      />
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginBottom: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

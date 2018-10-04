@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { finishTodo, deleteTodo, updateTodo } from '../features/todos/actions';
-
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
-
-import Swipeout from 'react-native-swipeout';
+import { StyleSheet, View, ScrollView } from 'react-native';
 import { SchemaModal } from './todoadder/schemamodal';
-import { PedometerTodo } from './PedometerTodo';
+import Todo from './Todo';
+import PedometerTodo from './PedometerTodo';
 
 // This class is exported both as the default export and as a component
 // wrapped using connect to ease testing of this component.
@@ -85,44 +83,26 @@ export class TodoList extends Component {
           />
         </View>
         <View>
-          {openTodos.map(todo => {
-            const buttons = {
-              left: [
-                {
-                  text: 'Done',
-                  backgroundColor: '#68CC3D',
-                },
-              ],
-              right: [
-                {
-                  text: 'Edit',
-                  onPress: () => this.handlePress(todo.id),
-                  backgroundColor: '#00AAEE',
-                },
-                {
-                  text: 'Delete',
-                  onPress: () => this.handleDelete(todo.id),
-                  backgroundColor: '#bf3b4f',
-                },
-              ],
-            };
-
-            return (
-              <Swipeout
-                left={buttons.left}
-                right={buttons.right}
-                onOpen={(section, row, direction) => {
-                  this.handleOpen(direction, todo.id);
-                }}
-                key={todo.id}
-              >
-                <View style={styles.todo}>
-                  <Text>{todo.text}</Text>
-                  <PedometerTodo />
-                </View>
-              </Swipeout>
-            );
-          })}
+          {openTodos.map(
+            todo =>
+              todo.isPedometer ? (
+                <PedometerTodo
+                  key={todo.id}
+                  onOpen={this.handleOpen}
+                  onDelete={this.handleDelete}
+                  onPress={this.handlePress}
+                  todo={todo}
+                />
+              ) : (
+                <Todo
+                  key={todo.id}
+                  onOpen={this.handleOpen}
+                  onDelete={this.handleDelete}
+                  onPress={this.handlePress}
+                  todo={todo}
+                />
+              ),
+          )}
         </View>
       </ScrollView>
     );
@@ -133,17 +113,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: '100%',
-  },
-
-  todo: {
-    height: 50,
-    width: '100%',
-    display: 'flex',
-    justifyContent: 'center',
-    paddingLeft: 15,
-    backgroundColor: '#FFF',
-    borderBottomColor: '#CCC',
-    borderBottomWidth: StyleSheet.hairlineWidth,
   },
 });
 
