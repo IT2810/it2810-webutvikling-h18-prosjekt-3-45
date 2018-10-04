@@ -146,7 +146,7 @@ export default class TodoSchema extends Component {
                   onConfirm={this.handleDatePicked}
                   onCancel={this.hideDateTimePicker}
                   mode={'datetime'}
-                  datePickerModeAndroid={'g'}
+                  datePickerModeAndroid={'spinner'}
                 />
               </View>
             </View>
