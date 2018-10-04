@@ -86,10 +86,9 @@ export default class TodoSchema extends Component {
   /**
    * Closes the modal window to the form  (cancel todo registration)
    * Uses the prop hideModule from todoadder
-   * @param state
    */
-  cancelForm = state => {
-    this.props.hideModule(state);
+  cancelForm = () => {
+    this.props.hideModule(false);
   };
 
   render() {
@@ -118,7 +117,7 @@ export default class TodoSchema extends Component {
             </Text>
             <View>
               <Icon.FontAwesome
-                name={'calendar'}
+                name="calendar"
                 size={40}
                 color={'#ccc'}
                 onPress={this.showDateTimePicker}
@@ -150,7 +149,7 @@ export default class TodoSchema extends Component {
             <Button
               title={'Cancel'}
               style={styles.button}
-              onPress={() => this.cancelForm(false)}
+              onPress={() => this.cancelForm}
             />
           </View>
         </View>
