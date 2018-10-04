@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {
   Text,
-  ScrollView,
   View,
   TouchableHighlight,
   StyleSheet,
@@ -126,8 +125,8 @@ export default class TodoSchema extends Component {
         behavior="padding"
         keyboardVerticalOffset={64}
       >
-        <ScrollView>
-          <View>
+        <View style={styles.subcontainer}>
+          <View style={styles.subsubcontainer}>
             <Text style={styles.title}>
               {this.state.text === '' &&
               this.state.description === '' &&
@@ -187,32 +186,32 @@ export default class TodoSchema extends Component {
                 </TouchableHighlight>
               </View>
             </View>
-            <View style={styles.btnContainer}>
-              <View>
-                <TouchableHighlight
-                  style={[styles.saveBtn, styles.button]}
-                  onPress={() =>
-                    this.saveForm({
-                      text: this.state.text,
-                      description: this.state.description,
-                      date: this.state.date,
-                    })
-                  }
-                >
-                  <Text style={styles.btnText}>Save</Text>
-                </TouchableHighlight>
-              </View>
-              <View>
-                <TouchableHighlight
-                  style={[styles.cancelBtn, styles.button]}
-                  onPress={() => this.cancelForm(false)}
-                >
-                  <Text style={styles.btnText}>Cancel</Text>
-                </TouchableHighlight>
-              </View>
+          </View>
+          <View style={styles.btnContainer}>
+            <View>
+              <TouchableHighlight
+                style={[styles.saveBtn, styles.button]}
+                onPress={() =>
+                  this.saveForm({
+                    text: this.state.text,
+                    description: this.state.description,
+                    date: this.state.date,
+                  })
+                }
+              >
+                <Text style={styles.btnText}>Save</Text>
+              </TouchableHighlight>
+            </View>
+            <View>
+              <TouchableHighlight
+                style={[styles.cancelBtn, styles.button]}
+                onPress={() => this.cancelForm(false)}
+              >
+                <Text style={styles.btnText}>Cancel</Text>
+              </TouchableHighlight>
             </View>
           </View>
-        </ScrollView>
+        </View>
       </KeyboardAvoidingView>
     );
   }
@@ -222,7 +221,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    height: '100%',
+  },
+
+  subcontainer: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-between',
   },
 
   title: {
@@ -254,13 +258,7 @@ const styles = StyleSheet.create({
   warning: {
     color: '#f00',
   },
-
-  test: {
-    flex: 1,
-  },
-
   dateCont: {
-    flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
