@@ -1,6 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
+import { PedometerTodo } from '../components/PedometerTodo';
+
 export default class StatisticsScreen extends React.Component {
   static navigationOptions = {
     title: 'Statistics',
@@ -9,7 +11,7 @@ export default class StatisticsScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Statistics stuff</Text>
+        <PedometerTodo />
       </View>
     );
   }
