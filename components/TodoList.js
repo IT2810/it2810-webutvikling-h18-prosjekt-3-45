@@ -6,6 +6,7 @@ import { StyleSheet, Text, View, ScrollView } from 'react-native';
 
 import Swipeout from 'react-native-swipeout';
 import { SchemaModal } from './todoadder/schemamodal';
+import { PedometerTodo } from './PedometerTodo';
 
 // This class is exported both as the default export and as a component
 // wrapped using connect to ease testing of this component.
@@ -117,6 +118,7 @@ export class TodoList extends Component {
               >
                 <View style={styles.todo}>
                   <Text>{todo.text}</Text>
+                  <PedometerTodo />
                 </View>
               </Swipeout>
             );

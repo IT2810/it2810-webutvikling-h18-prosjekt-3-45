@@ -72,7 +72,7 @@ export class PedometerTodo extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 15,
+    marginBottom: 5,
     alignItems: 'center',
     justifyContent: 'center',
   },
