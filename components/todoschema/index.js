@@ -79,9 +79,7 @@ export default class TodoSchema extends Component {
    */
   handleDatePicked = date => {
     this.setState({
-      date: date
-        .toLocaleString()
-        .substring(0, date.toLocaleString().length - 3),
+      date: date.toGMTString(),
     });
     this.hideDateTimePicker();
   };
