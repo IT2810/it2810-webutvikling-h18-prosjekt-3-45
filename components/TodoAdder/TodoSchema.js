@@ -12,31 +12,26 @@ import {
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import { Icon } from 'expo';
 
-export default class TodoSchema extends Component {
-  /**
-   * States:
-   * isDateTimePickerVisible is whether the datepicker modal is visible or not
-   * text is the title of todo from textinput from user
-   * description is the textinput from user (optional)
-   * date is the dateinput from user (optional)
-   *
-   * @type {{isDateTimePickerVisible: boolean, text: string, description: string, date: string}}
-   */
-  state = {
-    isDateTimePickerVisible: false,
-    keyboardVisible: false,
-    text: '',
-    description: '',
-    date: '',
-  };
-
+class TodoSchema extends Component {
   constructor(props) {
     super(props);
 
-    // The current todo object being edited with its current values
-    let curTodo = this.props.currentTodo;
+    /**
+     * All the state which is stored in this component.
+     * @type {{isDateTimePickerVisible: boolean, text: string, description: string, date: string}}
+     */
+    this.state = {
+      isDateTimePickerVisible: false, // Whether or not the data picker is visible.
+      text: '', // The value for the TODO title text input.
+      description: '', // The value for the TODO description input.
+      date: '', // The value for the TODO date.
+    };
 
-    // Update the state of schema with current todo values if existing
+    // This component can be used to both edit todos and to create new ones.
+    // If a todo to be edited is provided, we need to update the initial state.
+    const curTodo = this.props.currentTodo;
+
+    // Update the state of schema with current todo values if existing.
     if (curTodo !== undefined) {
       this.state = {
         text: curTodo.text,
@@ -47,17 +42,18 @@ export default class TodoSchema extends Component {
   }
 
   /**
-   * The DateTimePicker is taken from mmazzarolo at Github, but this has been modified to match
-   * our personal interests
-   * Source: https://github.com/mmazzarolo/react-native-modal-datetime-picker
+   * Shows the DateTime picker.
    */
-  // Toggle states which decides whether the datetimepicker should be visible
   showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true });
+
+  /**
+   * Hides the DateTime picker.
+   */
   hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
 
   /**
-   * Sets the titlestate based on input from user
-   * @param title   string     title for todo
+   * Sets the title state based on input from the user.
+   * @param title string The updated title.
    */
   handleTitlePicked = title => {
     this.setState({
@@ -66,8 +62,8 @@ export default class TodoSchema extends Component {
   };
 
   /**
-   * Sets the descriptionstate based on input from user
-   * @param description   string     description for todo
+   * Sets the description state based on input from the user.
+   * @param description string The updated description for the todo.
    */
   handleDescriptionPicked = description => {
     this.setState({
@@ -76,41 +72,43 @@ export default class TodoSchema extends Component {
   };
 
   /**
-   * Sets the datestate based on input from user
-   * @param date    string     date for todo
+   * Sets the date state based on input from the user.
+   * @param date string The newly picked date.
    */
   handleDatePicked = date => {
     this.setState({
+      // The date needs to be stored as a GMT string so that we
+      // can correctly parse it at a later point in time.
       date: date.toGMTString(),
     });
+
     this.hideDateTimePicker();
   };
 
   /**
-   * Checks whether the required field is empty
-   * Saves the state for a todo created by user input.
-   * Uses the prop saveForm from todoadder
-   * @param frmObject  {{text: string, description: string, date: string}}
+   * Checks whether the title field, which is required, is empty.
+   * If we can proceed, this method saves the state passes the
+   * newly created or updated TODO to the parent component.
+   * @param formData  {{text: string, description: string, date: string}}
    * an object containing the title, description and date state for todo
    */
-  saveForm = frmObject => {
-    if (frmObject.text === '') {
-      Alert.alert('Title missing', 'Please insert a title.');
+  saveForm = formData => {
+    if (formData.text) {
+      this.props.saveForm(formData);
     } else {
-      this.props.saveForm(frmObject);
+      Alert.alert('Title missing', 'Please insert a title.');
     }
   };
 
   /**
-   * Closes the modal window to the form  (cancel todo registration)
-   * Uses the prop hideModule from todoadder
+   * Closes the modal window. This is used when the cancel button is pressed.
    */
   cancelForm = () => {
-    this.props.hideModule(false);
+    this.props.setModalVisibility(false);
   };
 
   /**
-   * Clears the date of todoform when pressing clear
+   * Clears the currently chosen date.
    */
   clearDate = () => {
     this.setState({
@@ -128,55 +126,59 @@ export default class TodoSchema extends Component {
         <ScrollView>
           <View style={styles.subcontainer}>
             <Text style={styles.title}>
-              {this.state.text === '' &&
-              this.state.description === '' &&
-              this.state.date === ''
-                ? 'Create a new todo'
-                : 'Edit todo'}
+              {this.props.currentTodo ? 'Create a new todo' : 'Edit todo'}
             </Text>
+
             <Text style={styles.label}>Title</Text>
+
             <TextInput
               underlineColorAndroid="transparent"
               style={styles.input}
               returnKeyType="done"
-              placeholder={'Do delivery ..'}
               onChangeText={this.handleTitlePicked}
               value={this.state.text}
             />
+
             <Text style={styles.warning}>
               {this.state.text === '' ? 'This field is required' : ''}
             </Text>
+
             <Text style={styles.label}>Description</Text>
+
             <TextInput
               underlineColorAndroid="transparent"
               style={[styles.input, styles.multiline]}
-              placeholder={'Also remember to bring the books ...'}
               onChangeText={this.handleDescriptionPicked}
               value={this.state.description}
               multiline={true}
             />
+
             <Text style={styles.label}>Date</Text>
+
             <View style={styles.dateCont}>
               <View>
                 <Icon.FontAwesome
                   name="calendar"
                   size={40}
-                  color={'#ccc'}
+                  color="#CCC"
                   onPress={this.showDateTimePicker}
                 />
+
                 <View>
                   <DateTimePicker
                     isVisible={this.state.isDateTimePickerVisible}
                     onConfirm={this.handleDatePicked}
                     onCancel={this.hideDateTimePicker}
-                    mode={'datetime'}
-                    datePickerModeAndroid={'spinner'}
+                    mode="datetime"
+                    datePickerModeAndroid="spinner"
                   />
                 </View>
               </View>
+
               <Text style={styles.text}>
-                {this.state.date === '' ? 'XX.XX.20XX, XX:XX' : this.state.date}
+                {this.state.date === '' ? 'No date selected' : this.state.date}
               </Text>
+
               <View>
                 <TouchableHighlight
                   onPress={this.clearDate}
@@ -187,6 +189,7 @@ export default class TodoSchema extends Component {
               </View>
             </View>
           </View>
+
           <View style={styles.btnContainer}>
             <View>
               <TouchableHighlight
@@ -202,6 +205,7 @@ export default class TodoSchema extends Component {
                 <Text style={styles.btnText}>Save</Text>
               </TouchableHighlight>
             </View>
+
             <View>
               <TouchableHighlight
                 style={[styles.cancelBtn, styles.button]}
@@ -248,15 +252,18 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#bbb',
   },
+
   multiline: {
     borderWidth: 1,
     borderColor: '#bbb',
     padding: 7,
     borderRadius: 5,
   },
+
   warning: {
     color: '#f00',
   },
+
   dateCont: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -286,3 +293,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#f00',
   },
 });
+
+export default TodoSchema;

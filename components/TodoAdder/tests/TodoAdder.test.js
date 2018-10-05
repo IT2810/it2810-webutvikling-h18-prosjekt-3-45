@@ -1,8 +1,8 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import { TodoAdder } from '../../todoadder';
+import { TodoAdder } from '../index';
 
-jest.mock('../../todoschema', () => () => 'Schema');
+jest.mock('../TodoSchema', () => () => 'TodoSchema');
 
 describe('TodoAdder', () => {
   it('renders correctly', () => {

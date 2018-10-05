@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
 import { View, Modal, StyleSheet } from 'react-native';
-import TodoSchema from '../todoschema';
+import TodoSchema from './TodoSchema';
 
-/**
- * Modal functionality is inspired from
- * https://facebook.github.io/react-native/docs/modal.html
- * but has been modified to match our interests
- */
-export class SchemaModal extends Component {
+class SchemaModal extends Component {
   render() {
     return (
       <Modal
@@ -19,7 +14,7 @@ export class SchemaModal extends Component {
         <View style={styles.schemaContainer}>
           <TodoSchema
             saveForm={this.props.saveForm}
-            hideModule={this.props.setModalVisibility}
+            setModalVisibility={this.props.setModalVisibility}
             currentTodo={this.props.currentTodo}
           />
         </View>
@@ -34,3 +29,5 @@ const styles = StyleSheet.create({
     paddingVertical: 30,
   },
 });
+
+export default SchemaModal;
