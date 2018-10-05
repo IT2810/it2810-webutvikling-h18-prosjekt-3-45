@@ -126,7 +126,7 @@ class TodoSchema extends Component {
         <ScrollView>
           <View style={styles.subcontainer}>
             <Text style={styles.title}>
-              {this.props.currentTodo ? 'Create a new todo' : 'Edit todo'}
+              {this.props.currentTodo ? 'Edit todo' : 'Create a new todo'}
             </Text>
 
             <Text style={styles.label}>Title</Text>
