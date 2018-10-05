@@ -8,6 +8,12 @@ export const addTodo = (text, description, date) => ({
   date,
 });
 
+export const updateTodo = (id, data) => ({
+  type: 'UPDATE_TODO',
+  id,
+  data,
+});
+
 export const finishTodo = id => ({
   type: 'FINISH_TODO',
   id,

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, Modal, StyleSheet } from 'react-native';
-import TodoSchema from '../todoschema';
+import { View, StyleSheet } from 'react-native';
 import { addTodo } from '../../features/todos/actions';
 import { Icon } from 'expo';
+import { SchemaModal } from './schemamodal';
 
 /**
  * Modal functionality is inspired from
@@ -31,37 +31,27 @@ export class TodoAdder extends Component {
    * @param description   string    description for todo (optional)
    * @param date          string    date for todo (optional)
    */
-  createTodo = ({ title, description, date }) => {
-    this.props.addTodo(title, description, date);
+  createTodo = ({ text, description, date }) => {
+    this.props.addTodo(text, description, date);
     this.setModalVisibility(false);
   };
 
   render() {
     return (
       <View style={styles.container}>
-        <Modal
-          animationType="slide"
-          transparent={false}
-          visible={this.state.modalVisible}
-          onRequestClose={() => this.setModalVisibility(false)}
-        >
-          <View style={styles.schemaContainer}>
-            <TodoSchema
-              saveForm={this.createTodo}
-              hideModule={this.setModalVisibility}
-            />
-          </View>
-        </Modal>
-
+        <SchemaModal
+          saveForm={this.createTodo}
+          setModalVisibility={this.setModalVisibility}
+          modalVisible={this.state.modalVisible}
+        />
         <View style={styles.btnContainer}>
           <Icon.MaterialIcons
             name="add-circle"
             size={70}
-            color={'#00AAEE'}
+            color={'#2f95dc'}
             onPress={() => {
               this.setModalVisibility(true);
             }}
-            underlayColor={'#ffff00'}
           />
         </View>
       </View>
@@ -82,11 +72,6 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
-  },
-
-  schemaContainer: {
-    flex: 1,
-    paddingVertical: 30,
   },
 
   btnContainer: {

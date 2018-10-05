@@ -17,7 +17,7 @@ exports[`TodoAdder renders correctly 1`] = `
         }
       }
     >
-      TodoSchema
+      Schema
     </View>
   </Modal>
   <View
