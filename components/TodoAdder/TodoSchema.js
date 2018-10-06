@@ -1,14 +1,6 @@
 import React, { Component } from 'react';
-import {
-  Text,
-  View,
-  TouchableHighlight,
-  StyleSheet,
-  Alert,
-  TextInput,
-  ScrollView,
-  KeyboardAvoidingView,
-} from 'react-native';
+import { Text, StyleSheet, Alert, TextInput } from 'react-native';
+import { Container, Content, Button } from 'native-base';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import { Icon } from 'expo';
 
@@ -118,81 +110,58 @@ class TodoSchema extends Component {
 
   render() {
     return (
-      <KeyboardAvoidingView
-        style={styles.container}
-        behavior="padding"
-        keyboardVerticalOffset={32}
-      >
-        <ScrollView>
-          <View style={styles.subcontainer}>
-            <Text style={styles.title}>
-              {this.props.currentTodo ? 'Edit todo' : 'Create a new todo'}
-            </Text>
-
-            <Text style={styles.label}>Title</Text>
-
-            <TextInput
-              underlineColorAndroid="transparent"
-              style={styles.input}
-              returnKeyType="done"
-              onChangeText={this.handleTitlePicked}
-              value={this.state.text}
+      <Container style={styles.container}>
+        <Content>
+          <Text style={styles.title}>
+            {this.props.currentTodo ? 'Edit todo' : 'Create a new todo'}
+          </Text>
+          <Text style={styles.label}>Title</Text>
+          <TextInput
+            underlineColorAndroid="transparent"
+            style={styles.input}
+            returnKeyType="done"
+            onChangeText={this.handleTitlePicked}
+            value={this.state.text}
+          />
+          <Text style={styles.warning}>
+            {this.state.text === '' ? 'This field is required' : ''}
+          </Text>
+          <Text style={styles.label}>Description</Text>
+          <TextInput
+            underlineColorAndroid="transparent"
+            style={[styles.input, styles.multiline]}
+            onChangeText={this.handleDescriptionPicked}
+            value={this.state.description}
+            multiline={true}
+          />
+          <Text style={styles.label}>Date</Text>
+          <Container style={styles.dateCont}>
+            <Icon.FontAwesome
+              name="calendar"
+              size={40}
+              color="#CCC"
+              onPress={this.showDateTimePicker}
             />
-
-            <Text style={styles.warning}>
-              {this.state.text === '' ? 'This field is required' : ''}
-            </Text>
-
-            <Text style={styles.label}>Description</Text>
-
-            <TextInput
-              underlineColorAndroid="transparent"
-              style={[styles.input, styles.multiline]}
-              onChangeText={this.handleDescriptionPicked}
-              value={this.state.description}
-              multiline={true}
+            <DateTimePicker
+              isVisible={this.state.isDateTimePickerVisible}
+              onConfirm={this.handleDatePicked}
+              onCancel={this.hideDateTimePicker}
+              mode="datetime"
+              datePickerModeAndroid="spinner"
             />
-
-            <Text style={styles.label}>Date</Text>
-
-            <View style={styles.dateCont}>
-              <View>
-                <Icon.FontAwesome
-                  name="calendar"
-                  size={40}
-                  color="#CCC"
-                  onPress={this.showDateTimePicker}
-                />
-
-                <View>
-                  <DateTimePicker
-                    isVisible={this.state.isDateTimePickerVisible}
-                    onConfirm={this.handleDatePicked}
-                    onCancel={this.hideDateTimePicker}
-                    mode="datetime"
-                    datePickerModeAndroid="spinner"
-                  />
-                </View>
-              </View>
-
-              <Text style={styles.text}>
-                {this.state.date === '' ? 'No date selected' : this.state.date}
-              </Text>
-
-              <View>
-                <TouchableHighlight
-                  onPress={this.clearDate}
-                  style={[styles.button, styles.cancelBtn]}
-                >
-                  <Text style={styles.btnText}>Clear</Text>
-                </TouchableHighlight>
-              </View>
-            </View>
-          </View>
-
-          <View style={styles.btnContainer}>
-            <View>
-              <TouchableHighlight
+            <Text style={styles.text}>
+              {this.state.date === '' ? 'No date selected' : this.state.date}
+            </Text>
+            <Button
+              onPress={this.clearDate}
+              style={[styles.button, styles.cancelBtn]}
+            >
+              <Text style={styles.btnText}>Clear</Text>
+            </Button>
+          </Container>
+          <Container style={styles.btnContainer}>
+            <Container style={styles.subBtnContainer}>
+              <Button
                 style={[styles.saveBtn, styles.button]}
                 onPress={() =>
                   this.saveForm({
@@ -203,20 +172,17 @@ class TodoSchema extends Component {
                 }
               >
                 <Text style={styles.btnText}>Save</Text>
-              </TouchableHighlight>
-            </View>
-
-            <View>
-              <TouchableHighlight
+              </Button>
+              <Button
                 style={[styles.cancelBtn, styles.button]}
                 onPress={() => this.cancelForm(false)}
               >
                 <Text style={styles.btnText}>Cancel</Text>
-              </TouchableHighlight>
-            </View>
-          </View>
-        </ScrollView>
-      </KeyboardAvoidingView>
+              </Button>
+            </Container>
+          </Container>
+        </Content>
+      </Container>
     );
   }
 }
@@ -227,9 +193,8 @@ const styles = StyleSheet.create({
     padding: 20,
   },
 
-  subcontainer: {
-    flex: 1,
-    flexDirection: 'column',
+  subContainer: {
+    justifyContent: 'space-between',
   },
 
   title: {
@@ -266,14 +231,22 @@ const styles = StyleSheet.create({
 
   dateCont: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 40,
+    justifyContent: 'space-between',
+    height: 50,
   },
 
   btnContainer: {
     flexDirection: 'row',
+    justifyContent: 'flex-end',
+    height: 230,
+  },
+
+  subBtnContainer: {
+    flexDirection: 'row',
+    alignSelf: 'flex-end',
     justifyContent: 'space-between',
+    height: 45,
   },
 
   btnText: {
