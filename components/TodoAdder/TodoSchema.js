@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import { Icon } from 'expo';
+import format from 'date-fns/format';
 
 class TodoSchema extends Component {
   constructor(props) {
@@ -169,14 +170,16 @@ class TodoSchema extends Component {
                     isVisible={this.state.isDateTimePickerVisible}
                     onConfirm={this.handleDatePicked}
                     onCancel={this.hideDateTimePicker}
-                    mode="datetime"
+                    mode="date"
                     datePickerModeAndroid="spinner"
                   />
                 </View>
               </View>
 
               <Text style={styles.text}>
-                {this.state.date === '' ? 'No date selected' : this.state.date}
+                {this.state.date === ''
+                  ? 'No date selected'
+                  : format(this.state.date, 'ddd, Do MMM YYYY')}
               </Text>
 
               <View>
