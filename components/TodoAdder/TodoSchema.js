@@ -3,6 +3,7 @@ import { Text, StyleSheet, Alert, TextInput } from 'react-native';
 import { Container, Content, Button } from 'native-base';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import { Icon } from 'expo';
+import format from 'date-fns/format';
 
 class TodoSchema extends Component {
   constructor(props) {
