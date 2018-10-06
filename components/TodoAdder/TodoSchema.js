@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
 import { Text, StyleSheet, Alert, TextInput } from 'react-native';
-import { Container, Content, Button } from 'native-base';
+import {
+  Container,
+  Card,
+  Content,
+  Button,
+  Footer,
+  Form,
+  Textarea,
+} from 'native-base';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import { Icon } from 'expo';
 import format from 'date-fns/format';
@@ -116,73 +124,73 @@ class TodoSchema extends Component {
           <Text style={styles.title}>
             {this.props.currentTodo ? 'Edit todo' : 'Create a new todo'}
           </Text>
-          <Text style={styles.label}>Title</Text>
-          <TextInput
-            underlineColorAndroid="transparent"
-            style={styles.input}
-            returnKeyType="done"
-            onChangeText={this.handleTitlePicked}
-            value={this.state.text}
-          />
-          <Text style={styles.warning}>
-            {this.state.text === '' ? 'This field is required' : ''}
-          </Text>
-          <Text style={styles.label}>Description</Text>
-          <TextInput
-            underlineColorAndroid="transparent"
-            style={[styles.input, styles.multiline]}
-            onChangeText={this.handleDescriptionPicked}
-            value={this.state.description}
-            multiline={true}
-          />
-          <Text style={styles.label}>Date</Text>
-          <Container style={styles.dateCont}>
-            <Icon.FontAwesome
-              name="calendar"
-              size={40}
-              color="#CCC"
-              onPress={this.showDateTimePicker}
+          <Form>
+            <Text style={styles.label}>Title</Text>
+            <TextInput
+              underlineColorAndroid="transparent"
+              style={styles.input}
+              returnKeyType="done"
+              onChangeText={this.handleTitlePicked}
+              value={this.state.text}
             />
-            <DateTimePicker
-              isVisible={this.state.isDateTimePickerVisible}
-              onConfirm={this.handleDatePicked}
-              onCancel={this.hideDateTimePicker}
-              mode="datetime"
-              datePickerModeAndroid="spinner"
-            />
-            <Text style={styles.text}>
-              {this.state.date === '' ? 'No date selected' : this.state.date}
+            <Text style={styles.warning}>
+              {this.state.text === '' ? 'This field is required' : ''}
             </Text>
-            <Button
-              onPress={this.clearDate}
-              style={[styles.button, styles.cancelBtn]}
-            >
-              <Text style={styles.btnText}>Clear</Text>
-            </Button>
-          </Container>
-          <Container style={styles.btnContainer}>
-            <Container style={styles.subBtnContainer}>
+            <Text style={styles.label}>Description</Text>
+            <Textarea
+              rowSpan={3}
+              underlineColorAndroid="transparent"
+              style={[styles.input, styles.multiline]}
+              onChangeText={this.handleDescriptionPicked}
+              value={this.state.description}
+            />
+            <Text style={styles.label}>Date</Text>
+            <Card transparent style={styles.dateCont}>
+              <Icon.FontAwesome
+                name="calendar"
+                size={40}
+                color="#CCC"
+                onPress={this.showDateTimePicker}
+              />
+              <DateTimePicker
+                isVisible={this.state.isDateTimePickerVisible}
+                onConfirm={this.handleDatePicked}
+                onCancel={this.hideDateTimePicker}
+                mode="datetime"
+                datePickerModeAndroid="spinner"
+              />
+              <Text style={styles.text}>
+                {this.state.date === '' ? 'No date selected' : this.state.date}
+              </Text>
               <Button
-                style={[styles.saveBtn, styles.button]}
-                onPress={() =>
-                  this.saveForm({
-                    text: this.state.text,
-                    description: this.state.description,
-                    date: this.state.date,
-                  })
-                }
+                onPress={this.clearDate}
+                style={[styles.button, styles.cancelBtn]}
               >
-                <Text style={styles.btnText}>Save</Text>
+                <Text style={styles.btnText}>Clear</Text>
               </Button>
-              <Button
-                style={[styles.cancelBtn, styles.button]}
-                onPress={() => this.cancelForm(false)}
-              >
-                <Text style={styles.btnText}>Cancel</Text>
-              </Button>
-            </Container>
-          </Container>
+            </Card>
+          </Form>
         </Content>
+        <Footer transparent style={styles.btnContainer}>
+          <Button
+            style={[styles.saveBtn, styles.button]}
+            onPress={() =>
+              this.saveForm({
+                text: this.state.text,
+                description: this.state.description,
+                date: this.state.date,
+              })
+            }
+          >
+            <Text style={styles.btnText}>Save</Text>
+          </Button>
+          <Button
+            style={[styles.cancelBtn, styles.button]}
+            onPress={() => this.cancelForm(false)}
+          >
+            <Text style={styles.btnText}>Cancel</Text>
+          </Button>
+        </Footer>
       </Container>
     );
   }
@@ -192,10 +200,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-  },
-
-  subContainer: {
-    justifyContent: 'space-between',
   },
 
   title: {
@@ -234,20 +238,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    height: 50,
   },
 
   btnContainer: {
     flexDirection: 'row',
-    justifyContent: 'flex-end',
-    height: 230,
-  },
-
-  subBtnContainer: {
-    flexDirection: 'row',
-    alignSelf: 'flex-end',
     justifyContent: 'space-between',
-    height: 45,
+    backgroundColor: 'transparent',
+    borderTopWidth: 0,
   },
 
   btnText: {
