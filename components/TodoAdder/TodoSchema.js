@@ -161,7 +161,7 @@ class TodoSchema extends Component {
 
             <Button
               disabled={!this.state.date}
-              primary={!!this.state.date}
+              danger={!!this.state.date}
               onPress={this.clearDate}
             >
               <Text>Clear</Text>
