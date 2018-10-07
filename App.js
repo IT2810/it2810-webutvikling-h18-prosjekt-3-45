@@ -2,6 +2,7 @@ import React from 'react';
 import { AppLoading } from 'expo';
 import { StyleSheet, View } from 'react-native';
 import { Provider } from 'react-redux';
+import { Root } from 'native-base';
 import store from './store';
 import TabNavigator from './navigation/TabNavigator';
 
@@ -30,9 +31,11 @@ export default class App extends React.Component {
     if (this.state.ready) {
       return (
         <Provider store={store}>
-          <View style={styles.container}>
-            <TabNavigator />
-          </View>
+          <Root>
+            <View style={styles.container}>
+              <TabNavigator />
+            </View>
+          </Root>
         </Provider>
       );
     }

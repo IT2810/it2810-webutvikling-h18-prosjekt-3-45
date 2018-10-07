@@ -1,14 +1,15 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { finishTodo, deleteTodo, updateTodo } from '../features/todos/actions';
 import { StyleSheet, View, ScrollView } from 'react-native';
+import { Container, Content, Text, Toast } from 'native-base';
 import Swipeout from 'react-native-swipeout';
 import isBefore from 'date-fns/is_before';
 import isSameDay from 'date-fns/is_same_day';
 import addDays from 'date-fns/add_days';
 import startOfDay from 'date-fns/start_of_day';
 import SchemaModal from './TodoAdder/SchemaModal';
-import { Container, Header, Content, List, ListItem, Text } from 'native-base';
+import store from '../store';
+import { finishTodo, deleteTodo, updateTodo } from '../features/todos/actions';
 
 // This class is exported both as the default export and as a component
 // wrapped using connect to ease testing of this component.
@@ -24,12 +25,43 @@ export class TodoList extends Component {
   };
 
   /**
+   * Handles a press on the UNDO button in the toast which is displayed
+   * after swiping away a TODO.
+   */
+  handleUndo = (reason, todo, index) => {
+    if (reason === 'user') {
+      // Strip out the done flag, as we want this to be reset by the reducer.
+      const { done, ...rest } = todo;
+
+      store.dispatch({
+        // This action type is a special action which allows us to
+        // insert a TODO at a specified index.
+        type: 'READD_TODO',
+        ...rest,
+        index,
+      });
+    }
+  };
+
+  /**
    * Handles sliding of todos
    * @param direction   the direction of the sliding
    * @param id          id of the todo
    */
   handleOpen = (direction, id) => {
     if (direction === 'left') {
+      // Find the TODO and save it so that it can be restored later.
+      const index = this.props.todos.findIndex(todo => todo.id === id);
+
+      const todo = this.props.todos[index];
+
+      Toast.show({
+        text: 'Todo marked as finished',
+        buttonText: 'Undo',
+        onClose: reason => this.handleUndo(reason, todo, index),
+        duration: 5000,
+      });
+
       this.props.finishTodo(id);
     }
   };

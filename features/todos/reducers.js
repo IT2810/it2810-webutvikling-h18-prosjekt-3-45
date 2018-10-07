@@ -1,6 +1,7 @@
 const todo = (state = {}, action) => {
   switch (action.type) {
     case 'ADD_TODO':
+    case 'READD_TODO':
       return {
         ...state,
         text: action.text,
@@ -40,9 +41,14 @@ const todos = (state = [], action) => {
     case 'ADD_TODO':
       return [...state, todo(undefined, action)];
 
-    case 'UPDATE_TODO':
-      return state.map(entry => todo(entry, action));
+    case 'READD_TODO':
+      return [
+        ...state.slice(0, action.index),
+        todo(undefined, action),
+        ...state.slice(action.index),
+      ];
 
+    case 'UPDATE_TODO':
     case 'FINISH_TODO':
       return state.map(entry => todo(entry, action));
 
