@@ -47,7 +47,7 @@ export class TodoAdder extends Component {
             position="bottomRight"
             onPress={() => this.setModalVisibility(true)}
           >
-            <Icon name="add" />
+            <Icon name="md-add" />
           </Fab>
         </View>
       </View>

@@ -32,7 +32,10 @@
     "react-test-renderer": "^16.5.2"
   },
   "jest": {
-    "preset": "jest-expo"
+    "preset": "jest-expo",
+    "transformIgnorePatterns": [
+      "/node_modules/(?!native-base)/"
+    ]
   },
   "husky": {
     "hooks": {
