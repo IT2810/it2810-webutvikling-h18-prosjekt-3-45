@@ -22,6 +22,7 @@
     "uuid": "^3.3.2"
   },
   "devDependencies": {
+    "@expo/vector-icons": "^8.0.0",
     "date-fns": "^1.29.0",
     "husky": "^1.1.0",
     "jest": "^23.6.0",

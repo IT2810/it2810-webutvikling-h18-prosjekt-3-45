@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
-import { Text, StyleSheet, Alert, TextInput } from 'react-native';
+import { StyleSheet } from 'react-native';
 import {
   Container,
   Card,
   Content,
   Button,
   Footer,
-  Form,
   Textarea,
+  Input,
+  Text,
 } from 'native-base';
 import DateTimePicker from 'react-native-modal-datetime-picker';
-import { Icon } from 'expo';
 import format from 'date-fns/format';
 
 class TodoSchema extends Component {
@@ -86,19 +86,8 @@ class TodoSchema extends Component {
     this.hideDateTimePicker();
   };
 
-  /**
-   * Checks whether the title field, which is required, is empty.
-   * If we can proceed, this method saves the state passes the
-   * newly created or updated TODO to the parent component.
-   * @param formData  {{text: string, description: string, date: string}}
-   * an object containing the title, description and date state for todo
-   */
-  saveForm = formData => {
-    if (formData.text) {
-      this.props.saveForm(formData);
-    } else {
-      Alert.alert('Title missing', 'Please insert a title.');
-    }
+  validate = () => {
+    return !!this.state.text;
   };
 
   /**
@@ -120,75 +109,83 @@ class TodoSchema extends Component {
   render() {
     return (
       <Container style={styles.container}>
-        <Content>
+        <Content contentContainerStyle={styles.content}>
           <Text style={styles.title}>
             {this.props.currentTodo ? 'Edit todo' : 'Create a new todo'}
           </Text>
-          <Form>
-            <Text style={styles.label}>Title</Text>
-            <TextInput
-              underlineColorAndroid="transparent"
-              style={styles.input}
-              returnKeyType="done"
-              onChangeText={this.handleTitlePicked}
-              value={this.state.text}
+
+          <Text style={styles.label}>Title</Text>
+
+          <Input
+            underlineColorAndroid="transparent"
+            style={styles.input}
+            returnKeyType="done"
+            onChangeText={this.handleTitlePicked}
+            value={this.state.text}
+          />
+
+          <Text style={styles.warning}>
+            {!this.state.text && 'This field is required'}
+          </Text>
+
+          <Text style={styles.label}>Description</Text>
+
+          <Textarea
+            rowSpan={3}
+            underlineColorAndroid="transparent"
+            style={[styles.input, styles.multiline]}
+            onChangeText={this.handleDescriptionPicked}
+            value={this.state.description}
+          />
+
+          <Text style={styles.label}>Date</Text>
+
+          <Card transparent style={styles.dateCont}>
+            <Button onPress={this.showDateTimePicker}>
+              <Text>Add date</Text>
+            </Button>
+
+            <DateTimePicker
+              isVisible={this.state.isDateTimePickerVisible}
+              onConfirm={this.handleDatePicked}
+              onCancel={this.hideDateTimePicker}
+              datePickerModeAndroid="spinner"
+              mode="date"
             />
-            <Text style={styles.warning}>
-              {this.state.text === '' ? 'This field is required' : ''}
+
+            <Text style={styles.text}>
+              {this.state.date
+                ? format(this.state.date, 'ddd, Do MMM YYYY')
+                : 'No date selected'}
             </Text>
-            <Text style={styles.label}>Description</Text>
-            <Textarea
-              rowSpan={3}
-              underlineColorAndroid="transparent"
-              style={[styles.input, styles.multiline]}
-              onChangeText={this.handleDescriptionPicked}
-              value={this.state.description}
-            />
-            <Text style={styles.label}>Date</Text>
-            <Card transparent style={styles.dateCont}>
-              <Icon.FontAwesome
-                name="calendar"
-                size={40}
-                color="#CCC"
-                onPress={this.showDateTimePicker}
-              />
-              <DateTimePicker
-                isVisible={this.state.isDateTimePickerVisible}
-                onConfirm={this.handleDatePicked}
-                onCancel={this.hideDateTimePicker}
-                mode="datetime"
-                datePickerModeAndroid="spinner"
-              />
-              <Text style={styles.text}>
-                {this.state.date === '' ? 'No date selected' : this.state.date}
-              </Text>
-              <Button
-                onPress={this.clearDate}
-                style={[styles.button, styles.cancelBtn]}
-              >
-                <Text style={styles.btnText}>Clear</Text>
-              </Button>
-            </Card>
-          </Form>
+
+            <Button
+              disabled={!this.state.date}
+              primary={!!this.state.date}
+              onPress={this.clearDate}
+            >
+              <Text>Clear</Text>
+            </Button>
+          </Card>
         </Content>
+
         <Footer transparent style={styles.btnContainer}>
           <Button
-            style={[styles.saveBtn, styles.button]}
+            disabled={!this.validate()}
+            primary={!!this.validate()}
             onPress={() =>
-              this.saveForm({
+              this.props.saveForm({
                 text: this.state.text,
                 description: this.state.description,
                 date: this.state.date,
               })
             }
           >
-            <Text style={styles.btnText}>Save</Text>
+            <Text>Save</Text>
           </Button>
-          <Button
-            style={[styles.cancelBtn, styles.button]}
-            onPress={() => this.cancelForm(false)}
-          >
-            <Text style={styles.btnText}>Cancel</Text>
+
+          <Button danger onPress={() => this.cancelForm(false)}>
+            <Text>Cancel</Text>
           </Button>
         </Footer>
       </Container>
@@ -197,8 +194,7 @@ class TodoSchema extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  content: {
     padding: 20,
   },
 
@@ -243,25 +239,11 @@ const styles = StyleSheet.create({
   btnContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    backgroundColor: 'transparent',
-    borderTopWidth: 0,
-  },
-
-  btnText: {
-    color: '#fff',
-  },
-
-  button: {
-    padding: 15,
-    borderRadius: 10,
-  },
-
-  saveBtn: {
-    backgroundColor: '#2f95dc',
-  },
-
-  cancelBtn: {
-    backgroundColor: '#f00',
+    backgroundColor: '#EEE',
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderColor: '#CCC',
+    paddingHorizontal: 20,
+    paddingVertical: 5,
   },
 });
 

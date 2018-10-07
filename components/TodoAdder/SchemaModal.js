@@ -26,7 +26,6 @@ class SchemaModal extends Component {
 const styles = StyleSheet.create({
   schemaContainer: {
     flex: 1,
-    paddingVertical: 30,
   },
 });
 
