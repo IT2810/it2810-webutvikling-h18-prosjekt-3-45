@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import Calendar from '../components/Calendar';
 
 export default class CalendarScreen extends React.Component {
   static navigationOptions = {
@@ -7,11 +8,7 @@ export default class CalendarScreen extends React.Component {
   };
 
   render() {
-    return (
-      <View style={styles.container}>
-        <Text>Calendar stuff</Text>
-      </View>
-    );
+    return <Calendar />;
   }
 }
 

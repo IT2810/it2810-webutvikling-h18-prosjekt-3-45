@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tile renders correctly 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "borderBottomWidth": 1,
+        "borderColor": "#EEE",
+        "borderLeftWidth": 1,
+        "height": 50,
+        "padding": 2,
+        "position": "relative",
+        "width": "14.285714285714286%",
+      },
+      false,
+    ]
+  }
+>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    style={
+      Array [
+        Object {
+          "color": "#000",
+          "fontFamily": "System",
+          "fontSize": 16,
+        },
+        Object {
+          "fontWeight": "bold",
+        },
+      ]
+    }
+    uppercase={false}
+  >
+    7
+  </Text>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    style={
+      Array [
+        Object {
+          "color": "#000",
+          "fontFamily": "System",
+          "fontSize": 16,
+        },
+        Object {
+          "bottom": 2,
+          "position": "absolute",
+          "right": 2,
+        },
+      ]
+    }
+    uppercase={false}
+  >
+    0
+    /
+    0
+  </Text>
+</View>
+`;
