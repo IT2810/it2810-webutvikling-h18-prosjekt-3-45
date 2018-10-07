@@ -1,65 +1,205 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Tile renders correctly 1`] = `
-<View
-  style={
-    Array [
-      Object {
-        "borderBottomWidth": 1,
-        "borderColor": "#EEE",
-        "borderLeftWidth": 1,
-        "height": 50,
-        "padding": 2,
-        "position": "relative",
-        "width": "14.285714285714286%",
-      },
-      false,
-    ]
-  }
->
-  <Text
+Array [
+  <Modal
+    hardwareAccelerated={false}
+    onRequestClose={[Function]}
+    visible={false}
+  >
+    <View
+      style={
+        Object {
+          "backgroundColor": "#fff",
+          "flex": 1,
+          "height": 1334,
+        }
+      }
+    >
+      <View
+        onLayout={[Function]}
+      >
+        <View
+          style={
+            Object {
+              "backgroundColor": "#F8F8F8",
+              "borderBottomColor": "#a7a6ab",
+              "borderBottomWidth": 0.5,
+              "elevation": 3,
+              "flexDirection": "row",
+              "height": 64,
+              "justifyContent": "center",
+              "left": 0,
+              "paddingLeft": 6,
+              "paddingRight": 10,
+              "paddingTop": 18,
+              "right": 0,
+              "shadowColor": undefined,
+              "shadowOffset": undefined,
+              "shadowOpacity": undefined,
+              "shadowRadius": undefined,
+              "top": 0,
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "flex-start",
+                "alignSelf": "center",
+                "flex": 1,
+              }
+            }
+          >
+            <View
+              accessible={true}
+              isTVSelectable={true}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "alignSelf": null,
+                  "backgroundColor": "transparent",
+                  "borderBottomWidth": null,
+                  "borderColor": null,
+                  "borderLeftWidth": null,
+                  "borderRadius": 5,
+                  "borderRightWidth": null,
+                  "borderTopWidth": null,
+                  "borderWidth": undefined,
+                  "elevation": 0,
+                  "flexDirection": "row",
+                  "height": 45,
+                  "justifyContent": "space-between",
+                  "marginLeft": -3,
+                  "opacity": 1,
+                  "paddingBottom": 6,
+                  "paddingLeft": 4,
+                  "paddingRight": 6,
+                  "paddingTop": 6,
+                  "shadowColor": null,
+                  "shadowOffset": null,
+                  "shadowOpacity": null,
+                  "shadowRadius": null,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+              />
+            </View>
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "alignSelf": "center",
+                "flex": 1,
+              }
+            }
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              numberOfLines={1}
+              style={
+                Object {
+                  "color": "#000",
+                  "fontFamily": "System",
+                  "fontSize": 17,
+                  "fontWeight": "700",
+                  "marginLeft": undefined,
+                  "paddingLeft": 4,
+                  "paddingTop": 1,
+                  "textAlign": "center",
+                }
+              }
+            >
+              07 Oct 2018
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "flex-end",
+                "alignSelf": "center",
+                "flex": 1,
+                "flexDirection": "row",
+                "justifyContent": "flex-end",
+              }
+            }
+          />
+        </View>
+      </View>
+    </View>
+  </Modal>,
+  <View
     accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
+    isTVSelectable={true}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
     style={
       Array [
         Object {
-          "color": "#000",
-          "fontFamily": "System",
-          "fontSize": 16,
+          "borderBottomWidth": 1,
+          "borderColor": "#EEE",
+          "borderLeftWidth": 1,
+          "height": 50,
+          "position": "relative",
+          "width": "14.285714285714286%",
         },
-        Object {
-          "fontWeight": "bold",
-        },
+        false,
       ]
     }
-    uppercase={false}
   >
-    7
-  </Text>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-    style={
-      Array [
-        Object {
-          "color": "#000",
-          "fontFamily": "System",
-          "fontSize": 16,
-        },
-        Object {
-          "bottom": 2,
-          "position": "absolute",
-          "right": 2,
-        },
-      ]
-    }
-    uppercase={false}
-  >
-    0
-    /
-    0
-  </Text>
-</View>
+    <View
+      style={
+        Array [
+          Object {
+            "backgroundColor": "#F6F6F6",
+            "flex": 1,
+            "padding": 2,
+          },
+          undefined,
+          Object {
+            "backgroundColor": "#e0efff",
+          },
+        ]
+      }
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        style={
+          Array [
+            Object {
+              "color": "#000",
+              "fontFamily": "System",
+              "fontSize": 16,
+            },
+            Object {
+              "fontWeight": "bold",
+            },
+          ]
+        }
+        uppercase={false}
+      >
+        7
+      </Text>
+    </View>
+  </View>,
+]
 `;

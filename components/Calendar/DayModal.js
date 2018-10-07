@@ -21,7 +21,7 @@ class DayModal extends Component {
           <Header>
             <Left>
               <Button transparent onPress={this.props.onClose}>
-                <Icon name="arrow-back" style={{ color: '#FFF' }} />
+                <Icon name="md-arrow-back" style={{ color: '#FFF' }} />
               </Button>
             </Left>
 

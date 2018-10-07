@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { View, StyleSheet, TouchableHighlight } from 'react-native';
 import { Text } from 'native-base';
 import format from 'date-fns/format';
+import isToday from 'date-fns/is_today';
 import DayModal from './DayModal';
 import MonthPicker from './MonthPicker';
 
@@ -39,10 +40,16 @@ class Tile extends Component {
             styles.tileButton,
             this.props.index % 7 === 0 && styles.leftTile,
           ]}
-          underlayColor="#CCE6FF"
+          underlayColor="#007fff"
           onPress={this.handleShowModal}
         >
-          <View style={styles.tile}>
+          <View
+            style={[
+              styles.tile,
+              this.props.active && styles.activeTile,
+              isToday(this.props.day) && styles.today,
+            ]}
+          >
             <Text style={styles.day}>{format(this.props.day, 'D')}</Text>
 
             {this.props.todos.length > 0 && (
@@ -64,7 +71,6 @@ const styles = StyleSheet.create({
 
   tileButton: {
     width: `${100 / 7}%`,
-    padding: 2,
     height: 50,
     position: 'relative',
     borderLeftWidth: 1,
@@ -74,10 +80,20 @@ const styles = StyleSheet.create({
 
   tile: {
     flex: 1,
+    backgroundColor: '#F6F6F6',
+    padding: 2,
   },
 
   leftTile: {
     borderLeftWidth: 0,
+  },
+
+  activeTile: {
+    backgroundColor: '#FFF',
+  },
+
+  today: {
+    backgroundColor: '#e0efff',
   },
 
   day: {

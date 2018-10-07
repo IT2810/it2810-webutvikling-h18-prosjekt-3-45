@@ -6,6 +6,7 @@ import startOfMonth from 'date-fns/start_of_month';
 import startOfWeek from 'date-fns/start_of_week';
 import addDays from 'date-fns/add_days';
 import isSameDay from 'date-fns/is_same_day';
+import isSameMonth from 'date-fns/is_same_month';
 import MonthPicker from './MonthPicker';
 import Tile from './Tile';
 
@@ -60,6 +61,7 @@ export class Calendar extends Component {
                 )}
                 index={i}
                 key={i}
+                active={isSameMonth(day, this.state.month)}
               />
             );
           })}
@@ -81,6 +83,7 @@ const styles = StyleSheet.create({
     padding: 2,
     borderBottomWidth: 1,
     borderLeftWidth: 1,
+    borderTopWidth: 1,
     borderColor: '#EEE',
   },
 
