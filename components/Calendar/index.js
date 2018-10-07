@@ -6,6 +6,7 @@ import startOfMonth from 'date-fns/start_of_month';
 import startOfWeek from 'date-fns/start_of_week';
 import addDays from 'date-fns/add_days';
 import isSameDay from 'date-fns/is_same_day';
+import MonthPicker from './MonthPicker';
 import Tile from './Tile';
 
 const Header = ({ title }) => (
@@ -19,6 +20,12 @@ export class Calendar extends Component {
     month: new Date(),
   };
 
+  onMonthChange = month => {
+    this.setState({
+      month,
+    });
+  };
+
   render() {
     // The date on which the calendar should start, in order to align the
     // tiles with their respective days correctly.
@@ -28,6 +35,11 @@ export class Calendar extends Component {
 
     return (
       <Container>
+        <MonthPicker
+          onChange={this.onMonthChange}
+          selectedMonth={this.state.month}
+        />
+
         <View style={styles.calendar}>
           <Header title="Mon" />
           <Header title="Tue" />
