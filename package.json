@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "expo": "^30.0.1",
+    "native-base": "^2.8.1",
     "react": "^16.3.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-30.0.0.tar.gz",
     "react-native-modal-datetime-picker": "^6.0.0",
@@ -21,6 +22,7 @@
     "uuid": "^3.3.2"
   },
   "devDependencies": {
+    "@expo/vector-icons": "^8.0.0",
     "date-fns": "^1.29.0",
     "husky": "^1.1.0",
     "jest": "^23.6.0",
@@ -30,7 +32,10 @@
     "react-test-renderer": "^16.5.2"
   },
   "jest": {
-    "preset": "jest-expo"
+    "preset": "jest-expo",
+    "transformIgnorePatterns": [
+      "/node_modules/(?!native-base)/"
+    ]
   },
   "husky": {
     "hooks": {

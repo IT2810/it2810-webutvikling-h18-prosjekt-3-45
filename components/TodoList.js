@@ -1,19 +1,20 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { finishTodo, deleteTodo, updateTodo } from '../features/todos/actions';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { StyleSheet, View, ScrollView } from 'react-native';
 import Swipeout from 'react-native-swipeout';
 import isBefore from 'date-fns/is_before';
 import isSameDay from 'date-fns/is_same_day';
 import addDays from 'date-fns/add_days';
 import startOfDay from 'date-fns/start_of_day';
-import { SchemaModal } from './todoadder/schemamodal';
+import SchemaModal from './TodoAdder/SchemaModal';
+import { Container, Header, Content, List, ListItem, Text } from 'native-base';
 
 // This class is exported both as the default export and as a component
 // wrapped using connect to ease testing of this component.
 export class TodoList extends Component {
   /**
-   * modalVisible is whether the modal for adding a new todo should be visible
+   * modalVisible isXX.XX.20XX, XX:XX whether the modal for adding a new todo should be visible
    * pressedTodo is the todoobject (containing the states) that is pressed
    * @type {{modalVisible: boolean, pressedTodo: {}}}
    */
@@ -96,7 +97,7 @@ export class TodoList extends Component {
     }
 
     return (
-      <ScrollView style={styles.container}>
+      <Container>
         <View>
           <SchemaModal
             saveForm={this.updateTodo}
@@ -106,7 +107,7 @@ export class TodoList extends Component {
           />
         </View>
 
-        <View>
+        <Content>
           {sections.map((section, i) => (
             <Fragment key={section}>
               <View style={styles.todo}>
@@ -152,18 +153,13 @@ export class TodoList extends Component {
               })}
             </Fragment>
           ))}
-        </View>
-      </ScrollView>
+        </Content>
+      </Container>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    width: '100%',
-  },
-
   todo: {
     height: 50,
     width: '100%',
