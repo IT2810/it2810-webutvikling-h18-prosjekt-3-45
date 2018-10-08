@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import Settings from '../components/Settings';
 
 export default class SettingsScreen extends React.Component {
   static navigationOptions = {
@@ -7,19 +7,6 @@ export default class SettingsScreen extends React.Component {
   };
 
   render() {
-    return (
-      <View style={styles.container}>
-        <Text>Settings stuff</Text>
-      </View>
-    );
+    return <Settings />;
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#42f450',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

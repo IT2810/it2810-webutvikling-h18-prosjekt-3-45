@@ -15,7 +15,7 @@ import { finishTodo, deleteTodo, updateTodo } from '../features/todos/actions';
 // wrapped using connect to ease testing of this component.
 export class TodoList extends Component {
   /**
-   * modalVisible isXX.XX.20XX, XX:XX whether the modal for adding a new todo should be visible
+   * modalVisible is whether the modal for adding a new todo should be visible
    * pressedTodo is the todoobject (containing the states) that is pressed
    * @type {{modalVisible: boolean, pressedTodo: {}}}
    */
