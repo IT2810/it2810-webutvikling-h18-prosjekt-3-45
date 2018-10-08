@@ -11,10 +11,7 @@ export default class StatisticsScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <PedometerTodo
-          stepsGoal={600}
-          creationDate={new Date(new Date().setHours(0, 0, 0, 0))}
-        />
+        <Text>Statistics stuff</Text>
       </View>
     );
   }

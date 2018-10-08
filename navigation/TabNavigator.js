@@ -23,7 +23,7 @@ TaskStack.navigationOptions = {
   tabBarLabel: TaskScreen.navigationOptions.title,
   tabBarIcon: ({ focused }) => (
     <Icon.Octicons
-      name={'tasklist'}
+      name="tasklist"
       size={26}
       style={{ marginBottom: -3 }}
       color={focused ? COLOR.focused : COLOR.default}
@@ -39,7 +39,7 @@ CalendarStack.navigationOptions = {
   tabBarLabel: CalendarScreen.navigationOptions.title,
   tabBarIcon: ({ focused }) => (
     <Icon.FontAwesome
-      name={'calendar'}
+      name="calendar"
       size={26}
       style={{ marginBottom: -3 }}
       color={focused ? COLOR.focused : COLOR.default}
@@ -55,7 +55,7 @@ StatisticsStack.navigationOptions = {
   tabBarLabel: StatisticsScreen.navigationOptions.title,
   tabBarIcon: ({ focused }) => (
     <Icon.Ionicons
-      name={'md-stats'}
+      name="md-stats"
       size={26}
       style={{ marginBottom: -3 }}
       color={focused ? COLOR.focused : COLOR.default}
@@ -71,7 +71,7 @@ SettingsStack.navigationOptions = {
   tabBarLabel: SettingsScreen.navigationOptions.title,
   tabBarIcon: ({ focused }) => (
     <Icon.Ionicons
-      name={'md-settings'}
+      name="md-settings"
       size={26}
       style={{ marginBottom: -3 }}
       color={focused ? COLOR.focused : COLOR.default}

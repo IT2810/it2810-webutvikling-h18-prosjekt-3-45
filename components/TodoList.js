@@ -1,16 +1,22 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { finishTodo, deleteTodo, updateTodo } from '../features/todos/actions';
-import { StyleSheet, View, ScrollView } from 'react-native';
-import { SchemaModal } from './todoadder/schemamodal';
+import { StyleSheet, View } from 'react-native';
 import Todo from './Todo';
 import PedometerTodo from './PedometerTodo';
+import { Container, Content, Text, Toast } from 'native-base';
+import isBefore from 'date-fns/is_before';
+import isSameDay from 'date-fns/is_same_day';
+import addDays from 'date-fns/add_days';
+import startOfDay from 'date-fns/start_of_day';
+import SchemaModal from './TodoAdder/SchemaModal';
+import store from '../store';
+import { finishTodo, deleteTodo, updateTodo } from '../features/todos/actions';
 
 // This class is exported both as the default export and as a component
 // wrapped using connect to ease testing of this component.
 export class TodoList extends Component {
   /**
-   * modalVisible is whether the modal for adding a new todo should be visible
+   * modalVisible isXX.XX.20XX, XX:XX whether the modal for adding a new todo should be visible
    * pressedTodo is the todoobject (containing the states) that is pressed
    * @type {{modalVisible: boolean, pressedTodo: {}}}
    */
@@ -20,12 +26,43 @@ export class TodoList extends Component {
   };
 
   /**
+   * Handles a press on the UNDO button in the toast which is displayed
+   * after swiping away a TODO.
+   */
+  handleUndo = (reason, todo, index) => {
+    if (reason === 'user') {
+      // Strip out the done flag, as we want this to be reset by the reducer.
+      const { done, ...rest } = todo;
+
+      store.dispatch({
+        // This action type is a special action which allows us to
+        // insert a TODO at a specified index.
+        type: 'READD_TODO',
+        ...rest,
+        index,
+      });
+    }
+  };
+
+  /**
    * Handles sliding of todos
    * @param direction   the direction of the sliding
    * @param id          id of the todo
    */
   handleOpen = (direction, id) => {
     if (direction === 'left') {
+      // Find the TODO and save it so that it can be restored later.
+      const index = this.props.todos.findIndex(todo => todo.id === id);
+
+      const todo = this.props.todos[index];
+
+      Toast.show({
+        text: 'Todo marked as finished',
+        buttonText: 'Undo',
+        onClose: reason => this.handleUndo(reason, todo, index),
+        duration: 5000,
+      });
+
       this.props.finishTodo(id);
     }
   };
@@ -72,8 +109,28 @@ export class TodoList extends Component {
   render() {
     const openTodos = this.props.todos.filter(todo => !todo.done);
 
+    const sections = ['Someday', 'Overdue', 'Today', 'Tomorrow'];
+
+    const days = [
+      // Todos without any specific set date.
+      openTodos.filter(todo => !todo.date),
+
+      // Todos which are overdue.
+      openTodos.filter(
+        todo => todo.date && isBefore(todo.date, startOfDay(new Date())),
+      ),
+    ];
+
+    for (let i = 0; i < 2; i += 1) {
+      days.push(
+        openTodos.filter(
+          todo => todo.date && isSameDay(addDays(new Date(), i), todo.date),
+        ),
+      );
+    }
+
     return (
-      <ScrollView style={styles.container}>
+      <Container>
         <View>
           <SchemaModal
             saveForm={this.updateTodo}
@@ -82,37 +139,56 @@ export class TodoList extends Component {
             currentTodo={this.state.pressedTodo}
           />
         </View>
-        <View>
-          {openTodos.map(
-            todo =>
-              todo.isPedometer ? (
-                <PedometerTodo
-                  key={todo.id}
-                  onOpen={this.handleOpen}
-                  onDelete={this.handleDelete}
-                  onPress={this.handlePress}
-                  todo={todo}
-                />
-              ) : (
-                <Todo
-                  key={todo.id}
-                  onOpen={this.handleOpen}
-                  onDelete={this.handleDelete}
-                  onPress={this.handlePress}
-                  todo={todo}
-                />
-              ),
-          )}
-        </View>
-      </ScrollView>
+
+        <Content>
+          {sections.map((section, i) => (
+            <Fragment key={section}>
+              <View style={styles.todo}>
+                <Text style={styles.sectionTitle}>{section}</Text>
+              </View>
+
+              {days[i].map(
+                todo =>
+                  todo.isPedometer ? (
+                    <PedometerTodo
+                      key={todo.id}
+                      onOpen={this.handleOpen}
+                      onDelete={this.handleDelete}
+                      onPress={this.handlePress}
+                      todo={todo}
+                    />
+                  ) : (
+                    <Todo
+                      key={todo.id}
+                      onOpen={this.handleOpen}
+                      onDelete={this.handleDelete}
+                      onPress={this.handlePress}
+                      todo={todo}
+                    />
+                  ),
+              )}
+            </Fragment>
+          ))}
+        </Content>
+      </Container>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  todo: {
+    height: 50,
     width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    paddingLeft: 15,
+    backgroundColor: '#FFF',
+    borderBottomColor: '#CCC',
+    borderBottomWidth: StyleSheet.hairlineWidth,
+  },
+
+  sectionTitle: {
+    fontWeight: 'bold',
   },
 });
 
