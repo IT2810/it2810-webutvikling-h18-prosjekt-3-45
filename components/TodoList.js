@@ -30,8 +30,9 @@ export class TodoList extends Component {
    */
   handleUndo = (reason, todo, index) => {
     if (reason === 'user') {
-      // Strip out the done flag, as we want this to be reset by the reducer.
-      const { done, ...rest } = todo;
+      // Strip out the done flag and finished time, as we want
+      // this to be reset by the reducer.
+      const { done, finished, ...rest } = todo;
 
       store.dispatch({
         // This action type is a special action which allows us to
