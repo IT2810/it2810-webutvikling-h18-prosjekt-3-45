@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Modal } from 'react-native';
+import { Modal, View } from 'react-native';
+import { Text } from 'native-base';
 import format from 'date-fns/format';
 import {
   Container,
@@ -12,6 +13,9 @@ import {
   Button,
   Icon,
 } from 'native-base';
+import TodoList from '../TodoList';
+import { todoStyles } from '../Todo';
+import { tasksStyles } from '../Tasks';
 
 class DayModal extends Component {
   render() {
@@ -32,7 +36,19 @@ class DayModal extends Component {
             <Right />
           </Header>
 
-          <Content />
+          <Content>
+            <View style={todoStyles.todo}>
+              <Text style={tasksStyles.sectionTitle}>Unfinished</Text>
+            </View>
+
+            <TodoList todos={this.props.todos.filter(todo => !todo.done)} />
+
+            <View style={todoStyles.todo}>
+              <Text style={tasksStyles.sectionTitle}>Finished</Text>
+            </View>
+
+            <TodoList todos={this.props.todos.filter(todo => todo.done)} />
+          </Content>
         </Container>
       </Modal>
     );

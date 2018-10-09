@@ -41,11 +41,11 @@ export default class Todo extends React.Component {
         }}
         key={this.props.todo.id}
       >
-        <View style={styles.todo}>
+        <View style={todoStyles.todo}>
           <Text>{this.props.todo.text}</Text>
 
           {this.props.todo.isPedometer && (
-            <View style={styles.container}>
+            <View style={todoStyles.container}>
               <Text>
                 Walked{' '}
                 {this.props.getTotalSteps() > this.props.stepsGoal
@@ -70,13 +70,14 @@ export default class Todo extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({
+export const todoStyles = StyleSheet.create({
   container: {
     flex: 1,
     marginBottom: 5,
     alignItems: 'center',
     justifyContent: 'center',
   },
+
   todo: {
     height: 50,
     width: '100%',
