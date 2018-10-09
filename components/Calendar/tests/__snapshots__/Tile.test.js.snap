@@ -140,6 +140,7 @@ Array [
         </View>
       </View>
     </View>
+    TodoAdder
   </Modal>,
   <View
     accessible={true}

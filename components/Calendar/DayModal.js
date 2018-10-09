@@ -16,6 +16,7 @@ import {
 import TodoList from '../TodoList';
 import { todoStyles } from '../Todo';
 import { tasksStyles } from '../Tasks';
+import TodoAdder from '../TodoAdder';
 
 class DayModal extends Component {
   render() {
@@ -50,6 +51,8 @@ class DayModal extends Component {
             <TodoList todos={this.props.todos.filter(todo => todo.done)} />
           </Content>
         </Container>
+
+        <TodoAdder initialDate={this.props.day} />
       </Modal>
     );
   }

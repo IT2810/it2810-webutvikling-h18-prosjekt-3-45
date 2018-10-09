@@ -4,9 +4,8 @@ import { Text } from 'native-base';
 import format from 'date-fns/format';
 import isToday from 'date-fns/is_today';
 import DayModal from './DayModal';
-import MonthPicker from './MonthPicker';
 
-class Tile extends Component {
+export class Tile extends Component {
   state = {
     modalVisible: false,
   };

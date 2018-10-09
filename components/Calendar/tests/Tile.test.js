@@ -1,6 +1,8 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Tile from '../Tile';
+import { Tile } from '../Tile';
+
+jest.mock('../../TodoAdder', () => () => 'TodoAdder');
 
 describe('Tile', () => {
   it('renders correctly', () => {

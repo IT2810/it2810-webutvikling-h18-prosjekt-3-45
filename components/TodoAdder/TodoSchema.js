@@ -9,10 +9,6 @@ import {
   Textarea,
   Input,
   Text,
-  ListItem,
-  Left,
-  Body,
-  Right,
   Switch,
 } from 'native-base';
 import DateTimePicker from 'react-native-modal-datetime-picker';
@@ -34,6 +30,11 @@ class TodoSchema extends Component {
       isPedometer: false,
       stepsGoal: '0',
     };
+
+    // When clicking the add button from the calendar, a default date is provided.
+    if (this.props.initialDate) {
+      this.state.date = this.props.initialDate;
+    }
 
     // This component can be used to both edit todos and to create new ones.
     // If a todo to be edited is provided, we need to update the initial state.
