@@ -40,7 +40,7 @@ export class Tasks extends Component {
         <Content>
           {sections.map((section, i) => (
             <Fragment key={section}>
-              <View style={todoStyles.todo}>
+              <View style={[todoStyles.todo, tasksStyles.section]}>
                 <Text style={tasksStyles.sectionTitle}>{section}</Text>
               </View>
 
@@ -56,6 +56,10 @@ export class Tasks extends Component {
 export const tasksStyles = StyleSheet.create({
   sectionTitle: {
     fontWeight: 'bold',
+  },
+
+  section: {
+    backgroundColor: '#F7F7F7',
   },
 });
 
