@@ -26,7 +26,36 @@ export default class Todo extends React.Component {
       ],
     };
 
-    return (
+    const todo = (
+      <View style={todoStyles.todo}>
+        <Text>{this.props.todo.text}</Text>
+
+        {this.props.todo.isPedometer && (
+          <View style={todoStyles.container}>
+            <Text>
+              Walked{' '}
+              {this.props.getTotalSteps() > this.props.stepsGoal
+                ? this.props.stepsGoal
+                : this.props.getTotalSteps()}{' '}
+              of {this.props.stepsGoal} steps
+            </Text>
+            <Progress.Bar
+              progress={this.props.getTotalSteps() / this.props.stepsGoal}
+              width={300}
+              color={
+                this.props.getTotalSteps() > this.props.stepsGoal
+                  ? '#68CC3D'
+                  : '#2f95dc'
+              }
+            />
+          </View>
+        )}
+      </View>
+    );
+
+    return this.props.todo.done ? (
+      todo
+    ) : (
       <Swipeout
         left={
           this.props.todo.isPedometer
@@ -41,30 +70,7 @@ export default class Todo extends React.Component {
         }}
         key={this.props.todo.id}
       >
-        <View style={todoStyles.todo}>
-          <Text>{this.props.todo.text}</Text>
-
-          {this.props.todo.isPedometer && (
-            <View style={todoStyles.container}>
-              <Text>
-                Walked{' '}
-                {this.props.getTotalSteps() > this.props.stepsGoal
-                  ? this.props.stepsGoal
-                  : this.props.getTotalSteps()}{' '}
-                of {this.props.stepsGoal} steps
-              </Text>
-              <Progress.Bar
-                progress={this.props.getTotalSteps() / this.props.stepsGoal}
-                width={300}
-                color={
-                  this.props.getTotalSteps() > this.props.stepsGoal
-                    ? '#68CC3D'
-                    : '#2f95dc'
-                }
-              />
-            </View>
-          )}
-        </View>
+        {todo}
       </Swipeout>
     );
   }
