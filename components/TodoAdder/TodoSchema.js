@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, TextInput } from 'react-native';
 import {
   Container,
   Card,
@@ -9,6 +9,11 @@ import {
   Textarea,
   Input,
   Text,
+  ListItem,
+  Left,
+  Body,
+  Right,
+  Switch,
 } from 'native-base';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import format from 'date-fns/format';
@@ -26,6 +31,8 @@ class TodoSchema extends Component {
       text: '', // The value for the TODO title text input.
       description: '', // The value for the TODO description input.
       date: '', // The value for the TODO date.
+      isPedometer: false,
+      stepsGoal: '0',
     };
 
     // This component can be used to both edit todos and to create new ones.
@@ -38,6 +45,8 @@ class TodoSchema extends Component {
         text: curTodo.text,
         description: curTodo.description,
         date: curTodo.date,
+        isPedometer: curTodo.isPedometer,
+        stepsGoal: curTodo.stepsGoal,
       };
     }
   }
@@ -51,6 +60,18 @@ class TodoSchema extends Component {
    * Hides the DateTime picker.
    */
   hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
+
+  handlePedometerSwitch = input => {
+    this.setState({
+      isPedometer: input,
+    });
+  };
+
+  handleStepGoal = input => {
+    this.setState({
+      stepsGoal: input,
+    });
+  };
 
   /**
    * Sets the title state based on input from the user.
@@ -167,6 +188,28 @@ class TodoSchema extends Component {
               <Text>Clear</Text>
             </Button>
           </Card>
+
+          <Card transparent style={styles.dateCont}>
+            <Text style={styles.label}>Enable pedometer</Text>
+            <Switch
+              style={styles.field}
+              value={this.state.isPedometer}
+              onValueChange={this.handlePedometerSwitch}
+            />
+          </Card>
+
+          {this.state.isPedometer && (
+            <Card transparent style={styles.dateCont}>
+              <Text style={styles.label}>Step goal</Text>
+              <TextInput
+                style={styles.field}
+                keyboardType="numeric"
+                editable={this.state.isPedometer}
+                value={this.state.stepsGoal}
+                onChangeText={this.handleStepGoal}
+              />
+            </Card>
+          )}
         </Content>
 
         <Footer transparent style={styles.btnContainer}>
@@ -178,6 +221,8 @@ class TodoSchema extends Component {
                 text: this.state.text,
                 description: this.state.description,
                 date: this.state.date,
+                isPedometer: this.state.isPedometer,
+                stepsGoal: this.state.stepsGoal,
               })
             }
           >
@@ -244,6 +289,10 @@ const styles = StyleSheet.create({
     borderColor: '#CCC',
     paddingHorizontal: 20,
     paddingVertical: 5,
+  },
+
+  field: {
+    marginTop: 20,
   },
 });
 

@@ -1,8 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, View, ScrollView } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import Todo from './Todo';
+import PedometerTodo from './PedometerTodo';
 import { Container, Content, Text, Toast } from 'native-base';
-import Swipeout from 'react-native-swipeout';
 import isBefore from 'date-fns/is_before';
 import isSameDay from 'date-fns/is_same_day';
 import addDays from 'date-fns/add_days';
@@ -146,43 +147,26 @@ export class TodoList extends Component {
                 <Text style={styles.sectionTitle}>{section}</Text>
               </View>
 
-              {days[i].map(todo => {
-                const buttons = {
-                  left: [
-                    {
-                      text: 'Done',
-                      backgroundColor: '#68CC3D',
-                    },
-                  ],
-                  right: [
-                    {
-                      text: 'Edit',
-                      onPress: () => this.handlePress(todo.id),
-                      backgroundColor: '#00AAEE',
-                    },
-                    {
-                      text: 'Delete',
-                      onPress: () => this.handleDelete(todo.id),
-                      backgroundColor: '#bf3b4f',
-                    },
-                  ],
-                };
-
-                return (
-                  <Swipeout
-                    left={buttons.left}
-                    right={buttons.right}
-                    onOpen={(section, row, direction) => {
-                      this.handleOpen(direction, todo.id);
-                    }}
-                    key={todo.id}
-                  >
-                    <View style={styles.todo}>
-                      <Text>{todo.text}</Text>
-                    </View>
-                  </Swipeout>
-                );
-              })}
+              {days[i].map(
+                todo =>
+                  todo.isPedometer ? (
+                    <PedometerTodo
+                      key={todo.id}
+                      onOpen={this.handleOpen}
+                      onDelete={this.handleDelete}
+                      onPress={this.handlePress}
+                      todo={todo}
+                    />
+                  ) : (
+                    <Todo
+                      key={todo.id}
+                      onOpen={this.handleOpen}
+                      onDelete={this.handleDelete}
+                      onPress={this.handlePress}
+                      todo={todo}
+                    />
+                  ),
+              )}
             </Fragment>
           ))}
         </Content>
