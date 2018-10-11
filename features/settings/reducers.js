@@ -1,6 +1,6 @@
 const initialState = {
   goalEnabled: true,
-  todoGoal: '5',
+  todoGoal: 5,
 };
 
 const settings = (state = initialState, action) => {

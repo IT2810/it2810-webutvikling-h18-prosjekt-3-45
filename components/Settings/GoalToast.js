@@ -1,13 +1,13 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Switch, ListItem, Right, Left, Text, Toast } from 'native-base';
-import { TextInput } from 'react-native';
+import NumericInput from 'react-native-numeric-input';
 import { isToday } from 'date-fns';
 import { setGoalEnabled, setTodoGoal } from '../../features/settings/actions';
 
 class GoalToast extends Component {
   componentDidUpdate(prevProps) {
-    const goal = parseInt(this.props.settings.todoGoal, 10);
+    const goal = this.props.settings.todoGoal;
 
     if (
       prevProps !== this.props &&
@@ -20,7 +20,7 @@ class GoalToast extends Component {
       if (done === goal) {
         Toast.show({
           text: `You're being really productive today!`,
-          duration: 5000,
+          duration: 4000,
         });
       }
     }
@@ -49,10 +49,15 @@ class GoalToast extends Component {
             </Left>
 
             <Right>
-              <TextInput
-                keyboardType="numeric"
-                value={this.props.settings.todoGoal}
-                onChangeText={this.props.setTodoGoal}
+              <NumericInput
+                onChange={this.props.setTodoGoal}
+                initValue={this.props.settings.todoGoal}
+                step={1}
+                valueType="integer"
+                rounded
+                editable={false}
+                rightButtonBackgroundColor="#ddd"
+                leftButtonBackgroundColor="#e5e5e5"
               />
             </Right>
           </ListItem>
