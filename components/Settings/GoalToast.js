@@ -19,8 +19,8 @@ class GoalToast extends Component {
 
       if (done === goal) {
         Toast.show({
-          text: `AAww uyess mojfiweoiwef`,
-          duration: 3000,
+          text: `Daily todos done! Good job!`,
+          duration: 5000,
         });
       }
     }
