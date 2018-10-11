@@ -53,9 +53,10 @@ class GoalToast extends Component {
                 onChange={this.props.setTodoGoal}
                 initValue={this.props.settings.todoGoal}
                 step={1}
-                valueType="integer"
-                rounded
                 editable={false}
+                minValue={0}
+                rounded
+                valueType="integer"
                 rightButtonBackgroundColor="#ddd"
                 leftButtonBackgroundColor="#e5e5e5"
               />
