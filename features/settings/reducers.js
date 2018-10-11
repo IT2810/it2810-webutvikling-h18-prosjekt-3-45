@@ -12,7 +12,13 @@ const settings = (state = initialState, action) => {
       return { ...state, todoGoal: action.goal };
 
     case 'REHYDRATE':
-      return action.state.settings;
+      if (action.state.settings) {
+        return action.state.settings;
+      }
+
+      // This logic is included for backwards compatibility
+      // with store saves which do not include settings.
+      return initialState;
 
     default:
       return state;
