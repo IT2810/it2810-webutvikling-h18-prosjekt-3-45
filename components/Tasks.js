@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, View } from 'react-native';
-import { Container, Content, Text } from 'native-base';
+import { Container, Header, Content, Text } from 'native-base';
 import isBefore from 'date-fns/is_before';
 import isSameDay from 'date-fns/is_same_day';
 import addDays from 'date-fns/add_days';
