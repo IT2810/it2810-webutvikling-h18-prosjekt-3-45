@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, StyleSheet } from 'react-native';
 import { Fab, Icon } from 'native-base';
-import { addTodo } from '../../features/todos/actions';
+import { addTodo, addPedometerTodo } from '../../features/todos/actions';
 import SchemaModal from './SchemaModal';
 
 export class TodoAdder extends Component {
@@ -27,8 +27,10 @@ export class TodoAdder extends Component {
    * @param description string An optional description of the TODO.
    * @param date string The date on which the TODO should be done.
    */
-  createTodo = ({ text, description, date }) => {
-    this.props.addTodo(text, description, date);
+  createTodo = ({ text, description, date, isPedometer, stepsGoal }) => {
+    if (isPedometer)
+      this.props.addPedometerTodo(text, description, date, stepsGoal);
+    else this.props.addTodo(text, description, date);
     this.setModalVisibility(false);
   };
 
@@ -39,6 +41,7 @@ export class TodoAdder extends Component {
           saveForm={this.createTodo}
           setModalVisibility={this.setModalVisibility}
           modalVisible={this.state.modalVisible}
+          initialDate={this.props.initialDate}
         />
 
         <View style={styles.fabContainer}>
@@ -72,6 +75,7 @@ const styles = StyleSheet.create({
 
 const mapDispatchToProps = {
   addTodo,
+  addPedometerTodo,
 };
 
 export default connect(

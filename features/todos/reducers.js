@@ -9,6 +9,11 @@ const todo = (state = {}, action) => {
         date: action.date,
         id: action.id,
         done: false,
+
+        // These apply only when tracking the pedometer
+        creationDate: action.creationDate,
+        isPedometer: action.isPedometer,
+        stepsGoal: action.stepsGoal,
       };
 
     case 'UPDATE_TODO':
@@ -43,10 +48,12 @@ const todos = (state = [], action) => {
       return [...state, todo(undefined, action)];
 
     case 'READD_TODO':
+      const filtered = state.filter(todo => todo.id !== action.id);
+
       return [
-        ...state.slice(0, action.index),
+        ...filtered.slice(0, action.index + 1),
         todo(undefined, action),
-        ...state.slice(action.index),
+        ...filtered.slice(action.index + 1),
       ];
 
     case 'UPDATE_TODO':
