@@ -1,8 +1,8 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import Tasks from '../components/Tasks';
 import TodoAdder from '../components/TodoAdder';
-import { Container, Header, Content, Text, Footer, Button } from 'native-base';
+import { Container, Content, Text, Footer, Button } from 'native-base';
 
 export default class TaskScreen extends React.Component {
   static navigationOptions = {
@@ -23,18 +23,44 @@ export default class TaskScreen extends React.Component {
   render() {
     return (
       <Container style={styles.container}>
-        <Header style={styles.header}>
-          <Button transparent onPress={() => this.handleTabSelect(false)}>
-            <Text>Incompleted</Text>
-          </Button>
-          <Button
-            title="Complete"
-            transparent
-            onPress={() => this.handleTabSelect(true)}
+        <View style={styles.header}>
+          <View
+            style={[!this.state.selectedCompleted && styles.active, styles.tab]}
           >
-            <Text>Completed</Text>
-          </Button>
-        </Header>
+            <Button
+              style={styles.button}
+              transparent
+              onPress={() => this.handleTabSelect(false)}
+            >
+              <Text
+                style={[
+                  styles.text,
+                  !this.state.selectedCompleted && styles.activeText,
+                ]}
+              >
+                Incompleted
+              </Text>
+            </Button>
+          </View>
+          <View
+            style={[this.state.selectedCompleted && styles.active, styles.tab]}
+          >
+            <Button
+              style={styles.button}
+              transparent
+              onPress={() => this.handleTabSelect(true)}
+            >
+              <Text
+                style={[
+                  styles.text,
+                  this.state.selectedCompleted && styles.activeText,
+                ]}
+              >
+                Completed
+              </Text>
+            </Button>
+          </View>
+        </View>
         <Content>
           {(!this.state.selectedCompleted && <Tasks donelist={false} />) || (
             <Tasks donelist={true} />
@@ -53,9 +79,34 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FFF',
   },
+
   header: {
-    justifyContent: 'space-around',
+    flexDirection: 'row',
+    borderBottomWidth: 0.5,
+    borderColor: '#AAA',
   },
+
+  tab: {
+    flex: 1,
+  },
+
+  button: {
+    justifyContent: 'center',
+    width: '100%',
+  },
+
+  active: {
+    backgroundColor: '#5067FF',
+  },
+
+  text: {
+    color: '#5067FF',
+  },
+
+  activeText: {
+    color: '#fff',
+  },
+
   footer: {
     justifyContent: 'flex-end',
     backgroundColor: 'transparent',
