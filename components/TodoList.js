@@ -7,6 +7,7 @@ import { Toast } from 'native-base';
 import store from '../store';
 import SchemaModal from './TodoAdder/SchemaModal';
 import { finishTodo, deleteTodo, updateTodo } from '../features/todos/actions';
+import DoneTodo from './DoneTodo';
 
 // This class is exported both as the default export and as a component
 // wrapped using connect to ease testing of this component.
@@ -53,14 +54,26 @@ export class TodoList extends Component {
 
       const todo = this.props.todos[index];
 
-      Toast.show({
-        text: 'Todo marked as finished',
-        buttonText: 'Undo',
-        onClose: reason => this.handleUndo(reason, todo, index),
-        duration: 5000,
-      });
+      // If this todo has already been checked "done"
+      if (todo.done) {
+        this.handleUndo('user', todo, index);
 
-      this.props.finishTodo(id);
+        Toast.show({
+          text: 'Todo marked as unfinished',
+          buttonText: 'Undo',
+          onClose: () => this.props.finishTodo(id),
+          duration: 3000,
+        });
+      } else {
+        Toast.show({
+          text: 'Todo marked as finished',
+          buttonText: 'Undo',
+          onClose: reason => this.handleUndo(reason, todo, index),
+          duration: 3000,
+        });
+
+        this.props.finishTodo(id);
+      }
     }
   };
 

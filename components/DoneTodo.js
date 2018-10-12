@@ -3,16 +3,10 @@ import Swipeout from 'react-native-swipeout';
 import { StyleSheet, Text, View } from 'react-native';
 import * as Progress from 'react-native-progress';
 
-export default class Todo extends React.Component {
+export default class DoneTodo extends React.Component {
   render() {
     const buttons = {
       left: [
-        {
-          text: 'Done',
-          backgroundColor: '#68CC3D',
-        },
-      ],
-      leftUndone: [
         {
           text: 'Undone',
           backgroundColor: '#68CC3D',
@@ -61,15 +55,7 @@ export default class Todo extends React.Component {
 
     return (
       <Swipeout
-        left={
-          this.props.todo.isPedometer
-            ? this.props.getTotalSteps() > this.props.stepsGoal
-              ? buttons.left
-              : null
-            : this.props.todo.done
-              ? buttons.leftUndone
-              : buttons.left
-        }
+        left={buttons.left}
         right={buttons.right}
         onOpen={(section, row, direction) => {
           this.props.onOpen(direction, this.props.todo.id);

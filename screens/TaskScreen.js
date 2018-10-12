@@ -2,15 +2,7 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import Tasks from '../components/Tasks';
 import TodoAdder from '../components/TodoAdder';
-import {
-  Container,
-  Header,
-  Content,
-  Text,
-  Footer,
-  Card,
-  Button,
-} from 'native-base';
+import { Container, Header, Content, Text, Footer, Button } from 'native-base';
 
 export default class TaskScreen extends React.Component {
   static navigationOptions = {
@@ -44,8 +36,8 @@ export default class TaskScreen extends React.Component {
           </Button>
         </Header>
         <Content>
-          {(!this.state.selectedCompleted && <Tasks />) || (
-            <Text>Completed list here</Text>
+          {(!this.state.selectedCompleted && <Tasks donelist={false} />) || (
+            <Tasks donelist={true} />
           )}
         </Content>
         <Footer transparent style={styles.footer}>

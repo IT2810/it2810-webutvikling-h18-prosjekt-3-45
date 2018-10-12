@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, View } from 'react-native';
-import { Container, Header, Content, Text } from 'native-base';
+import { Container, Content, Text } from 'native-base';
 import isBefore from 'date-fns/is_before';
 import isSameDay from 'date-fns/is_same_day';
 import addDays from 'date-fns/add_days';
@@ -13,7 +13,9 @@ import { todoStyles } from './Todo';
 // wrapped using connect to ease testing of this component.
 export class Tasks extends Component {
   render() {
-    const openTodos = this.props.todos.filter(todo => !todo.done);
+    const openTodos = this.props.todos.filter(
+      todo => todo.done === this.props.donelist,
+    );
 
     const sections = ['Someday', 'Overdue', 'Today', 'Tomorrow'];
 
@@ -44,7 +46,7 @@ export class Tasks extends Component {
                 <Text style={tasksStyles.sectionTitle}>{section}</Text>
               </View>
 
-              <TodoList todos={days[i]} />
+              <TodoList donelist={this.props.donelist} todos={days[i]} />
             </Fragment>
           ))}
         </Content>
