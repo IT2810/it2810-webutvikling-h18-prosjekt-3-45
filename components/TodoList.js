@@ -53,15 +53,12 @@ export class TodoList extends Component {
       const index = this.props.todos.findIndex(todo => todo.id === id);
 
       const todo = this.props.todos[index];
-
       // If this todo has already been checked "done"
       if (todo.done) {
         this.handleUndo('user', todo, index);
 
         Toast.show({
           text: 'Todo marked as unfinished',
-          buttonText: 'Undo',
-          onClose: () => this.props.finishTodo(id),
           duration: 3000,
         });
       } else {
