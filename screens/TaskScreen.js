@@ -61,14 +61,12 @@ export default class TaskScreen extends React.Component {
             </Button>
           </View>
         </View>
-        <Content>
-          {(!this.state.selectedCompleted && <Tasks showDone={false} />) || (
-            <Tasks showDone={true} />
-          )}
-        </Content>
-        <Footer transparent style={styles.footer}>
-          <TodoAdder />
-        </Footer>
+
+        {(!this.state.selectedCompleted && <Tasks showDone={false} />) || (
+          <Tasks showDone={true} />
+        )}
+
+        <TodoAdder />
       </Container>
     );
   }
@@ -105,11 +103,5 @@ const styles = StyleSheet.create({
 
   activeText: {
     color: '#fff',
-  },
-
-  footer: {
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    height: 0,
   },
 });
