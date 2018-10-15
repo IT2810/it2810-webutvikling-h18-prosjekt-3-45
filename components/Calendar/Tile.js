@@ -47,6 +47,9 @@ export class Tile extends Component {
               styles.tile,
               this.props.active && styles.activeTile,
               isToday(this.props.day) && styles.today,
+              doneCount === this.props.todos.length &&
+                this.props.todos.length > 0 &&
+                styles.completed,
             ]}
           >
             <Text style={styles.day}>{format(this.props.day, 'D')}</Text>
@@ -103,6 +106,9 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 2,
     bottom: 2,
+  },
+  completed: {
+    backgroundColor: '#0f0',
   },
 });
 
