@@ -47,9 +47,11 @@ export class Tile extends Component {
               styles.tile,
               this.props.active && styles.activeTile,
               isToday(this.props.day) && styles.today,
-              doneCount === this.props.todos.length &&
-                this.props.todos.length > 0 &&
-                styles.completed,
+              this.props.todos.length > 0 && {
+                backgroundColor: `rgba(0, 200, 0, ${(doneCount /
+                  this.props.todos.length) *
+                  0.8})`,
+              },
             ]}
           >
             <Text style={styles.day}>{format(this.props.day, 'D')}</Text>
