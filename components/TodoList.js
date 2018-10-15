@@ -5,6 +5,7 @@ import Todo from './Todo';
 import PedometerTodo from './PedometerTodo';
 import { Container, Content, Text, Toast } from 'native-base';
 import isBefore from 'date-fns/is_before';
+import isAfter from 'date-fns/is_after';
 import isSameDay from 'date-fns/is_same_day';
 import addDays from 'date-fns/add_days';
 import startOfDay from 'date-fns/start_of_day';
@@ -126,7 +127,7 @@ export class TodoList extends Component {
   render() {
     const openTodos = this.props.todos.filter(todo => !todo.done);
 
-    const sections = ['Someday', 'Overdue', 'Today', 'Tomorrow'];
+    const sections = ['Someday', 'Overdue', 'Today', 'Tomorrow', 'Upcoming'];
 
     const days = [
       // Todos without any specific set date.
@@ -145,6 +146,13 @@ export class TodoList extends Component {
         ),
       );
     }
+
+    // Upcoming todos which do not fit into the above sections.
+    days.push(
+      openTodos.filter(
+        todo => todo.date && isAfter(todo.date, addDays(new Date(), 1)),
+      ),
+    );
 
     return (
       <Container>
