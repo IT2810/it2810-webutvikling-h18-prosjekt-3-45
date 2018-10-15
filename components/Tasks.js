@@ -22,7 +22,7 @@ export class Tasks extends Component {
       this.props.todos.filter(todo => todo.done),
     ).sort(
       (a, b) =>
-        a.finished < b.finished ? -1 : a.finished > b.finished ? 1 : 0,
+        a.finished > b.finished ? -1 : a.finished < b.finished ? 1 : 0,
     );
 
     const sections = ['Someday', 'Overdue', 'Today', 'Tomorrow'];
