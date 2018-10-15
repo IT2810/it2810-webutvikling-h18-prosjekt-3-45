@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet, TextInput } from 'react-native';
+import { StyleSheet } from 'react-native';
+import NumericInput from 'react-native-numeric-input';
 import {
   Container,
   Card,
@@ -32,7 +33,7 @@ class TodoSchema extends Component {
       description: '', // The value for the TODO description input.
       date: '', // The value for the TODO date.
       isPedometer: false,
-      stepsGoal: '0',
+      stepsGoal: 1000,
     };
 
     // This component can be used to both edit todos and to create new ones.
@@ -201,12 +202,18 @@ class TodoSchema extends Component {
           {this.state.isPedometer && (
             <Card transparent style={styles.dateCont}>
               <Text style={styles.label}>Step goal</Text>
-              <TextInput
-                style={styles.field}
-                keyboardType="numeric"
-                editable={this.state.isPedometer}
-                value={this.state.stepsGoal}
-                onChangeText={this.handleStepGoal}
+
+              <NumericInput
+                onChange={this.handleStepGoal}
+                initValue={this.state.stepsGoal}
+                step={1000}
+                editable={false}
+                minValue={1000}
+                rounded
+                totalWidth={160}
+                valueType="integer"
+                rightButtonBackgroundColor="#ddd"
+                leftButtonBackgroundColor="#e5e5e5"
               />
             </Card>
           )}

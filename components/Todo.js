@@ -1,6 +1,6 @@
 import React from 'react';
 import Swipeout from 'react-native-swipeout';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Alert } from 'react-native';
 import * as Progress from 'react-native-progress';
 
 export default class Todo extends React.Component {
@@ -28,13 +28,7 @@ export default class Todo extends React.Component {
 
     return (
       <Swipeout
-        left={
-          this.props.todo.isPedometer
-            ? this.props.getTotalSteps() > this.props.stepsGoal
-              ? buttons.left
-              : null
-            : buttons.left
-        }
+        left={buttons.left}
         right={buttons.right}
         onOpen={(section, row, direction) => {
           this.props.onOpen(direction, this.props.todo.id);
@@ -42,20 +36,21 @@ export default class Todo extends React.Component {
         key={this.props.todo.id}
       >
         <View style={styles.todo}>
-          <Text>{this.props.todo.text}</Text>
+          <View>
+            <Text>{this.props.todo.text}</Text>
+          </View>
 
           {this.props.todo.isPedometer && (
             <View style={styles.container}>
-              <Text>
-                Walked{' '}
+              <Text style={styles.steps}>
                 {this.props.getTotalSteps() > this.props.stepsGoal
                   ? this.props.stepsGoal
                   : this.props.getTotalSteps()}{' '}
-                of {this.props.stepsGoal} steps
+                / {this.props.stepsGoal}
               </Text>
               <Progress.Bar
                 progress={this.props.getTotalSteps() / this.props.stepsGoal}
-                width={300}
+                width={100}
                 color={
                   this.props.getTotalSteps() > this.props.stepsGoal
                     ? '#68CC3D'
@@ -72,19 +67,21 @@ export default class Todo extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    marginBottom: 5,
+    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
   },
   todo: {
     height: 50,
     width: '100%',
-    display: 'flex',
-    justifyContent: 'center',
-    paddingLeft: 15,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 15,
     backgroundColor: '#FFF',
     borderBottomColor: '#CCC',
     borderBottomWidth: StyleSheet.hairlineWidth,
+  },
+  steps: {
+    marginRight: 5,
   },
 });
