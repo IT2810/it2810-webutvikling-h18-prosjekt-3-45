@@ -109,9 +109,6 @@ const styles = StyleSheet.create({
     right: 2,
     bottom: 2,
   },
-  completed: {
-    backgroundColor: '#0f0',
-  },
 });
 
 export default Tile;
