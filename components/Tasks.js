@@ -17,6 +17,14 @@ export class Tasks extends Component {
       todo => todo.done === this.props.showDone,
     );
 
+    // Find all done todos and sort by date checked
+    const doneTodos = Object.values(
+      this.props.todos.filter(todo => todo.done),
+    ).sort(
+      (a, b) =>
+        a.finished < b.finished ? -1 : a.finished > b.finished ? 1 : 0,
+    );
+
     const sections = ['Someday', 'Overdue', 'Today', 'Tomorrow'];
 
     const days = [
@@ -40,17 +48,23 @@ export class Tasks extends Component {
     return (
       <Container>
         <Content>
-          {sections.map((section, i) => (
-            <Fragment key={section}>
-              {!this.props.showDone && (
-                <View style={[todoStyles.todo, tasksStyles.section]}>
-                  <Text style={tasksStyles.sectionTitle}>{section}</Text>
-                </View>
-              )}
+          {!this.props.showDone ? (
+            sections.map((section, i) => (
+              <Fragment key={section}>
+                {!this.props.showDone && (
+                  <View style={[todoStyles.todo, tasksStyles.section]}>
+                    <Text style={tasksStyles.sectionTitle}>{section}</Text>
+                  </View>
+                )}
 
-              <TodoList showDone={this.props.showDone} todos={days[i]} />
+                <TodoList showDone={this.props.showDone} todos={days[i]} />
+              </Fragment>
+            ))
+          ) : (
+            <Fragment>
+              <TodoList showDone={this.props.showDone} todos={doneTodos} />
             </Fragment>
-          ))}
+          )}
         </Content>
       </Container>
     );

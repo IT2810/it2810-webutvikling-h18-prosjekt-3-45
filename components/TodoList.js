@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import { connect } from 'react-redux';
 import Todo from './Todo';
 import PedometerTodo from './PedometerTodo';
@@ -7,7 +7,6 @@ import { Toast } from 'native-base';
 import store from '../store';
 import SchemaModal from './TodoAdder/SchemaModal';
 import { finishTodo, deleteTodo, updateTodo } from '../features/todos/actions';
-import DoneTodo from './DoneTodo';
 
 // This class is exported both as the default export and as a component
 // wrapped using connect to ease testing of this component.
@@ -124,7 +123,6 @@ export class TodoList extends Component {
             currentTodo={this.state.pressedTodo}
           />
         </View>
-
         {this.props.todos.map(
           todo =>
             todo.isPedometer ? (
