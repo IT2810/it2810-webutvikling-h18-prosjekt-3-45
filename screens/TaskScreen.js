@@ -62,8 +62,8 @@ export default class TaskScreen extends React.Component {
           </View>
         </View>
         <Content>
-          {(!this.state.selectedCompleted && <Tasks donelist={false} />) || (
-            <Tasks donelist={true} />
+          {(!this.state.selectedCompleted && <Tasks showDone={false} />) || (
+            <Tasks showDone={true} />
           )}
         </Content>
         <Footer transparent style={styles.footer}>

@@ -14,7 +14,7 @@ import { todoStyles } from './Todo';
 export class Tasks extends Component {
   render() {
     const openTodos = this.props.todos.filter(
-      todo => todo.done === this.props.donelist,
+      todo => todo.done === this.props.showDone,
     );
 
     const sections = ['Someday', 'Overdue', 'Today', 'Tomorrow'];
@@ -46,7 +46,7 @@ export class Tasks extends Component {
                 <Text style={tasksStyles.sectionTitle}>{section}</Text>
               </View>
 
-              <TodoList donelist={this.props.donelist} todos={days[i]} />
+              <TodoList showDone={this.props.showDone} todos={days[i]} />
             </Fragment>
           ))}
         </Content>
