@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
 
   footer: {
     justifyContent: 'flex-end',
-    backgroundColor: 'transparent',
-    borderColor: 'transparent',
+    alignItems: 'center',
+    height: 0,
   },
 });
