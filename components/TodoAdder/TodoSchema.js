@@ -206,6 +206,7 @@ class TodoSchema extends Component {
                 editable={false}
                 minValue={1000}
                 totalWidth={160}
+                totalHeight={50}
                 sepratorWidth={0}
                 inputStyle={styles.numInput}
                 iconStyle={{ color: '#fff' }}
@@ -293,6 +294,7 @@ const styles = StyleSheet.create({
   },
 
   dateCont: {
+    paddingTop: 10,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
