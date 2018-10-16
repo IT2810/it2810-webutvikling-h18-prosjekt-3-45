@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
+import NumericInput from 'react-native-numeric-input';
 import {
   Container,
   Card,
   Content,
   Button,
-  Footer,
+  View,
   Textarea,
   Input,
   Text,
+  Switch,
 } from 'native-base';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import format from 'date-fns/format';
@@ -26,6 +28,8 @@ class TodoSchema extends Component {
       text: '', // The value for the TODO title text input.
       description: '', // The value for the TODO description input.
       date: '', // The value for the TODO date.
+      isPedometer: false,
+      stepsGoal: 10000,
     };
 
     // This component can be used to both edit todos and to create new ones.
@@ -38,6 +42,8 @@ class TodoSchema extends Component {
         text: curTodo.text,
         description: curTodo.description,
         date: curTodo.date,
+        isPedometer: curTodo.isPedometer,
+        stepsGoal: curTodo.stepsGoal,
       };
     }
   }
@@ -51,6 +57,18 @@ class TodoSchema extends Component {
    * Hides the DateTime picker.
    */
   hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
+
+  handlePedometerSwitch = input => {
+    this.setState({
+      isPedometer: input,
+    });
+  };
+
+  handleStepGoal = input => {
+    this.setState({
+      stepsGoal: input,
+    });
+  };
 
   /**
    * Sets the title state based on input from the user.
@@ -114,7 +132,7 @@ class TodoSchema extends Component {
             {this.props.currentTodo ? 'Edit todo' : 'Create a new todo'}
           </Text>
 
-          <Text style={styles.label}>Title</Text>
+          <Text style={[styles.label, styles.mainLabel]}>Title</Text>
 
           <Input
             underlineColorAndroid="transparent"
@@ -128,17 +146,17 @@ class TodoSchema extends Component {
             {!this.state.text && 'This field is required'}
           </Text>
 
-          <Text style={styles.label}>Description</Text>
+          <Text style={[styles.label, styles.mainLabel]}>Description</Text>
 
           <Textarea
             rowSpan={3}
             underlineColorAndroid="transparent"
-            style={[styles.input, styles.multiline]}
+            style={[styles.input, styles.multiLine]}
             onChangeText={this.handleDescriptionPicked}
             value={this.state.description}
           />
 
-          <Text style={styles.label}>Date</Text>
+          <Text style={[styles.label, styles.mainLabel]}>Date</Text>
 
           <Card transparent style={styles.dateCont}>
             <Button onPress={this.showDateTimePicker}>
@@ -167,9 +185,42 @@ class TodoSchema extends Component {
               <Text>Clear</Text>
             </Button>
           </Card>
+
+          <Card transparent style={styles.dateCont}>
+            <Text style={styles.label}>Enable pedometer</Text>
+            <Switch
+              value={this.state.isPedometer}
+              onValueChange={this.handlePedometerSwitch}
+            />
+          </Card>
+
+          {this.state.isPedometer && (
+            <Card transparent style={styles.dateCont}>
+              <Text style={styles.label}>Step goal</Text>
+
+              <NumericInput
+                onChange={this.handleStepGoal}
+                initValue={this.state.stepsGoal}
+                step={1000}
+                editable={false}
+                minValue={1000}
+                totalWidth={160}
+                totalHeight={50}
+                sepratorWidth={0}
+                inputStyle={styles.numInput}
+                iconStyle={{ color: '#fff' }}
+                rounded
+                valueType="integer"
+                rightButtonBackgroundColor="#5067FF"
+                leftButtonBackgroundColor={
+                  this.state.stepsGoal === 1000 ? '#ccc' : '#5067FF'
+                }
+              />
+            </Card>
+          )}
         </Content>
 
-        <Footer transparent style={styles.btnContainer}>
+        <View style={styles.btnContainer}>
           <Button
             disabled={!this.validate()}
             primary={!!this.validate()}
@@ -178,6 +229,8 @@ class TodoSchema extends Component {
                 text: this.state.text,
                 description: this.state.description,
                 date: this.state.date,
+                isPedometer: this.state.isPedometer,
+                stepsGoal: this.state.stepsGoal,
               })
             }
           >
@@ -187,7 +240,7 @@ class TodoSchema extends Component {
           <Button danger onPress={() => this.cancelForm(false)}>
             <Text>Cancel</Text>
           </Button>
-        </Footer>
+        </View>
       </Container>
     );
   }
@@ -203,11 +256,14 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
 
+  mainLabel: {
+    marginTop: 20,
+  },
+
   label: {
     fontSize: 20,
     color: '#777',
     fontWeight: 'bold',
-    marginTop: 20,
   },
 
   input: {
@@ -219,11 +275,17 @@ const styles = StyleSheet.create({
     borderBottomColor: '#bbb',
   },
 
-  multiline: {
+  multiLine: {
     borderWidth: 1,
     borderColor: '#bbb',
     padding: 7,
     borderRadius: 5,
+  },
+
+  numInput: {
+    width: 60,
+    fontSize: 16,
+    borderWidth: 0,
   },
 
   warning: {
@@ -234,6 +296,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    height: 50,
   },
 
   btnContainer: {
