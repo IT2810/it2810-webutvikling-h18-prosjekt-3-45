@@ -4,6 +4,10 @@ import { StyleSheet, Text, View, Alert } from 'react-native';
 import * as Progress from 'react-native-progress';
 
 export default class Todo extends React.Component {
+  state = {
+    isClosed: true,
+  };
+
   render() {
     const buttons = {
       left: [
@@ -30,9 +34,11 @@ export default class Todo extends React.Component {
       <Swipeout
         left={buttons.left}
         right={buttons.right}
-        autoClose={true}
+        close={this.state.isClosed}
         onOpen={(section, row, direction) => {
-          this.props.onOpen(direction, this.props.todo.id);
+          this.props.onOpen(direction, this.props.todo.id, () =>
+            this.setState({ isClosed: true }),
+          );
         }}
         key={this.props.todo.id}
       >

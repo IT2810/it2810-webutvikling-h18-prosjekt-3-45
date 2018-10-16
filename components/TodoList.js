@@ -50,7 +50,7 @@ export class TodoList extends Component {
    * @param direction   the direction of the sliding
    * @param id          id of the todo
    */
-  handleOpen = (direction, id) => {
+  handleOpen = (direction, id, close) => {
     if (direction === 'left') {
       // Find the TODO and save it so that it can be restored later.
       const index = this.props.todos.findIndex(todo => todo.id === id);
@@ -74,7 +74,7 @@ export class TodoList extends Component {
           "You don't have the required amount of steps!",
           [
             { text: 'OK', onPress: () => handleFinishTodo(todo, index) },
-            { text: 'Cancel', style: 'cancel' },
+            { text: 'Cancel', onPress: () => close(), style: 'cancel' },
           ],
           { cancelable: true },
         );
@@ -82,6 +82,8 @@ export class TodoList extends Component {
       }
 
       handleFinishTodo(todo, index);
+
+      close();
     }
   };
 
