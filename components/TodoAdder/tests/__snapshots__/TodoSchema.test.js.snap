@@ -13,18 +13,7 @@ exports[`TodoSchema renders correctly 1`] = `
   <View
     style={
       Array [
-        Object {
-          "backgroundColor": "#F8F8F8",
-          "borderColor": "#cbcbcb",
-          "borderTopWidth": 0.5,
-          "elevation": 3,
-          "flexDirection": "row",
-          "height": 55,
-          "justifyContent": "center",
-          "left": 0,
-          "paddingBottom": 0,
-          "right": 0,
-        },
+        Object {},
         Object {
           "backgroundColor": "#EEE",
           "borderColor": "#CCC",
@@ -36,7 +25,6 @@ exports[`TodoSchema renders correctly 1`] = `
         },
       ]
     }
-    transparent={true}
   >
     <View
       accessible={true}
