@@ -64,7 +64,13 @@ export class TodoList extends Component {
         this.props.finishTodo(id);
       };
 
-      if (!todo.done && todo.isPedometer) {
+      if (todo.done) {
+        this.handleUndo('user', todo, index);
+        Toast.show({
+          text: 'Todo marked as unfinished',
+          duration: 3000,
+        });
+      } else if (!todo.done && todo.isPedometer) {
         Alert.alert(
           'Are you sure?',
           "You don't have the required amount of steps!",
@@ -74,12 +80,10 @@ export class TodoList extends Component {
           ],
           { cancelable: true },
         );
-        return;
+      } else {
+        handleFinishTodo(todo, index);
+        close();
       }
-
-      handleFinishTodo(todo, index);
-
-      close();
     }
   };
 

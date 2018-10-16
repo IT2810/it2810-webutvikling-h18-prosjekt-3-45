@@ -51,11 +51,9 @@ export class Tasks extends Component {
           {!this.props.showDone ? (
             sections.map((section, i) => (
               <Fragment key={section}>
-                {!this.props.showDone && (
-                  <View style={[todoStyles.todo, tasksStyles.section]}>
-                    <Text style={tasksStyles.sectionTitle}>{section}</Text>
-                  </View>
-                )}
+                <View style={[todoStyles.todo, tasksStyles.section]}>
+                  <Text style={tasksStyles.sectionTitle}>{section}</Text>
+                </View>
 
                 <TodoList showDone={this.props.showDone} todos={days[i]} />
               </Fragment>

@@ -66,7 +66,7 @@ export default class Todo extends React.Component {
 
     return (
       <Swipeout
-        left={buttons.left}
+        left={this.props.todo.done ? buttons.leftUndone : buttons.left}
         right={buttons.right}
         close={this.state.isClosed}
         onOpen={(section, row, direction) => {
