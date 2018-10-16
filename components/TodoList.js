@@ -1,8 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, View, ScrollView } from 'react-native';
+import { StyleSheet, View, Alert } from 'react-native';
+import Todo from './Todo';
+import PedometerTodo from './PedometerTodo';
 import { Container, Content, Text, Toast } from 'native-base';
-import Swipeout from 'react-native-swipeout';
 import isBefore from 'date-fns/is_before';
 import isAfter from 'date-fns/is_after';
 import isSameDay from 'date-fns/is_same_day';
@@ -49,21 +50,40 @@ export class TodoList extends Component {
    * @param direction   the direction of the sliding
    * @param id          id of the todo
    */
-  handleOpen = (direction, id) => {
+  handleOpen = (direction, id, close) => {
     if (direction === 'left') {
       // Find the TODO and save it so that it can be restored later.
       const index = this.props.todos.findIndex(todo => todo.id === id);
 
       const todo = this.props.todos[index];
 
-      Toast.show({
-        text: 'Todo marked as finished',
-        buttonText: 'Undo',
-        onClose: reason => this.handleUndo(reason, todo, index),
-        duration: 5000,
-      });
+      handleFinishTodo = (todo, index) => {
+        Toast.show({
+          text: 'Todo marked as finished',
+          buttonText: 'Undo',
+          onClose: reason => this.handleUndo(reason, todo, index),
+          duration: 5000,
+        });
 
-      this.props.finishTodo(id);
+        this.props.finishTodo(id);
+      };
+
+      if (!todo.done && todo.isPedometer) {
+        Alert.alert(
+          'Are you sure?',
+          "You don't have the required amount of steps!",
+          [
+            { text: 'OK', onPress: () => handleFinishTodo(todo, index) },
+            { text: 'Cancel', onPress: () => close(), style: 'cancel' },
+          ],
+          { cancelable: true },
+        );
+        return;
+      }
+
+      handleFinishTodo(todo, index);
+
+      close();
     }
   };
 
@@ -154,43 +174,26 @@ export class TodoList extends Component {
                 <Text style={styles.sectionTitle}>{section}</Text>
               </View>
 
-              {days[i].map(todo => {
-                const buttons = {
-                  left: [
-                    {
-                      text: 'Done',
-                      backgroundColor: '#68CC3D',
-                    },
-                  ],
-                  right: [
-                    {
-                      text: 'Edit',
-                      onPress: () => this.handlePress(todo.id),
-                      backgroundColor: '#00AAEE',
-                    },
-                    {
-                      text: 'Delete',
-                      onPress: () => this.handleDelete(todo.id),
-                      backgroundColor: '#bf3b4f',
-                    },
-                  ],
-                };
-
-                return (
-                  <Swipeout
-                    left={buttons.left}
-                    right={buttons.right}
-                    onOpen={(section, row, direction) => {
-                      this.handleOpen(direction, todo.id);
-                    }}
-                    key={todo.id}
-                  >
-                    <View style={styles.todo}>
-                      <Text>{todo.text}</Text>
-                    </View>
-                  </Swipeout>
-                );
-              })}
+              {days[i].map(
+                todo =>
+                  todo.isPedometer ? (
+                    <PedometerTodo
+                      key={todo.id}
+                      onOpen={this.handleOpen}
+                      onDelete={this.handleDelete}
+                      onPress={this.handlePress}
+                      todo={todo}
+                    />
+                  ) : (
+                    <Todo
+                      key={todo.id}
+                      onOpen={this.handleOpen}
+                      onDelete={this.handleDelete}
+                      onPress={this.handlePress}
+                      todo={todo}
+                    />
+                  ),
+              )}
             </Fragment>
           ))}
         </Content>
