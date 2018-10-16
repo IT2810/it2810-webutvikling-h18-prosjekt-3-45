@@ -227,6 +227,10 @@ class TodoSchema extends Component {
         </Content>
 
         <View style={styles.btnContainer}>
+          <Button danger onPress={() => this.cancelForm(false)}>
+            <Text>Cancel</Text>
+          </Button>
+
           <Button
             disabled={!this.validate()}
             primary={!!this.validate()}
@@ -241,10 +245,6 @@ class TodoSchema extends Component {
             }
           >
             <Text>Save</Text>
-          </Button>
-
-          <Button danger onPress={() => this.cancelForm(false)}>
-            <Text>Cancel</Text>
           </Button>
         </View>
       </Container>
