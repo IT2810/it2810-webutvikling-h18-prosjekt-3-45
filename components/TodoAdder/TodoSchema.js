@@ -189,7 +189,6 @@ class TodoSchema extends Component {
           <Card transparent style={styles.dateCont}>
             <Text style={styles.label}>Enable pedometer</Text>
             <Switch
-              style={styles.field}
               value={this.state.isPedometer}
               onValueChange={this.handlePedometerSwitch}
             />
@@ -294,10 +293,10 @@ const styles = StyleSheet.create({
   },
 
   dateCont: {
-    paddingTop: 10,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    height: 50,
   },
 
   btnContainer: {
@@ -308,10 +307,6 @@ const styles = StyleSheet.create({
     borderColor: '#CCC',
     paddingHorizontal: 20,
     paddingVertical: 5,
-  },
-
-  field: {
-    marginTop: 20,
   },
 });
 
