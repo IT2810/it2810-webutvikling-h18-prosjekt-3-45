@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import TodoList from '../components/TodoList';
+import Tasks from '../components/Tasks';
 import TodoAdder from '../components/TodoAdder';
 
 export default class TaskScreen extends React.Component {
@@ -11,7 +11,7 @@ export default class TaskScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <TodoList />
+        <Tasks />
         <TodoAdder />
       </View>
     );

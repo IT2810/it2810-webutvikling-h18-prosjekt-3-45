@@ -41,6 +41,7 @@ export class TodoAdder extends Component {
           saveForm={this.createTodo}
           setModalVisibility={this.setModalVisibility}
           modalVisible={this.state.modalVisible}
+          initialDate={this.props.initialDate}
         />
 
         <View style={styles.fabContainer}>
