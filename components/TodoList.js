@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
-import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
+import { View, Alert } from 'react-native';
 import Todo from './Todo';
 import PedometerTodo from './PedometerTodo';
 import { Toast } from 'native-base';
@@ -45,21 +45,40 @@ export class TodoList extends Component {
    * @param direction   the direction of the sliding
    * @param id          id of the todo
    */
-  handleOpen = (direction, id) => {
+  handleOpen = (direction, id, close) => {
     if (direction === 'left') {
       // Find the TODO and save it so that it can be restored later.
       const index = this.props.todos.findIndex(todo => todo.id === id);
 
       const todo = this.props.todos[index];
 
-      Toast.show({
-        text: 'Todo marked as finished',
-        buttonText: 'Undo',
-        onClose: reason => this.handleUndo(reason, todo, index),
-        duration: 5000,
-      });
+      handleFinishTodo = (todo, index) => {
+        Toast.show({
+          text: 'Todo marked as finished',
+          buttonText: 'Undo',
+          onClose: reason => this.handleUndo(reason, todo, index),
+          duration: 5000,
+        });
 
-      this.props.finishTodo(id);
+        this.props.finishTodo(id);
+      };
+
+      if (!todo.done && todo.isPedometer) {
+        Alert.alert(
+          'Are you sure?',
+          "You don't have the required amount of steps!",
+          [
+            { text: 'OK', onPress: () => handleFinishTodo(todo, index) },
+            { text: 'Cancel', onPress: () => close(), style: 'cancel' },
+          ],
+          { cancelable: true },
+        );
+        return;
+      }
+
+      handleFinishTodo(todo, index);
+
+      close();
     }
   };
 

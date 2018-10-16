@@ -1,9 +1,13 @@
 import React from 'react';
 import Swipeout from 'react-native-swipeout';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Alert } from 'react-native';
 import * as Progress from 'react-native-progress';
 
 export default class Todo extends React.Component {
+  state = {
+    isClosed: true,
+  };
+
   render() {
     const buttons = {
       left: [
@@ -28,20 +32,21 @@ export default class Todo extends React.Component {
 
     const todo = (
       <View style={todoStyles.todo}>
-        <Text>{this.props.todo.text}</Text>
+        <View>
+          <Text>{this.props.todo.text}</Text>
+        </View>
 
         {this.props.todo.isPedometer && (
           <View style={todoStyles.container}>
-            <Text>
-              Walked{' '}
+            <Text style={todoStyles.steps}>
               {this.props.getTotalSteps() > this.props.stepsGoal
                 ? this.props.stepsGoal
                 : this.props.getTotalSteps()}{' '}
-              of {this.props.stepsGoal} steps
+              / {this.props.stepsGoal}
             </Text>
             <Progress.Bar
               progress={this.props.getTotalSteps() / this.props.stepsGoal}
-              width={300}
+              width={100}
               color={
                 this.props.getTotalSteps() > this.props.stepsGoal
                   ? '#68CC3D'
@@ -57,16 +62,13 @@ export default class Todo extends React.Component {
       todo
     ) : (
       <Swipeout
-        left={
-          this.props.todo.isPedometer
-            ? this.props.getTotalSteps() > this.props.stepsGoal
-              ? buttons.left
-              : null
-            : buttons.left
-        }
+        left={buttons.left}
         right={buttons.right}
+        close={this.state.isClosed}
         onOpen={(section, row, direction) => {
-          this.props.onOpen(direction, this.props.todo.id);
+          this.props.onOpen(direction, this.props.todo.id, () =>
+            this.setState({ isClosed: true }),
+          );
         }}
         key={this.props.todo.id}
       >
@@ -78,20 +80,23 @@ export default class Todo extends React.Component {
 
 export const todoStyles = StyleSheet.create({
   container: {
-    flex: 1,
-    marginBottom: 5,
+    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
   },
 
   todo: {
     height: 50,
     width: '100%',
-    display: 'flex',
-    justifyContent: 'center',
-    paddingLeft: 15,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 15,
     backgroundColor: '#FFF',
     borderBottomColor: '#CCC',
     borderBottomWidth: StyleSheet.hairlineWidth,
+  },
+
+  steps: {
+    marginRight: 5,
   },
 });

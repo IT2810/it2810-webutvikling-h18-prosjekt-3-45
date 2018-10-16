@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { StyleSheet, TextInput } from 'react-native';
+import { StyleSheet } from 'react-native';
+import NumericInput from 'react-native-numeric-input';
 import {
   Container,
   Card,
   Content,
   Button,
-  Footer,
+  View,
   Textarea,
   Input,
   Text,
@@ -28,7 +29,7 @@ class TodoSchema extends Component {
       description: '', // The value for the TODO description input.
       date: '', // The value for the TODO date.
       isPedometer: false,
-      stepsGoal: '0',
+      stepsGoal: 10000,
     };
 
     // When clicking the add button from the calendar, a default date is provided.
@@ -136,7 +137,7 @@ class TodoSchema extends Component {
             {this.props.currentTodo ? 'Edit todo' : 'Create a new todo'}
           </Text>
 
-          <Text style={styles.label}>Title</Text>
+          <Text style={[styles.label, styles.mainLabel]}>Title</Text>
 
           <Input
             underlineColorAndroid="transparent"
@@ -150,17 +151,17 @@ class TodoSchema extends Component {
             {!this.state.text && 'This field is required'}
           </Text>
 
-          <Text style={styles.label}>Description</Text>
+          <Text style={[styles.label, styles.mainLabel]}>Description</Text>
 
           <Textarea
             rowSpan={3}
             underlineColorAndroid="transparent"
-            style={[styles.input, styles.multiline]}
+            style={[styles.input, styles.multiLine]}
             onChangeText={this.handleDescriptionPicked}
             value={this.state.description}
           />
 
-          <Text style={styles.label}>Date</Text>
+          <Text style={[styles.label, styles.mainLabel]}>Date</Text>
 
           <Card transparent style={styles.dateCont}>
             <Button onPress={this.showDateTimePicker}>
@@ -193,7 +194,6 @@ class TodoSchema extends Component {
           <Card transparent style={styles.dateCont}>
             <Text style={styles.label}>Enable pedometer</Text>
             <Switch
-              style={styles.field}
               value={this.state.isPedometer}
               onValueChange={this.handlePedometerSwitch}
             />
@@ -202,18 +202,30 @@ class TodoSchema extends Component {
           {this.state.isPedometer && (
             <Card transparent style={styles.dateCont}>
               <Text style={styles.label}>Step goal</Text>
-              <TextInput
-                style={styles.field}
-                keyboardType="numeric"
-                editable={this.state.isPedometer}
-                value={this.state.stepsGoal}
-                onChangeText={this.handleStepGoal}
+
+              <NumericInput
+                onChange={this.handleStepGoal}
+                initValue={this.state.stepsGoal}
+                step={1000}
+                editable={false}
+                minValue={1000}
+                totalWidth={160}
+                totalHeight={50}
+                sepratorWidth={0}
+                inputStyle={styles.numInput}
+                iconStyle={{ color: '#fff' }}
+                rounded
+                valueType="integer"
+                rightButtonBackgroundColor="#5067FF"
+                leftButtonBackgroundColor={
+                  this.state.stepsGoal === 1000 ? '#ccc' : '#5067FF'
+                }
               />
             </Card>
           )}
         </Content>
 
-        <Footer transparent style={styles.btnContainer}>
+        <View style={styles.btnContainer}>
           <Button
             disabled={!this.validate()}
             primary={!!this.validate()}
@@ -233,7 +245,7 @@ class TodoSchema extends Component {
           <Button danger onPress={() => this.cancelForm(false)}>
             <Text>Cancel</Text>
           </Button>
-        </Footer>
+        </View>
       </Container>
     );
   }
@@ -249,11 +261,14 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
 
+  mainLabel: {
+    marginTop: 20,
+  },
+
   label: {
     fontSize: 20,
     color: '#777',
     fontWeight: 'bold',
-    marginTop: 20,
   },
 
   input: {
@@ -265,11 +280,17 @@ const styles = StyleSheet.create({
     borderBottomColor: '#bbb',
   },
 
-  multiline: {
+  multiLine: {
     borderWidth: 1,
     borderColor: '#bbb',
     padding: 7,
     borderRadius: 5,
+  },
+
+  numInput: {
+    width: 60,
+    fontSize: 16,
+    borderWidth: 0,
   },
 
   warning: {
@@ -280,6 +301,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    height: 50,
   },
 
   btnContainer: {
@@ -290,10 +312,6 @@ const styles = StyleSheet.create({
     borderColor: '#CCC',
     paddingHorizontal: 20,
     paddingVertical: 5,
-  },
-
-  field: {
-    marginTop: 20,
   },
 });
 
