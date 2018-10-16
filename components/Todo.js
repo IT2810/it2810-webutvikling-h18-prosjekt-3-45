@@ -30,6 +30,7 @@ export default class Todo extends React.Component {
       <Swipeout
         left={buttons.left}
         right={buttons.right}
+        autoClose={true}
         onOpen={(section, row, direction) => {
           this.props.onOpen(direction, this.props.todo.id);
         }}

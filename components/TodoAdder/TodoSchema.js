@@ -10,10 +10,6 @@ import {
   Textarea,
   Input,
   Text,
-  ListItem,
-  Left,
-  Body,
-  Right,
   Switch,
 } from 'native-base';
 import DateTimePicker from 'react-native-modal-datetime-picker';
@@ -33,7 +29,7 @@ class TodoSchema extends Component {
       description: '', // The value for the TODO description input.
       date: '', // The value for the TODO date.
       isPedometer: false,
-      stepsGoal: 1000,
+      stepsGoal: 10000,
     };
 
     // This component can be used to both edit todos and to create new ones.
@@ -136,7 +132,7 @@ class TodoSchema extends Component {
             {this.props.currentTodo ? 'Edit todo' : 'Create a new todo'}
           </Text>
 
-          <Text style={styles.label}>Title</Text>
+          <Text style={[styles.label, styles.mainLabel]}>Title</Text>
 
           <Input
             underlineColorAndroid="transparent"
@@ -150,17 +146,17 @@ class TodoSchema extends Component {
             {!this.state.text && 'This field is required'}
           </Text>
 
-          <Text style={styles.label}>Description</Text>
+          <Text style={[styles.label, styles.mainLabel]}>Description</Text>
 
           <Textarea
             rowSpan={3}
             underlineColorAndroid="transparent"
-            style={[styles.input, styles.multiline]}
+            style={[styles.input, styles.multiLine]}
             onChangeText={this.handleDescriptionPicked}
             value={this.state.description}
           />
 
-          <Text style={styles.label}>Date</Text>
+          <Text style={[styles.label, styles.mainLabel]}>Date</Text>
 
           <Card transparent style={styles.dateCont}>
             <Button onPress={this.showDateTimePicker}>
@@ -209,11 +205,16 @@ class TodoSchema extends Component {
                 step={1000}
                 editable={false}
                 minValue={1000}
-                rounded
                 totalWidth={160}
+                sepratorWidth={0}
+                inputStyle={styles.numInput}
+                iconStyle={{ color: '#fff' }}
+                rounded
                 valueType="integer"
-                rightButtonBackgroundColor="#ddd"
-                leftButtonBackgroundColor="#e5e5e5"
+                rightButtonBackgroundColor="#5067FF"
+                leftButtonBackgroundColor={
+                  this.state.stepsGoal === 1000 ? '#ccc' : '#5067FF'
+                }
               />
             </Card>
           )}
@@ -255,11 +256,14 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
 
+  mainLabel: {
+    marginTop: 20,
+  },
+
   label: {
     fontSize: 20,
     color: '#777',
     fontWeight: 'bold',
-    marginTop: 20,
   },
 
   input: {
@@ -271,11 +275,17 @@ const styles = StyleSheet.create({
     borderBottomColor: '#bbb',
   },
 
-  multiline: {
+  multiLine: {
     borderWidth: 1,
     borderColor: '#bbb',
     padding: 7,
     borderRadius: 5,
+  },
+
+  numInput: {
+    width: 60,
+    fontSize: 16,
+    borderWidth: 0,
   },
 
   warning: {
