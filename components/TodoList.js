@@ -12,7 +12,7 @@ import { finishTodo, deleteTodo, updateTodo } from '../features/todos/actions';
 // wrapped using connect to ease testing of this component.
 export class TodoList extends Component {
   /**
-   * modalVisible isXX.XX.20XX, XX:XX whether the modal for adding a new todo should be visible
+   * modalVisible is whether the modal for adding a new todo should be visible
    * pressedTodo is the todoobject (containing the states) that is pressed
    * @type {{modalVisible: boolean, pressedTodo: {}}}
    */
@@ -27,8 +27,9 @@ export class TodoList extends Component {
    */
   handleUndo = (reason, todo, index) => {
     if (reason === 'user') {
-      // Strip out the done flag, as we want this to be reset by the reducer.
-      const { done, ...rest } = todo;
+      // Strip out the done flag and finished time, as we want
+      // this to be reset by the reducer.
+      const { done, finished, ...rest } = todo;
 
       store.dispatch({
         // This action type is a special action which allows us to
@@ -132,7 +133,6 @@ export class TodoList extends Component {
             currentTodo={this.state.pressedTodo}
           />
         </View>
-
         {this.props.todos.map(
           todo =>
             todo.isPedometer ? (

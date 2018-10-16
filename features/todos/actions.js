@@ -28,6 +28,7 @@ export const updateTodo = (id, data) => ({
 export const finishTodo = id => ({
   type: 'FINISH_TODO',
   id,
+  finished: new Date().toGMTString(),
 });
 
 export const deleteTodo = id => ({

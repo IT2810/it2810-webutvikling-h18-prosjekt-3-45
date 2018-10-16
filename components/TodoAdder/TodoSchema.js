@@ -165,7 +165,7 @@ class TodoSchema extends Component {
 
           <Card transparent style={styles.dateCont}>
             <Button onPress={this.showDateTimePicker}>
-              <Text>Add date</Text>
+              <Text>Set date</Text>
             </Button>
 
             <DateTimePicker
