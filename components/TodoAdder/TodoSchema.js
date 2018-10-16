@@ -6,7 +6,7 @@ import {
   Card,
   Content,
   Button,
-  Footer,
+  View,
   Textarea,
   Input,
   Text,
@@ -221,7 +221,7 @@ class TodoSchema extends Component {
           )}
         </Content>
 
-        <Footer transparent style={styles.btnContainer}>
+        <View style={styles.btnContainer}>
           <Button
             disabled={!this.validate()}
             primary={!!this.validate()}
@@ -241,7 +241,7 @@ class TodoSchema extends Component {
           <Button danger onPress={() => this.cancelForm(false)}>
             <Text>Cancel</Text>
           </Button>
-        </Footer>
+        </View>
       </Container>
     );
   }
