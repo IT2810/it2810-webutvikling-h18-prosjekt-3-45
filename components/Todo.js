@@ -16,6 +16,12 @@ export default class Todo extends React.Component {
           backgroundColor: '#68CC3D',
         },
       ],
+      leftUndone: [
+        {
+          text: 'Undone',
+          backgroundColor: '#68CC3D',
+        },
+      ],
       right: [
         {
           text: 'Edit',
@@ -58,11 +64,9 @@ export default class Todo extends React.Component {
       </View>
     );
 
-    return this.props.todo.done ? (
-      todo
-    ) : (
+    return (
       <Swipeout
-        left={buttons.left}
+        left={this.props.todo.done ? buttons.leftUndone : buttons.left}
         right={buttons.right}
         close={this.state.isClosed}
         onOpen={(section, row, direction) => {

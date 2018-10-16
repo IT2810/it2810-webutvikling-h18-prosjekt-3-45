@@ -48,7 +48,8 @@ class TodoSchema extends Component {
         description: curTodo.description,
         date: curTodo.date,
         isPedometer: curTodo.isPedometer,
-        stepsGoal: curTodo.stepsGoal,
+        //Need so when editing todos stepsGoal do not start at 0
+        stepsGoal: curTodo.stepsGoal || 10000,
       };
     }
   }
@@ -165,7 +166,7 @@ class TodoSchema extends Component {
 
           <Card transparent style={styles.dateCont}>
             <Button onPress={this.showDateTimePicker}>
-              <Text>Add date</Text>
+              <Text>Set date</Text>
             </Button>
 
             <DateTimePicker

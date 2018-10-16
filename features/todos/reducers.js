@@ -34,6 +34,7 @@ const todo = (state = {}, action) => {
       return {
         ...state,
         done: true,
+        finished: action.finished,
       };
 
     default:
