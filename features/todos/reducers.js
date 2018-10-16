@@ -34,6 +34,7 @@ const todo = (state = {}, action) => {
       return {
         ...state,
         done: true,
+        finished: action.finished,
       };
 
     default:
@@ -47,10 +48,12 @@ const todos = (state = [], action) => {
       return [...state, todo(undefined, action)];
 
     case 'READD_TODO':
+      const filtered = state.filter(todo => todo.id !== action.id);
+
       return [
-        ...state.slice(0, action.index),
+        ...filtered.slice(0, action.index + 1),
         todo(undefined, action),
-        ...state.slice(action.index),
+        ...filtered.slice(action.index + 1),
       ];
 
     case 'UPDATE_TODO':

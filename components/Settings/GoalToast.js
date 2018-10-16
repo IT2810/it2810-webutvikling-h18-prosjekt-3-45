@@ -4,9 +4,8 @@ import { Switch, ListItem, Right, Left, Text, Toast } from 'native-base';
 import NumericInput from 'react-native-numeric-input';
 import { isToday } from 'date-fns';
 import { setGoalEnabled, setTodoGoal } from '../../features/settings/actions';
-import { settings } from '../../features/settings/reducers';
 
-export class GoalToast extends Component {
+class GoalToast extends Component {
   componentDidUpdate(prevProps) {
     const goal = this.props.settings.todoGoal;
 

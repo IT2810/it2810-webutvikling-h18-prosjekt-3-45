@@ -32,6 +32,11 @@ class TodoSchema extends Component {
       stepsGoal: 10000,
     };
 
+    // When clicking the add button from the calendar, a default date is provided.
+    if (this.props.initialDate) {
+      this.state.date = this.props.initialDate;
+    }
+
     // This component can be used to both edit todos and to create new ones.
     // If a todo to be edited is provided, we need to update the initial state.
     const curTodo = this.props.currentTodo;
@@ -43,7 +48,8 @@ class TodoSchema extends Component {
         description: curTodo.description,
         date: curTodo.date,
         isPedometer: curTodo.isPedometer,
-        stepsGoal: curTodo.stepsGoal,
+        //Need so when editing todos stepsGoal do not start at 0
+        stepsGoal: curTodo.stepsGoal || 10000,
       };
     }
   }
@@ -160,7 +166,7 @@ class TodoSchema extends Component {
 
           <Card transparent style={styles.dateCont}>
             <Button onPress={this.showDateTimePicker}>
-              <Text>Add date</Text>
+              <Text>Set date</Text>
             </Button>
 
             <DateTimePicker
@@ -221,6 +227,10 @@ class TodoSchema extends Component {
         </Content>
 
         <View style={styles.btnContainer}>
+          <Button danger onPress={() => this.cancelForm(false)}>
+            <Text>Cancel</Text>
+          </Button>
+
           <Button
             disabled={!this.validate()}
             primary={!!this.validate()}
@@ -235,10 +245,6 @@ class TodoSchema extends Component {
             }
           >
             <Text>Save</Text>
-          </Button>
-
-          <Button danger onPress={() => this.cancelForm(false)}>
-            <Text>Cancel</Text>
           </Button>
         </View>
       </Container>

@@ -16,6 +16,12 @@ export default class Todo extends React.Component {
           backgroundColor: '#68CC3D',
         },
       ],
+      leftUndone: [
+        {
+          text: 'Undone',
+          backgroundColor: '#68CC3D',
+        },
+      ],
       right: [
         {
           text: 'Edit',
@@ -30,9 +36,37 @@ export default class Todo extends React.Component {
       ],
     };
 
+    const todo = (
+      <View style={todoStyles.todo}>
+        <View>
+          <Text>{this.props.todo.text}</Text>
+        </View>
+
+        {this.props.todo.isPedometer && (
+          <View style={todoStyles.container}>
+            <Text style={todoStyles.steps}>
+              {this.props.getTotalSteps() > this.props.stepsGoal
+                ? this.props.stepsGoal
+                : this.props.getTotalSteps()}{' '}
+              / {this.props.stepsGoal}
+            </Text>
+            <Progress.Bar
+              progress={this.props.getTotalSteps() / this.props.stepsGoal}
+              width={100}
+              color={
+                this.props.getTotalSteps() > this.props.stepsGoal
+                  ? '#68CC3D'
+                  : '#2f95dc'
+              }
+            />
+          </View>
+        )}
+      </View>
+    );
+
     return (
       <Swipeout
-        left={buttons.left}
+        left={this.props.todo.done ? buttons.leftUndone : buttons.left}
         right={buttons.right}
         close={this.state.isClosed}
         onOpen={(section, row, direction) => {
@@ -42,41 +76,18 @@ export default class Todo extends React.Component {
         }}
         key={this.props.todo.id}
       >
-        <View style={styles.todo}>
-          <View>
-            <Text>{this.props.todo.text}</Text>
-          </View>
-
-          {this.props.todo.isPedometer && (
-            <View style={styles.container}>
-              <Text style={styles.steps}>
-                {this.props.getTotalSteps() > this.props.stepsGoal
-                  ? this.props.stepsGoal
-                  : this.props.getTotalSteps()}{' '}
-                / {this.props.stepsGoal}
-              </Text>
-              <Progress.Bar
-                progress={this.props.getTotalSteps() / this.props.stepsGoal}
-                width={100}
-                color={
-                  this.props.getTotalSteps() > this.props.stepsGoal
-                    ? '#68CC3D'
-                    : '#2f95dc'
-                }
-              />
-            </View>
-          )}
-        </View>
+        {todo}
       </Swipeout>
     );
   }
 }
 
-const styles = StyleSheet.create({
+export const todoStyles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
   },
+
   todo: {
     height: 50,
     width: '100%',
@@ -88,6 +99,7 @@ const styles = StyleSheet.create({
     borderBottomColor: '#CCC',
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
+
   steps: {
     marginRight: 5,
   },

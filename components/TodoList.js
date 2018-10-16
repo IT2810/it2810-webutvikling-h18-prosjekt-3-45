@@ -1,23 +1,18 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, View, Alert } from 'react-native';
+import { View, Alert } from 'react-native';
 import Todo from './Todo';
 import PedometerTodo from './PedometerTodo';
-import { Container, Content, Text, Toast } from 'native-base';
-import isBefore from 'date-fns/is_before';
-import isAfter from 'date-fns/is_after';
-import isSameDay from 'date-fns/is_same_day';
-import addDays from 'date-fns/add_days';
-import startOfDay from 'date-fns/start_of_day';
-import SchemaModal from './TodoAdder/SchemaModal';
+import { Toast } from 'native-base';
 import store from '../store';
+import SchemaModal from './TodoAdder/SchemaModal';
 import { finishTodo, deleteTodo, updateTodo } from '../features/todos/actions';
 
 // This class is exported both as the default export and as a component
 // wrapped using connect to ease testing of this component.
 export class TodoList extends Component {
   /**
-   * modalVisible isXX.XX.20XX, XX:XX whether the modal for adding a new todo should be visible
+   * modalVisible is whether the modal for adding a new todo should be visible
    * pressedTodo is the todoobject (containing the states) that is pressed
    * @type {{modalVisible: boolean, pressedTodo: {}}}
    */
@@ -32,8 +27,9 @@ export class TodoList extends Component {
    */
   handleUndo = (reason, todo, index) => {
     if (reason === 'user') {
-      // Strip out the done flag, as we want this to be reset by the reducer.
-      const { done, ...rest } = todo;
+      // Strip out the done flag and finished time, as we want
+      // this to be reset by the reducer.
+      const { done, finished, ...rest } = todo;
 
       store.dispatch({
         // This action type is a special action which allows us to
@@ -57,7 +53,7 @@ export class TodoList extends Component {
 
       const todo = this.props.todos[index];
 
-      handleFinishTodo = (todo, index) => {
+      const handleFinishTodo = (todo, index) => {
         Toast.show({
           text: 'Todo marked as finished',
           buttonText: 'Undo',
@@ -68,7 +64,13 @@ export class TodoList extends Component {
         this.props.finishTodo(id);
       };
 
-      if (!todo.done && todo.isPedometer) {
+      if (todo.done) {
+        this.handleUndo('user', todo, index);
+        Toast.show({
+          text: 'Todo marked as unfinished',
+          duration: 3000,
+        });
+      } else if (!todo.done && todo.isPedometer) {
         Alert.alert(
           'Are you sure?',
           "You don't have the required amount of steps!",
@@ -78,12 +80,10 @@ export class TodoList extends Component {
           ],
           { cancelable: true },
         );
-        return;
+      } else {
+        handleFinishTodo(todo, index);
+        close();
       }
-
-      handleFinishTodo(todo, index);
-
-      close();
     }
   };
 
@@ -127,37 +127,8 @@ export class TodoList extends Component {
   };
 
   render() {
-    const openTodos = this.props.todos.filter(todo => !todo.done);
-
-    const sections = ['Someday', 'Overdue', 'Today', 'Tomorrow', 'Upcoming'];
-
-    const days = [
-      // Todos without any specific set date.
-      openTodos.filter(todo => !todo.date),
-
-      // Todos which are overdue.
-      openTodos.filter(
-        todo => todo.date && isBefore(todo.date, startOfDay(new Date())),
-      ),
-    ];
-
-    for (let i = 0; i < 2; i += 1) {
-      days.push(
-        openTodos.filter(
-          todo => todo.date && isSameDay(addDays(new Date(), i), todo.date),
-        ),
-      );
-    }
-
-    // Upcoming todos which do not fit into the above sections.
-    days.push(
-      openTodos.filter(
-        todo => todo.date && isAfter(todo.date, addDays(new Date(), 1)),
-      ),
-    );
-
     return (
-      <Container>
+      <Fragment>
         <View>
           <SchemaModal
             saveForm={this.updateTodo}
@@ -166,62 +137,30 @@ export class TodoList extends Component {
             currentTodo={this.state.pressedTodo}
           />
         </View>
-
-        <Content>
-          {sections.map((section, i) => (
-            <Fragment key={section}>
-              <View style={styles.todo}>
-                <Text style={styles.sectionTitle}>{section}</Text>
-              </View>
-
-              {days[i].map(
-                todo =>
-                  todo.isPedometer ? (
-                    <PedometerTodo
-                      key={todo.id}
-                      onOpen={this.handleOpen}
-                      onDelete={this.handleDelete}
-                      onPress={this.handlePress}
-                      todo={todo}
-                    />
-                  ) : (
-                    <Todo
-                      key={todo.id}
-                      onOpen={this.handleOpen}
-                      onDelete={this.handleDelete}
-                      onPress={this.handlePress}
-                      todo={todo}
-                    />
-                  ),
-              )}
-            </Fragment>
-          ))}
-        </Content>
-      </Container>
+        {this.props.todos.map(
+          todo =>
+            todo.isPedometer ? (
+              <PedometerTodo
+                key={todo.id}
+                onOpen={this.handleOpen}
+                onDelete={this.handleDelete}
+                onPress={this.handlePress}
+                todo={todo}
+              />
+            ) : (
+              <Todo
+                key={todo.id}
+                onOpen={this.handleOpen}
+                onDelete={this.handleDelete}
+                onPress={this.handlePress}
+                todo={todo}
+              />
+            ),
+        )}
+      </Fragment>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  todo: {
-    height: 50,
-    width: '100%',
-    display: 'flex',
-    justifyContent: 'center',
-    paddingLeft: 15,
-    backgroundColor: '#FFF',
-    borderBottomColor: '#CCC',
-    borderBottomWidth: StyleSheet.hairlineWidth,
-  },
-
-  sectionTitle: {
-    fontWeight: 'bold',
-  },
-});
-
-const mapStateToProps = state => ({
-  todos: state.todos,
-});
 
 const mapDispatchToProps = {
   finishTodo,
@@ -230,6 +169,6 @@ const mapDispatchToProps = {
 };
 
 export default connect(
-  mapStateToProps,
+  undefined,
   mapDispatchToProps,
 )(TodoList);

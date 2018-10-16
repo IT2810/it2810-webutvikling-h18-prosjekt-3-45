@@ -16,6 +16,7 @@ class SchemaModal extends Component {
             saveForm={this.props.saveForm}
             setModalVisibility={this.props.setModalVisibility}
             currentTodo={this.props.currentTodo}
+            initialDate={this.props.initialDate}
           />
         </View>
       </Modal>
