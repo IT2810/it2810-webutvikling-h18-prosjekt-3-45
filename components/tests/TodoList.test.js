@@ -6,6 +6,7 @@ import { addTodo } from '../../features/todos/actions';
 
 const mockTodos = todos(undefined, addTodo('Test todo'));
 
+// snapshot test for completed todolist
 describe('TodoList', () => {
   const tree = renderer
     .create(<TodoList showDone={true} todos={mockTodos} />)
@@ -16,6 +17,7 @@ describe('TodoList', () => {
   });
 });
 
+// snapshot test for incompleted todolist
 describe('TodoList', () => {
   const tree = renderer
     .create(<TodoList showDone={false} todos={mockTodos} />)
