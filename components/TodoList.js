@@ -7,6 +7,7 @@ import { Toast } from 'native-base';
 import store from '../store';
 import SchemaModal from './TodoAdder/SchemaModal';
 import { finishTodo, deleteTodo, updateTodo } from '../features/todos/actions';
+import { isToday } from 'date-fns';
 
 // This class is exported both as the default export and as a component
 // wrapped using connect to ease testing of this component.
@@ -54,8 +55,23 @@ export class TodoList extends Component {
       const todo = this.props.todos[index];
 
       const handleFinishTodo = (todo, index) => {
+        let message = 'Todo marked as finished';
+
+        const goal = this.props.settings.todoGoal;
+
+        if (this.props.settings.goalEnabled && goal > 0) {
+          // Make sure to add 1, as the current todo has not yet been marked.
+          const done =
+            this.props.allTodos.filter(todo => isToday(todo.finished)).length +
+            1;
+
+          if (done === goal) {
+            message = `You're being really productive today!`;
+          }
+        }
+
         Toast.show({
-          text: 'Todo marked as finished',
+          text: message,
           buttonText: 'Undo',
           onClose: reason => this.handleUndo(reason, todo, index),
           duration: 5000,
@@ -162,6 +178,11 @@ export class TodoList extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  allTodos: state.todos,
+  settings: state.settings,
+});
+
 const mapDispatchToProps = {
   finishTodo,
   deleteTodo,
@@ -169,6 +190,6 @@ const mapDispatchToProps = {
 };
 
 export default connect(
-  undefined,
+  mapStateToProps,
   mapDispatchToProps,
 )(TodoList);
