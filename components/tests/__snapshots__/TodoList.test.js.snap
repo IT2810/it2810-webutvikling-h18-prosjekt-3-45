@@ -55,62 +55,6 @@ Array [
                 Object {
                   "alignItems": "center",
                   "alignSelf": "flex-start",
-                  "backgroundColor": "#b5b5b5",
-                  "borderBottomWidth": null,
-                  "borderColor": "#007aff",
-                  "borderLeftWidth": null,
-                  "borderRadius": 5,
-                  "borderRightWidth": null,
-                  "borderTopWidth": null,
-                  "borderWidth": undefined,
-                  "elevation": 2,
-                  "flexDirection": "row",
-                  "height": 45,
-                  "justifyContent": "space-between",
-                  "opacity": 1,
-                  "paddingBottom": 6,
-                  "paddingTop": 6,
-                  "shadowColor": undefined,
-                  "shadowOffset": undefined,
-                  "shadowOpacity": undefined,
-                  "shadowRadius": undefined,
-                }
-              }
-            >
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
-                style={
-                  Object {
-                    "backgroundColor": "transparent",
-                    "color": "#fff",
-                    "fontFamily": "System",
-                    "fontSize": 16.5,
-                    "marginLeft": 0,
-                    "marginRight": 0,
-                    "paddingLeft": 16,
-                    "paddingRight": 16,
-                  }
-                }
-                uppercase={false}
-              >
-                Save
-              </Text>
-            </View>
-            <View
-              accessible={true}
-              isTVSelectable={true}
-              onResponderGrant={[Function]}
-              onResponderMove={[Function]}
-              onResponderRelease={[Function]}
-              onResponderTerminate={[Function]}
-              onResponderTerminationRequest={[Function]}
-              onStartShouldSetResponder={[Function]}
-              style={
-                Object {
-                  "alignItems": "center",
-                  "alignSelf": "flex-start",
                   "backgroundColor": "#d9534f",
                   "borderBottomWidth": null,
                   "borderColor": "#007aff",
@@ -154,24 +98,139 @@ Array [
                 Cancel
               </Text>
             </View>
+            <View
+              accessible={true}
+              isTVSelectable={true}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "alignSelf": "flex-start",
+                  "backgroundColor": "#b5b5b5",
+                  "borderBottomWidth": null,
+                  "borderColor": "#007aff",
+                  "borderLeftWidth": null,
+                  "borderRadius": 5,
+                  "borderRightWidth": null,
+                  "borderTopWidth": null,
+                  "borderWidth": undefined,
+                  "elevation": 2,
+                  "flexDirection": "row",
+                  "height": 45,
+                  "justifyContent": "space-between",
+                  "opacity": 1,
+                  "paddingBottom": 6,
+                  "paddingTop": 6,
+                  "shadowColor": undefined,
+                  "shadowOffset": undefined,
+                  "shadowOpacity": undefined,
+                  "shadowRadius": undefined,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "backgroundColor": "transparent",
+                    "color": "#fff",
+                    "fontFamily": "System",
+                    "fontSize": 16.5,
+                    "marginLeft": 0,
+                    "marginRight": 0,
+                    "paddingLeft": 16,
+                    "paddingRight": 16,
+                  }
+                }
+                uppercase={false}
+              >
+                Save
+              </Text>
+            </View>
           </View>
         </View>
       </View>
     </Modal>
-  </View>
-</View>
+  </View>,
+  <View
+    style={
+      Array [
+        Object {
+          "backgroundColor": "#dbddde",
+          "overflow": "hidden",
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      onLayout={[Function]}
+      onMoveShouldSetResponder={[Function]}
+      onMoveShouldSetResponderCapture={[Function]}
+      onResponderEnd={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderReject={[Function]}
+      onResponderRelease={[Function]}
+      onResponderStart={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      onStartShouldSetResponderCapture={[Function]}
+      style={
+        Array [
+          Object {},
+          Object {
+            "transform": Array [
+              Object {
+                "translateX": 0,
+              },
+            ],
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#FFF",
+            "borderBottomColor": "#CCC",
+            "borderBottomWidth": 0.5,
+            "flexDirection": "row",
+            "height": 50,
+            "justifyContent": "space-between",
+            "paddingHorizontal": 15,
+            "width": "100%",
+          }
+        }
+      >
+        <View>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+          >
+            Test todo
+          </Text>
+        </View>
+      </View>
+    </View>
+    <View />
+    <View />
+  </View>,
+]
 `;
 
 exports[`TodoList should render correctly 2`] = `
-<View
-  style={
-    Object {
-      "backgroundColor": "#fff",
-      "flex": 1,
-      "height": 1334,
-    }
-  }
->
+Array [
   <View>
     <Modal
       animationType="slide"
@@ -225,62 +284,6 @@ exports[`TodoList should render correctly 2`] = `
                 Object {
                   "alignItems": "center",
                   "alignSelf": "flex-start",
-                  "backgroundColor": "#b5b5b5",
-                  "borderBottomWidth": null,
-                  "borderColor": "#007aff",
-                  "borderLeftWidth": null,
-                  "borderRadius": 5,
-                  "borderRightWidth": null,
-                  "borderTopWidth": null,
-                  "borderWidth": undefined,
-                  "elevation": 2,
-                  "flexDirection": "row",
-                  "height": 45,
-                  "justifyContent": "space-between",
-                  "opacity": 1,
-                  "paddingBottom": 6,
-                  "paddingTop": 6,
-                  "shadowColor": undefined,
-                  "shadowOffset": undefined,
-                  "shadowOpacity": undefined,
-                  "shadowRadius": undefined,
-                }
-              }
-            >
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
-                style={
-                  Object {
-                    "backgroundColor": "transparent",
-                    "color": "#fff",
-                    "fontFamily": "System",
-                    "fontSize": 16.5,
-                    "marginLeft": 0,
-                    "marginRight": 0,
-                    "paddingLeft": 16,
-                    "paddingRight": 16,
-                  }
-                }
-                uppercase={false}
-              >
-                Save
-              </Text>
-            </View>
-            <View
-              accessible={true}
-              isTVSelectable={true}
-              onResponderGrant={[Function]}
-              onResponderMove={[Function]}
-              onResponderRelease={[Function]}
-              onResponderTerminate={[Function]}
-              onResponderTerminationRequest={[Function]}
-              onStartShouldSetResponder={[Function]}
-              style={
-                Object {
-                  "alignItems": "center",
-                  "alignSelf": "flex-start",
                   "backgroundColor": "#d9534f",
                   "borderBottomWidth": null,
                   "borderColor": "#007aff",
@@ -322,6 +325,62 @@ exports[`TodoList should render correctly 2`] = `
                 uppercase={false}
               >
                 Cancel
+              </Text>
+            </View>
+            <View
+              accessible={true}
+              isTVSelectable={true}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "alignSelf": "flex-start",
+                  "backgroundColor": "#b5b5b5",
+                  "borderBottomWidth": null,
+                  "borderColor": "#007aff",
+                  "borderLeftWidth": null,
+                  "borderRadius": 5,
+                  "borderRightWidth": null,
+                  "borderTopWidth": null,
+                  "borderWidth": undefined,
+                  "elevation": 2,
+                  "flexDirection": "row",
+                  "height": 45,
+                  "justifyContent": "space-between",
+                  "opacity": 1,
+                  "paddingBottom": 6,
+                  "paddingTop": 6,
+                  "shadowColor": undefined,
+                  "shadowOffset": undefined,
+                  "shadowOpacity": undefined,
+                  "shadowRadius": undefined,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "backgroundColor": "transparent",
+                    "color": "#fff",
+                    "fontFamily": "System",
+                    "fontSize": 16.5,
+                    "marginLeft": 0,
+                    "marginRight": 0,
+                    "paddingLeft": 16,
+                    "paddingRight": 16,
+                  }
+                }
+                uppercase={false}
+              >
+                Save
               </Text>
             </View>
           </View>
@@ -370,24 +429,27 @@ exports[`TodoList should render correctly 2`] = `
       <View
         style={
           Object {
+            "alignItems": "center",
             "backgroundColor": "#FFF",
             "borderBottomColor": "#CCC",
             "borderBottomWidth": 0.5,
-            "display": "flex",
+            "flexDirection": "row",
             "height": 50,
-            "justifyContent": "center",
-            "paddingLeft": 15,
+            "justifyContent": "space-between",
+            "paddingHorizontal": 15,
             "width": "100%",
           }
         }
       >
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
-          Test todo
-        </Text>
+        <View>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+          >
+            Test todo
+          </Text>
+        </View>
       </View>
     </View>
     <View />
