@@ -4,11 +4,9 @@ import {
   createBottomTabNavigator,
 } from 'react-navigation';
 import { Icon } from 'expo';
-
 import CalendarScreen from '../screens/CalendarScreen';
 import TaskScreen from '../screens/TaskScreen';
 import SettingsScreen from '../screens/SettingsScreen';
-import StatisticsScreen from '../screens/StatisticsScreen';
 
 const COLOR = {
   focused: '#2f95dc',
@@ -47,22 +45,6 @@ CalendarStack.navigationOptions = {
   ),
 };
 
-const StatisticsStack = createStackNavigator({
-  Statistics: StatisticsScreen,
-});
-
-StatisticsStack.navigationOptions = {
-  tabBarLabel: StatisticsScreen.navigationOptions.title,
-  tabBarIcon: ({ focused }) => (
-    <Icon.Ionicons
-      name="md-stats"
-      size={26}
-      style={{ marginBottom: -3 }}
-      color={focused ? COLOR.focused : COLOR.default}
-    />
-  ),
-};
-
 const SettingsStack = createStackNavigator({
   Settings: SettingsScreen,
 });
@@ -83,7 +65,6 @@ export default createBottomTabNavigator(
   {
     TaskStack,
     CalendarStack,
-    StatisticsStack,
     SettingsStack,
   },
   {

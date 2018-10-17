@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import Tasks from '../components/Tasks';
 import TodoAdder from '../components/TodoAdder';
-import { Container, Content, Text, Footer, Button } from 'native-base';
+import { Container, Text, Button } from 'native-base';
 
 export default class TaskScreen extends React.Component {
   static navigationOptions = {
