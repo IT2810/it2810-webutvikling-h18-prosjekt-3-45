@@ -47,23 +47,29 @@ export class Tasks extends Component {
 
     return (
       <Container>
-        <Content>
-          {!this.props.showDone ? (
-            sections.map((section, i) => (
-              <Fragment key={section}>
-                <View style={[todoStyles.todo, tasksStyles.section]}>
-                  <Text style={tasksStyles.sectionTitle}>{section}</Text>
-                </View>
+        {doneTodos.length < 1 && this.props.showDone ? (
+          <View style={tasksStyles.placeholder}>
+            <Text>You have not completed any todos yet.</Text>
+          </View>
+        ) : (
+          <Content>
+            {!this.props.showDone ? (
+              sections.map((section, i) => (
+                <Fragment key={section}>
+                  <View style={[todoStyles.todo, tasksStyles.section]}>
+                    <Text style={tasksStyles.sectionTitle}>{section}</Text>
+                  </View>
 
-                <TodoList showDone={this.props.showDone} todos={days[i]} />
+                  <TodoList showDone={this.props.showDone} todos={days[i]} />
+                </Fragment>
+              ))
+            ) : (
+              <Fragment>
+                <TodoList showDone={this.props.showDone} todos={doneTodos} />
               </Fragment>
-            ))
-          ) : (
-            <Fragment>
-              <TodoList showDone={this.props.showDone} todos={doneTodos} />
-            </Fragment>
-          )}
-        </Content>
+            )}
+          </Content>
+        )}
       </Container>
     );
   }
@@ -76,6 +82,12 @@ export const tasksStyles = StyleSheet.create({
 
   section: {
     backgroundColor: '#F7F7F7',
+  },
+
+  placeholder: {
+    alignSelf: 'center',
+    justifyContent: 'center',
+    flex: 1,
   },
 });
 

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { View, Alert } from 'react-native';
 import Todo from './Todo';
 import PedometerTodo from './PedometerTodo';
-import { Toast } from 'native-base';
+import { Text, Toast } from 'native-base';
 import store from '../store';
 import SchemaModal from './TodoAdder/SchemaModal';
 import { finishTodo, deleteTodo, updateTodo } from '../features/todos/actions';
