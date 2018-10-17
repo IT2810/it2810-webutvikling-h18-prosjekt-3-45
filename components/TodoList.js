@@ -83,7 +83,7 @@ export class TodoList extends Component {
       if (todo.done) {
         this.handleUndo('user', todo, index);
         Toast.show({
-          text: 'Todo marked as unfinished',
+          text: 'Todo marked as incomplete',
           duration: 3000,
         });
       } else if (!todo.done && todo.isPedometer) {

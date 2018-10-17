@@ -40,13 +40,13 @@ class DayModal extends Component {
 
             <Content>
               <View style={[todoStyles.todo, tasksStyles.section]}>
-                <Text style={tasksStyles.sectionTitle}>Unfinished</Text>
+                <Text style={tasksStyles.sectionTitle}>Incomplete</Text>
               </View>
 
               <TodoList todos={this.props.todos.filter(todo => !todo.done)} />
 
               <View style={[todoStyles.todo, tasksStyles.section]}>
-                <Text style={tasksStyles.sectionTitle}>Finished</Text>
+                <Text style={tasksStyles.sectionTitle}>Complete</Text>
               </View>
 
               <TodoList todos={this.props.todos.filter(todo => todo.done)} />
