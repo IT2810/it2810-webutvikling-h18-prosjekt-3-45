@@ -61,11 +61,7 @@ export default class TaskScreen extends React.Component {
             </Button>
           </View>
         </View>
-
-        {(!this.state.selectedCompleted && <Tasks showDone={false} />) || (
-          <Tasks showDone={true} />
-        )}
-
+        <Tasks showDone={this.state.selectedCompleted} />
         <TodoAdder />
       </Container>
     );
