@@ -38,7 +38,7 @@ export default class TaskScreen extends React.Component {
                   !this.state.selectedCompleted && styles.activeText,
                 ]}
               >
-                Incompleted
+                Incomplete
               </Text>
             </Button>
           </View>
