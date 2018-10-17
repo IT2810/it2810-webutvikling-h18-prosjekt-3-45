@@ -1,0 +1,294 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GoalToast should render correctly 1`] = `
+Array [
+  <View
+    accessible={true}
+    isTVSelectable={true}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={null}
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "transparent",
+          "borderBottomWidth": 0.5,
+          "borderColor": "#c9c9c9",
+          "flexDirection": "row",
+          "marginLeft": 16,
+          "paddingBottom": 13,
+          "paddingRight": 16,
+          "paddingTop": 13,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "alignItems": "flex-start",
+            "alignSelf": "center",
+            "flex": 1,
+            "flexDirection": "row",
+          }
+        }
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "alignSelf": "center",
+              "color": "#000",
+              "fontFamily": "System",
+              "fontSize": 16,
+            }
+          }
+          uppercase={false}
+        >
+          Enable daily todo goal
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": "flex-end",
+            "alignSelf": "center",
+            "flex": 0.28,
+            "paddingBottom": null,
+            "paddingLeft": null,
+            "paddingRight": null,
+            "paddingTop": null,
+          }
+        }
+      >
+        <RCTSwitch
+          disabled={false}
+          onChange={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Array [
+              Object {
+                "height": 31,
+                "width": 51,
+              },
+              Object {
+                "alignSelf": null,
+                "marginBottom": -5,
+                "marginTop": -5,
+              },
+            ]
+          }
+          value={true}
+        />
+      </View>
+    </View>
+  </View>,
+  <View
+    accessible={true}
+    isTVSelectable={true}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={null}
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "transparent",
+          "borderBottomWidth": 0.5,
+          "borderColor": "#c9c9c9",
+          "flexDirection": "row",
+          "marginLeft": 16,
+          "paddingBottom": 13,
+          "paddingRight": 16,
+          "paddingTop": 13,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "alignItems": "flex-start",
+            "alignSelf": "center",
+            "flex": 1,
+            "flexDirection": "row",
+          }
+        }
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "alignSelf": "center",
+              "color": "#000",
+              "fontFamily": "System",
+              "fontSize": 16,
+            }
+          }
+          uppercase={false}
+        >
+          Daily todo amount
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": "flex-end",
+            "alignSelf": "center",
+            "flex": 0.28,
+            "paddingBottom": null,
+            "paddingLeft": null,
+            "paddingRight": null,
+            "paddingTop": null,
+          }
+        }
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "alignItems": "center",
+                "borderWidth": 1,
+                "flexDirection": "row",
+                "justifyContent": "center",
+              },
+              Object {
+                "borderColor": "#d4d4d4",
+                "height": 90.04394836769228,
+                "width": 225.1098709192307,
+              },
+              Object {
+                "borderRadius": 16.20791070618461,
+              },
+              Object {},
+            ]
+          }
+        >
+          <View
+            accessible={true}
+            isTVSelectable={true}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "#e5e5e5",
+                "borderBottomLeftRadius": 16.20791070618461,
+                "borderTopLeftRadius": 16.20791070618461,
+                "borderWidth": 0,
+                "height": 88.04394836769228,
+                "justifyContent": "center",
+                "left": 0,
+                "opacity": 1,
+                "position": "absolute",
+                "width": 67.53296127576921,
+                "zIndex": -1,
+              }
+            }
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+            />
+          </View>
+          <View
+            style={
+              Array [
+                Object {
+                  "alignSelf": "center",
+                  "borderLeftColor": "#d4d4d4",
+                  "borderLeftWidth": 1,
+                  "borderRightColor": "#d4d4d4",
+                  "borderRightWidth": 1,
+                },
+              ]
+            }
+          >
+            <TextInput
+              allowFontScaling={true}
+              editable={false}
+              keyboardType="numeric"
+              onBlur={[Function]}
+              onChangeText={[Function]}
+              onFocus={[Function]}
+              returnKeyType="done"
+              style={
+                Array [
+                  Object {
+                    "padding": 0,
+                    "textAlign": "center",
+                  },
+                  Object {
+                    "borderLeftColor": "#d4d4d4",
+                    "borderLeftWidth": 1,
+                    "borderRightColor": "#d4d4d4",
+                    "borderRightWidth": 1,
+                    "color": "black",
+                    "fontSize": 34.216700379723065,
+                    "height": 90.04394836769228,
+                    "width": 90.04394836769228,
+                  },
+                  Object {},
+                ]
+              }
+              underlineColorAndroid="rgba(0,0,0,0)"
+              value="0"
+            />
+          </View>
+          <View
+            accessible={true}
+            isTVSelectable={true}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "#ddd",
+                "borderBottomRightRadius": 16.20791070618461,
+                "borderTopRightRadius": 16.20791070618461,
+                "borderWidth": 0,
+                "height": 88.04394836769228,
+                "justifyContent": "center",
+                "opacity": 1,
+                "position": "absolute",
+                "right": 0,
+                "width": 67.53296127576921,
+                "zIndex": -1,
+              }
+            }
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+            />
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>,
+]
+`;

@@ -5,7 +5,7 @@ import NumericInput from 'react-native-numeric-input';
 import { isToday } from 'date-fns';
 import { setGoalEnabled, setTodoGoal } from '../../features/settings/actions';
 
-class GoalToast extends Component {
+export class GoalToast extends Component {
   componentDidUpdate(prevProps) {
     const goal = this.props.settings.todoGoal;
 
