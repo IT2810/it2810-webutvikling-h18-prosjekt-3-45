@@ -1,31 +1,10 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { Switch, ListItem, Right, Left, Text, Toast } from 'native-base';
+import { Switch, ListItem, Right, Left, Text } from 'native-base';
 import NumericInput from 'react-native-numeric-input';
-import { isToday } from 'date-fns';
 import { setGoalEnabled, setTodoGoal } from '../../features/settings/actions';
 
 class GoalToast extends Component {
-  componentDidUpdate(prevProps) {
-    const goal = this.props.settings.todoGoal;
-
-    if (
-      prevProps !== this.props &&
-      this.props.settings.goalEnabled &&
-      goal > 0
-    ) {
-      const done = this.props.todos.filter(todo => isToday(todo.finished))
-        .length;
-
-      if (done === goal) {
-        Toast.show({
-          text: `You're being really productive today!`,
-          duration: 4000,
-        });
-      }
-    }
-  }
-
   render() {
     return (
       <Fragment>
@@ -69,7 +48,6 @@ class GoalToast extends Component {
 }
 
 const mapStateToProps = state => ({
-  todos: state.todos,
   settings: state.settings,
 });
 
