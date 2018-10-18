@@ -8,7 +8,11 @@ describe('Tile', () => {
   it('renders correctly', () => {
     const tree = renderer
       .create(
-        <Tile todos={[]} day={new Date('Sun, 07 Oct 2018 16:03:43 GMT')} />,
+        <Tile
+          todos={[]}
+          day={new Date('Sun, 07 Oct 2018 16:03:43 GMT')}
+          settings={{ todoGoal: 5 }}
+        />,
       )
       .toJSON();
 

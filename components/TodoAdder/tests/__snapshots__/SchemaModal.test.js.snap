@@ -17,11 +17,16 @@ exports[`SchemaModal renders correctly 1`] = `
   >
     <View
       style={
-        Object {
-          "backgroundColor": "#fff",
-          "flex": 1,
-          "height": 1334,
-        }
+        Array [
+          Object {
+            "backgroundColor": "#fff",
+            "flex": 1,
+            "height": 1334,
+          },
+          Object {
+            "paddingTop": 20,
+          },
+        ]
       }
     >
       <View
