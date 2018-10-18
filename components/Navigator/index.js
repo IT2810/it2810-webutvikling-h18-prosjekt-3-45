@@ -4,9 +4,9 @@ import {
   createBottomTabNavigator,
 } from 'react-navigation';
 import { Icon } from 'expo';
-import CalendarScreen from '../screens/CalendarScreen';
-import TaskScreen from '../screens/TaskScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+import CalendarScreen from './CalendarScreen';
+import TaskScreen from './TaskScreen';
+import SettingsScreen from './SettingsScreen';
 
 const COLOR = {
   focused: '#2f95dc',

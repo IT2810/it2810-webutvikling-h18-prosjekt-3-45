@@ -2,7 +2,7 @@ import React from 'react';
 import { Pedometer } from 'expo';
 import addDays from 'date-fns/add_days';
 import Todo from './Todo';
-import config from '../config.js';
+import config from '../../config.js';
 
 export default class PedometerTodo extends React.Component {
   state = {
