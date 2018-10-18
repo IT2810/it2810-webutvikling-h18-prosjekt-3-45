@@ -1,15 +1,15 @@
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import Tasks from '../components/Tasks';
-import TodoAdder from '../components/TodoAdder';
+import React, { Component } from 'react';
 import { Container, Text, Button } from 'native-base';
+import { StyleSheet, View } from 'react-native';
+import Tasks from '../Tasks';
+import TodoAdder from '../TodoAdder';
 
-export default class TaskScreen extends React.Component {
+export default class TaskScreen extends Component {
   static navigationOptions = {
     title: 'Tasks',
   };
 
-  // Whether the user has selected the completed tasks tab or not
+  // Whether the user has selected the completed tasks tab or not.
   state = {
     selectedCompleted: false,
   };

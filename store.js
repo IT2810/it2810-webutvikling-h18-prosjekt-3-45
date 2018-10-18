@@ -1,6 +1,6 @@
-import { createStore, applyMiddleware } from 'redux';
+import { createStore } from 'redux';
 import { AsyncStorage } from 'react-native';
-import rootReducer from './rootReducer';
+import rootReducer from './features/rootReducer';
 
 // The key used for storing data in AsyncStorage.
 const DATA_NAMESPACE = '@TodoApp:data';
@@ -41,9 +41,9 @@ const retrieveData = async () => {
         state: JSON.parse(value),
       });
     }
-   } catch (error) {
-     console.error(error);
-   }
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 // Attempt loading data asynchronously.
