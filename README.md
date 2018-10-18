@@ -4,7 +4,7 @@ I dette prosjektet var oppgaven å lage en såkalt Personal Information and Moti
 
 ## :warning: Oppstart
 
-Dette prosjektet er satt opp med Expo, så i utgangspunktet trenger man kun kjøre `npm install -g expo-cli` og `expo start` for å starte opp prosjektet. I tillegg har vi innført en konfigurasjonsfil, `config.js`, hvor man kan skru av og på pedometer-todos. Denne er innført fordi man kan få problemer med pedometer-todos og live reloading. Gjerne sjekk at variabelen i denne fila er satt itl `true` før du forsøker å teste pedometer-todos.
+Dette prosjektet er satt opp med Expo, så i utgangspunktet trenger man kun kjøre `npm install -g expo-cli` og `expo start` for å starte opp prosjektet. _I tillegg har vi innført en konfigurasjonsfil, `config.js`, hvor man kan skru av og på pedometer-todos. Denne er innført fordi man kan få problemer med pedometer-todos og live reloading. Gjerne sjekk at variabelen i denne fila er satt itl `true` før du forsøker å teste pedometer-todos._
 
 ## Innhold og funksjonalitet
 
@@ -21,14 +21,16 @@ I applikasjonen vår kan man legge til nye elementer i form av forskjellige type
 - Fortelle litt om testing, hvorfor appen er plattformuavhengig og fungerer på ios/android
 - Fortelle masse om Jest!
 
-- Fortelle om git
-  plattformuavhengig: fungerer på både ios og android
-  git: ryddig, kommentering, navngiving, best practice
-  dekomponere i tasks, issues, markere commits, assigner folk
+Vi har brukt Git og GitHub aktivt i utviklingen og forsøkt å følge gode og etablerte praksiser rundt bruk av Git. Vi har dekomponert utviklingen i tasks, og hver task er lagt inn som en issue på GitHub. Videre har vi assignet hver issue som vi har gjort til en person på gruppen, slik at man får en oversikt over hvem som har gjort hva.
 
+Oppgaven oppgir et krav om å markere commits med hviken issue de bidrar til. Vi har ikke markert hver individuelle commit med en issue, men vi mener dette kravet er tilfredsstilt gjennom at vi har gjennomført all utvikling i separate branches, som er koblet opp mot issues gjennom navnet på branchen. Dette fører til at hver PR linker til en issue, og issuen linker til pull requesten, slik at man i fra alle gjorte issues kan se hvem som gjorde den, samt hvilken pull request den ble løst i. Dette var relativt utbredt praksis i programvareutvikling, og i følge et spørsmål på dette fagets Piazza burde det være greit å gjøre det slik.
+
+All utviklingen i dette prosjektet foregikk på GitHub. Vi har forsøkt å dekomponere utviklinger i tasks som ligger lagret som issues. Oppgaven lister et krav om å markere commits med hvilken issue de bidrar til. Vi har ikke gjort dette ved å eksplisitt markere issuene i hver eneste commitmelding da dette ikke virker som en veldig utbredt praksis. Det vi derimot har gjort er å gjøre all utvikling i separate branches som følger et navngivingssystem hvor branchen er koblet opp mot en issue. For eksempel er alle endringer tilknyttet dette dokumentet gjort i branchen feat-#13-readme og dermed koblet opp i mot issue 13, som handler om å legge til dokumentasjon. Dette var også akseptabel praksis i faget programvareutvikling.
+
+plattformuavhengig: fungerer på både ios og android
+dekomponere i tasks, issues, markere commits, assigner folk
 oversikt over filer
 oversikt over komponenter som er brukt
-
 noe om utforsnkning
 
 ### Pedometer
