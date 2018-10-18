@@ -146,6 +146,7 @@ class TodoSchema extends Component {
             returnKeyType="done"
             onChangeText={this.handleTitlePicked}
             value={this.state.text}
+            maxLength={30}
           />
 
           <Text style={styles.warning}>
