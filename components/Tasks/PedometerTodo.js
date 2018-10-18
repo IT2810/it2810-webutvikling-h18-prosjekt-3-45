@@ -2,7 +2,7 @@ import React from 'react';
 import { Pedometer } from 'expo';
 import addDays from 'date-fns/add_days';
 import Todo from './Todo';
-import config from '../config.js';
+import config from '../../config.js';
 
 export default class PedometerTodo extends React.Component {
   state = {
@@ -22,6 +22,11 @@ export default class PedometerTodo extends React.Component {
     }
   };
 
+  /**
+   * Retrieves past steps walked from creation date based
+   * on when the todo was created and when it was set, if
+   * it was set.
+   */
   updatePastSteps = () => {
     let startCount = new Date(this.props.todo.creationDate);
     let stopCount = addDays(new Date(), 1);
@@ -51,6 +56,9 @@ export default class PedometerTodo extends React.Component {
     );
   };
 
+  /**
+   * Creates live updates of steps
+   */
   _subscribe = () => {
     let countLive =
       !this.props.todo.date ||
@@ -74,11 +82,17 @@ export default class PedometerTodo extends React.Component {
     );
   };
 
+  /**
+   * Prevents updates from the pedometer to unmounted components
+   */
   _unsubscribe = () => {
     this._subscription && this._subscription.remove();
     this._subscription = null;
   };
 
+  /**
+   * Return total steps
+   */
   getTotalSteps = () => this.state.pastStepCount + this.state.currentStepCount;
 
   render() {

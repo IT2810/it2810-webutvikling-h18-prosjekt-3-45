@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import todos from './features/todos/reducers';
-import settings from './features/settings/reducers';
+import todos from './todos/reducers';
+import settings from './settings/reducers';
 
 const rootReducer = combineReducers({
   todos,

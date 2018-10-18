@@ -4,14 +4,16 @@ import { StyleSheet, View } from 'react-native';
 import { Provider } from 'react-redux';
 import { Root } from 'native-base';
 import store from './store';
-import TabNavigator from './navigation/TabNavigator';
+import Navigator from './components/Navigator';
 
 export default class App extends React.Component {
   state = {
+    // Whether or not the assets have finished loading.
     ready: false,
   };
 
   async componentWillMount() {
+    // Wait until fonts have finished loading.
     await this.loadFonts();
 
     this.setState({
@@ -19,6 +21,9 @@ export default class App extends React.Component {
     });
   }
 
+  /**
+   * Load required fonts asynchronously.
+   */
   async loadFonts() {
     await Expo.Font.loadAsync({
       Roboto: require('native-base/Fonts/Roboto.ttf'),
@@ -28,12 +33,14 @@ export default class App extends React.Component {
   }
 
   render() {
+    // Only render the app when the application has finished loading.
+    // If the app has not finished loading, show a splash icon.
     if (this.state.ready) {
       return (
         <Provider store={store}>
           <Root>
             <View style={styles.container}>
-              <TabNavigator />
+              <Navigator />
             </View>
           </Root>
         </Provider>

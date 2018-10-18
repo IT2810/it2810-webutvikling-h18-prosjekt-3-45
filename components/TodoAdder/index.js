@@ -21,11 +21,12 @@ export class TodoAdder extends Component {
   };
 
   /**
-   * Creates a new TODO using the provided information.
-   * Hides the modal after adding the TODO.
-   * @param title string The title of the TODO that is to be added.
-   * @param description string An optional description of the TODO.
-   * @param date string The date on which the TODO should be done.
+   * Create a todo based on user input in the todoSchema
+   * @param text          title of todo       string
+   * @param description   description of todo string
+   * @param date          set date of todo    GMTstring
+   * @param isPedometer   pedometer is active boolean
+   * @param stepsGoal     amount of steps     int
    */
   createTodo = ({ text, description, date, isPedometer, stepsGoal }) => {
     if (isPedometer)
