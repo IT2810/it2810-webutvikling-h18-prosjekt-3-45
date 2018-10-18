@@ -13,8 +13,8 @@ import {
   Button,
   Icon,
 } from 'native-base';
-import TodoList from '../TodoList';
-import { todoStyles } from '../Todo';
+import TodoList from '../Tasks/TodoList';
+import { todoStyles } from '../Tasks/Todo';
 import { tasksStyles } from '../Tasks';
 import TodoAdder from '../TodoAdder';
 
