@@ -30,42 +30,40 @@ Vi har tatt i bruk prettier.io for å opprettholde kodekvaliteten fordi Prettier
 
 Under er en litt overordnet oversikt over hvordan appen vår er strukturert. Flere filer er utelatt. Vi har forsøkt å bruke best-practices i så stor grad som mulig, både angående komponentstrukturering samt i kodingen vår. Vi har lagt til kommentarer der vi mener det er nødvendig - altså ikke overalt, men der hvor det skjer noe bemerkelsesverdig.
 
-```
 ├── App.js # Selve rotfilen til applikasjonen
 ├── assets # Mappe som inneholder filer som app-ikoner og lignende
 ├── components # Brøkdelen av komponentene våre
-│   ├── Calendar # Komponenter relatert til kalenderen
-│   │   ├── DayModal.js
-│   │   ├── index.js
-│   │   ├── MonthPicker.js
-│   │   └── Tile.js
-│   ├── Navigator # Filer relatert til tab-navigajone
-│   │   ├── CalendarScreen.js
-│   │   ├── index.js
-│   │   ├── SettingsScreen.js
-│   │   └── TaskScreen.js
-│   ├── Settings # Filer relatert til innstillingene
-│   │   ├── GoalToast.js
-│   │   └── index.js
-│   ├── Tasks # Filer relatert til task-listen
-│   │   ├── index.js
-│   │   ├── PedometerTodo.js
-│   │   ├── Todo.js
-│   │   └── TodoList.js
-│   └── TodoAdder # Filer relatert til pluss-knappen for todos
-│       ├── index.js
-│       ├── SchemaModal.js
-│       └── TodoSchema.js
+│ ├── Calendar # Komponenter relatert til kalenderen
+│ │ ├── DayModal.js
+│ │ ├── index.js
+│ │ ├── MonthPicker.js
+│ │ └── Tile.js
+│ ├── Navigator # Filer relatert til tab-navigajone
+│ │ ├── CalendarScreen.js
+│ │ ├── index.js
+│ │ ├── SettingsScreen.js
+│ │ └── TaskScreen.js
+│ ├── Settings # Filer relatert til innstillingene
+│ │ ├── GoalToast.js
+│ │ └── index.js
+│ ├── Tasks # Filer relatert til task-listen
+│ │ ├── index.js
+│ │ ├── PedometerTodo.js
+│ │ ├── Todo.js
+│ │ └── TodoList.js
+│ └── TodoAdder # Filer relatert til pluss-knappen for todos
+│ ├── index.js
+│ ├── SchemaModal.js
+│ └── TodoSchema.js
 ├── features # Filer relatert til redux
-│   ├── rootReducer.js
-│   ├── settings
-│   │   ├── actions.js
-│   │   ├── reducers.js
-│   └── todos
-│       ├── actions.js
-│       └── reducers.js
+│ ├── rootReducer.js
+│ ├── settings
+│ │ ├── actions.js
+│ │ ├── reducers.js
+│ └── todos
+│ ├── actions.js
+│ └── reducers.js
 └── store.js # Konfigurasjon for Redux
-```
 
 ## Testing
 
