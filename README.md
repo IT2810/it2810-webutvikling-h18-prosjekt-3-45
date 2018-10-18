@@ -1,6 +1,6 @@
 # Personal Information and Motivation Manager
 
-I dette prosjektet var oppgaven å lage en såkalt Personal Information and Motivation manager (PIMM). Vi har valgt å lage en applikasjon som er basert rundt gjøremål, såkalt todos, og applikasjonen vår er i praksis en integrert todo-liste og kalender. Brukeren kan registrere todos, som vises både i et listeformat og i en kalender. Dette er altså en form for mål for intellektuell aktivitet som brukeren kan registrere. I tillegg har vi gjort det mulig å registrere enkelte spesial-todos, som for eksempel innebærer å gå et bestemt antall skritt i løpet av en dag. Dette er altså et mål for fysisk aktivitet brukeren kan registrere. I tillegg kan brukeren registrere en slags meta-mål i form av antallet todos som brukeren ønsker å oppnå i løpet av en dag, noe vi håper vil bidra til at brukeren blir mer motivert. Hvis brukeren når dette meta-målet får brukeren en gratulerende melding. Kalenderen fargekodes også basert på hvor mange todos man oppnår avhengig av enten antall todos satt den dagen eller meta-målet, og vi håper at dette motiverer brukeren til å jobbe med sine oppsatte oppgave kontinuerlig.
+I dette prosjektet var oppgaven å lage en såkalt Personal Information and Motivation manager (PIMM). Vi har valgt å lage en applikasjon som er basert rundt gjøremål, såkalt todos, og applikasjonen vår er i praksis en integrert todo-liste og kalender.
 
 ## :warning: Oppstart
 
