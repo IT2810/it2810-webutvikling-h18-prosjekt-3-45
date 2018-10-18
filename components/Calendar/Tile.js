@@ -52,7 +52,7 @@ export class Tile extends Component {
               this.props.todos.length > this.props.settings.todoGoal
                 ? {
                     backgroundColor: `rgba(0, 200, 0, ${(doneCount /
-                      this.props.settings.todoGoal) *
+                      this.props.todos.length) *
                       0.8})`,
                   }
                 : {
