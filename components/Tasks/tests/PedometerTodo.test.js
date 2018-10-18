@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import PedometerTodo from '../PedometerTodo';
+import PedometerTodo from '../Task/PedometerTodo';
 import todos from '../../features/todos/reducers';
 import { addPedometerTodo } from '../../features/todos/actions';
 import { handleOpen, handleDelete, handlePress } from '../TodoList';
