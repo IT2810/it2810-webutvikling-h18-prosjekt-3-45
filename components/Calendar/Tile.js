@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { View, StyleSheet, TouchableHighlight } from 'react-native';
+import { connect } from 'react-redux';
 import { Text } from 'native-base';
 import format from 'date-fns/format';
 import isToday from 'date-fns/is_today';
@@ -47,11 +48,18 @@ export class Tile extends Component {
               styles.tile,
               this.props.active && styles.activeTile,
               isToday(this.props.day) && styles.today,
-              this.props.todos.length > 0 && {
-                backgroundColor: `rgba(0, 200, 0, ${(doneCount /
-                  this.props.todos.length) *
-                  0.8})`,
-              },
+              this.props.todos.length > 0 &&
+              this.props.todos.length > this.props.settings.todoGoal
+                ? {
+                    backgroundColor: `rgba(0, 200, 0, ${(doneCount /
+                      this.props.todos.length) *
+                      0.8})`,
+                  }
+                : {
+                    backgroundColor: `rgba(0, 200, 0, ${(doneCount /
+                      this.props.settings.todoGoal) *
+                      0.8})`,
+                  },
             ]}
           >
             <Text style={styles.day}>{format(this.props.day, 'D')}</Text>
@@ -111,4 +119,8 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Tile;
+const mapStateToProps = state => ({
+  settings: state.settings,
+});
+
+export default connect(mapStateToProps)(Tile);
