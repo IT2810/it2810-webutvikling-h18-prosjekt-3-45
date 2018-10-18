@@ -10,27 +10,33 @@ export default class PedometerTodo extends React.Component {
     currentStepCount: 0,
   };
 
-  componentDidMount() {
+  componentDidMount = () => {
     if (config.pedometer) this._subscribe();
-  }
+  };
 
-  componentWillUnmount() {
-    this._unsubscribe();
-  }
+  componentWillUnmount = () => this._unsubscribe();
 
-  _subscribe = () => {
+  componentDidUpdate = prevProps => {
+    if (prevProps !== this.props) {
+      this.updatePastSteps();
+    }
+  };
+
+  updatePastSteps = () => {
+    let startCount = new Date(this.props.todo.creationDate);
+    let stopCount = addDays(new Date(), 1);
+    if (this.props.todo.date) {
+      startCount = new Date(
+        new Date(this.props.todo.date).setHours(0, 0, 0, 0),
+      );
+      stopCount = new Date(
+        new Date(this.props.todo.date).setHours(23, 59, 59, 0),
+      );
+    }
+
     Pedometer.isAvailableAsync().then(
       result => {
-        this._subscription = Pedometer.watchStepCount(result => {
-          this.setState({
-            currentStepCount: result.steps,
-          });
-        });
-
-        Pedometer.getStepCountAsync(
-          new Date(this.props.todo.creationDate),
-          addDays(new Date(), 1),
-        ).then(
+        Pedometer.getStepCountAsync(startCount, stopCount).then(
           result => {
             this.setState({ pastStepCount: result.steps });
           },
@@ -38,6 +44,29 @@ export default class PedometerTodo extends React.Component {
             alert(error);
           },
         );
+      },
+      error => {
+        alert(error);
+      },
+    );
+  };
+
+  _subscribe = () => {
+    let countLive =
+      !this.props.todo.date ||
+      new Date(this.props.todo.date).setHours(0, 0, 0, 0) ==
+        new Date().setHours(0, 0, 0, 0);
+
+    Pedometer.isAvailableAsync().then(
+      result => {
+        if (countLive) {
+          this._subscription = Pedometer.watchStepCount(result => {
+            this.setState({
+              currentStepCount: result.steps,
+            });
+          });
+        }
+        this.updatePastSteps();
       },
       error => {
         alert(error);

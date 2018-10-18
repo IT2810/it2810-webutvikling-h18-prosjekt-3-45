@@ -66,7 +66,7 @@ export default class TaskScreen extends React.Component {
           <Tasks showDone={true} />
         )}
 
-        <TodoAdder />
+        {!this.state.selectedCompleted && <TodoAdder />}
       </Container>
     );
   }

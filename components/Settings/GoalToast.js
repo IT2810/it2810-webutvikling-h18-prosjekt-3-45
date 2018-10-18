@@ -33,7 +33,7 @@ export class GoalToast extends Component {
                 initValue={this.props.settings.todoGoal}
                 step={1}
                 editable={false}
-                minValue={0}
+                minValue={1}
                 rounded
                 valueType="integer"
                 rightButtonBackgroundColor="#ddd"

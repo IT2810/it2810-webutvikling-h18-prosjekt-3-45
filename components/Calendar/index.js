@@ -9,6 +9,7 @@ import isSameDay from 'date-fns/is_same_day';
 import isSameMonth from 'date-fns/is_same_month';
 import MonthPicker from './MonthPicker';
 import Tile from './Tile';
+import TodoAdder from '../TodoAdder';
 
 const Header = ({ title }) => (
   <View style={styles.header}>
@@ -35,43 +36,51 @@ export class Calendar extends Component {
     });
 
     return (
-      <Container>
-        <MonthPicker
-          onChange={this.onMonthChange}
-          selectedMonth={this.state.month}
-        />
+      <Container style={styles.container}>
+        <View>
+          <MonthPicker
+            onChange={this.onMonthChange}
+            selectedMonth={this.state.month}
+          />
 
-        <View style={styles.calendar}>
-          <Header title="Mon" />
-          <Header title="Tue" />
-          <Header title="Wed" />
-          <Header title="Thu" />
-          <Header title="Fri" />
-          <Header title="Sat" />
-          <Header title="Sun" />
+          <View style={styles.calendar}>
+            <Header title="Mon" />
+            <Header title="Tue" />
+            <Header title="Wed" />
+            <Header title="Thu" />
+            <Header title="Fri" />
+            <Header title="Sat" />
+            <Header title="Sun" />
 
-          {[...Array(7 * 5)].map((_, i) => {
-            const day = addDays(start, i);
+            {[...Array(7 * 5)].map((_, i) => {
+              const day = addDays(start, i);
 
-            return (
-              <Tile
-                day={day}
-                todos={this.props.todos.filter(todo =>
-                  isSameDay(todo.date, day),
-                )}
-                index={i}
-                key={i}
-                active={isSameMonth(day, this.state.month)}
-              />
-            );
-          })}
+              return (
+                <Tile
+                  day={day}
+                  todos={this.props.todos.filter(todo =>
+                    isSameDay(todo.date, day),
+                  )}
+                  index={i}
+                  key={i}
+                  active={isSameMonth(day, this.state.month)}
+                />
+              );
+            })}
+          </View>
         </View>
+        <TodoAdder />
       </Container>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+  },
+
   calendar: {
     flexDirection: 'row',
     flexWrap: 'wrap',

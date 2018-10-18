@@ -1,5 +1,5 @@
 const config = {
-  pedometer: false,
+  pedometer: true,
 };
 
 export default config;
