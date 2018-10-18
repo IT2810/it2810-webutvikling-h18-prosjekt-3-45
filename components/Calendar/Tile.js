@@ -48,17 +48,20 @@ export class Tile extends Component {
               styles.tile,
               this.props.active && styles.activeTile,
               isToday(this.props.day) && styles.today,
-              this.props.todos.length > 0 &&
-              this.props.todos.length > this.props.settings.todoGoal
-                ? {
-                    backgroundColor: `rgba(0, 200, 0, ${(doneCount /
-                      this.props.todos.length) *
-                      0.8})`,
-                  }
+              !isToday(this.props.day) && this.props.todos.length >= 0
+                ? this.props.todos.length > this.props.settings.todoGoal
+                  ? {
+                      backgroundColor: `rgba(0, 200, 0, ${(doneCount /
+                        this.props.todos.length) *
+                        0.8})`,
+                    }
+                  : {
+                      backgroundColor: `rgba(0, 200, 0, ${(doneCount /
+                        this.props.settings.todoGoal) *
+                        0.8})`,
+                    }
                 : {
-                    backgroundColor: `rgba(0, 200, 0, ${(doneCount /
-                      this.props.settings.todoGoal) *
-                      0.8})`,
+                    backgroundColor: `rgba(224, 239, 255, 1)`,
                   },
             ]}
           >
