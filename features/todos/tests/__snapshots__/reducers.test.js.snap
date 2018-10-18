@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`todos reducer should add a todo 1`] = `
+Array [
+  Object {
+    "creationDate": undefined,
+    "date": "Thu, 18 Oct 2018 17:42:18 GMT",
+    "description": "Todo description",
+    "done": false,
+    "id": 2,
+    "isPedometer": undefined,
+    "stepsGoal": undefined,
+    "text": "Todo text",
+  },
+]
+`;
+
+exports[`todos reducer should add new todo to the end of the array 1`] = `
+Array [
+  Object {
+    "creationDate": undefined,
+    "date": "Thu, 18 Oct 2018 17:42:18 GMT",
+    "description": "Todo description",
+    "done": false,
+    "id": 1,
+    "isPedometer": undefined,
+    "stepsGoal": undefined,
+    "text": "Todo text",
+  },
+  Object {
+    "creationDate": undefined,
+    "date": "Thu, 18 Oct 2018 17:45:39 GMT",
+    "description": "Second todo description",
+    "done": false,
+    "id": 3,
+    "isPedometer": undefined,
+    "stepsGoal": undefined,
+    "text": "Second todo",
+  },
+]
+`;
