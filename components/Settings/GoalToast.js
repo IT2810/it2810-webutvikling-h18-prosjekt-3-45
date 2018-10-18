@@ -4,7 +4,7 @@ import { Switch, ListItem, Right, Left, Text } from 'native-base';
 import NumericInput from 'react-native-numeric-input';
 import { setGoalEnabled, setTodoGoal } from '../../features/settings/actions';
 
-class GoalToast extends Component {
+export class GoalToast extends Component {
   render() {
     return (
       <Fragment>

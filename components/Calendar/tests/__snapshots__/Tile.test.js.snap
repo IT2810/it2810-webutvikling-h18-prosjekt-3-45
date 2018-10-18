@@ -175,7 +175,9 @@ Array [
           },
           undefined,
           false,
-          false,
+          Object {
+            "backgroundColor": "rgba(0, 200, 0, 0)",
+          },
         ]
       }
     >
