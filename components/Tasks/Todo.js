@@ -38,7 +38,7 @@ export default class Todo extends React.Component {
 
     const todo = (
       <View style={todoStyles.todo}>
-        <View>
+        <View style={this.props.todo.isPedometer && { width: '50%' }}>
           <Text>{this.props.todo.text}</Text>
         </View>
 
