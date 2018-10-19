@@ -176,6 +176,7 @@ class TodoSchema extends Component {
               onCancel={this.hideDateTimePicker}
               datePickerModeAndroid="spinner"
               mode="date"
+              date={new Date(this.state.date)}
             />
 
             <Text style={styles.text}>
